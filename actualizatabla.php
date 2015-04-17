@@ -67,6 +67,13 @@ $sql_query = "delete from contacto where usuario_uno='$d1' and usuario_dos='$d2'
 $consulta = pg_query($sql_query);
 break;
 
+case "agregaUsuario":
+$d1=$_POST["user"];
+$d2=$_POST["usuario2"];
+$sql_query = "insert into contacto values ('$d1', '$d2', false, '01/01/1900');";
+$consulta = pg_query($sql_query);
+break;
+
 }
 header('Location: index.php');
 ?>
