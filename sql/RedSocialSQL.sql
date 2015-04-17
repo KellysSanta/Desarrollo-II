@@ -1,0 +1,240 @@
+drop table if exists Usuario, Administrador, Universidad, Carrera,Usuario_Cliente, Estudio_Usuario, Contacto, Mensaje, Evento, Invitacion_Evento, Notificacion_Evento, Usuario_Agenda, Grupo, Invitacion_grupo, Notificacion_Grupo;
+
+CREATE TABLE Usuario(
+login varchar(20) primary key,
+correo varchar(70),
+pass varchar(32),
+nombre varchar(60),
+apellido varchar(30),
+apellido2 varchar(30),
+sexo varchar(30),
+universidad varchar(50),
+identificacion varchar(20),
+tipoid varchar(2),
+carrera varchar(80),
+estado boolean
+);
+
+
+CREATE TABLE Administrador (
+admin_id VARCHAR(20) NOT NULL,
+CONSTRAINT administrador_pk PRIMARY KEY (admin_id),
+CONSTRAINT administrador_fk FOREIGN KEY (admin_id)
+REFERENCES Usuario (login)
+);
+
+
+CREATE TABLE Universidad (
+	universidad_id VARCHAR(50) NOT NULL PRIMARY KEY,
+	nombre VARCHAR(50) NOT NULL,
+	ciudad varchar(40) not NULL,
+	estado boolean NOT NULL,
+	admin_id VARCHAR(20) NOT NULL,
+
+CONSTRAINT universidad_fk FOREIGN KEY (admin_id)
+REFERENCES Administrador (admin_id)
+);
+
+	
+
+CREATE TABLE Carrera (
+	carrera_id VARCHAR(20) NOT NULL,
+	nombre VARCHAR(50) NOT NULL,
+	universidad varchar(50),
+	estado boolean NOT NULL,
+	admin_id VARCHAR(20) NOT NULL,
+CONSTRAINT usuario_pk PRIMARY KEY (carrera_id),
+CONSTRAINT carrera_fk FOREIGN KEY (universidad)
+REFERENCES Universidad (universidad_id),
+CONSTRAINT usuario_fk FOREIGN KEY (admin_id)
+REFERENCES Administrador (admin_id)
+);
+
+
+CREATE TABLE Usuario_Cliente(
+	usuario_id VARCHAR(20) NOT NULL,
+	universidad_id VARCHAR(20) NOT NULL,
+	carrera_id VARCHAR(20) NOT NULL,
+CONSTRAINT Usuario_cliente_pk PRIMARY KEY (usuario_id),
+CONSTRAINT usuario_fk FOREIGN KEY (usuario_id)
+REFERENCES Usuario (login),
+CONSTRAINT universidad_fk FOREIGN KEY (universidad_id)
+REFERENCES Universidad (universidad_id)
+);
+
+CREATE TABLE Estudio_Usuario(
+
+	usuario_id VARCHAR(20) NOT NULL,
+	estudio VARCHAR(100) NOT NULL,
+	estado boolean NOT NULL,
+CONSTRAINT estudio_usuario_pk PRIMARY KEY (usuario_id, estudio),
+CONSTRAINT usuario_fk FOREIGN KEY (usuario_id)
+REFERENCES Usuario (login)
+);
+
+
+CREATE TABLE Contacto (
+	usuario_uno VARCHAR(20) NOT NULL,
+	usuario_dos VARCHAR(20) NOT NULL,
+	solicitud boolean NOT NULL,
+	fecha timestamp without time zone NOT NULL,
+
+CONSTRAINT contacto_pk PRIMARY KEY (usuario_uno, usuario_dos),
+CONSTRAINT usuario_uno_fk FOREIGN KEY (usuario_uno)
+REFERENCES Usuario (login),
+CONSTRAINT usuario_dos_fk FOREIGN KEY (usuario_dos)
+REFERENCES Usuario (login)
+	
+);
+
+
+CREATE TABLE Mensaje (
+	usuario_uno VARCHAR(20) NOT NULL,
+	usuario_dos VARCHAR(20) NOT NULL,
+	fecha timestamp without time zone NOT NULL,
+	mensaje_enviado VARCHAR(500) NOT NULL,
+	oculto boolean NOT NULL,
+	posponer boolean NOT NULL,
+	estado boolean NOT NULL,
+	visto boolean NOT NULL,
+
+	CONSTRAINT mensaje_pk PRIMARY KEY (usuario_uno, usuario_dos, fecha),
+	CONSTRAINT usuario_uno_fk FOREIGN KEY (usuario_uno)
+	REFERENCES Usuario (login),
+	CONSTRAINT usuario_dos_fk FOREIGN KEY (usuario_dos)
+	REFERENCES Usuario (login)
+
+);
+
+
+CREATE TABLE Evento (
+	id_evento VARCHAR(20) NOT NULL PRIMARY KEY,
+	nombre VARCHAR(50) NOT NULL,
+	descripcion VARCHAR(300) NOT NULL,
+	fecha timestamp without time zone NOT NULL,
+	lugar VARCHAR(50) NOT NULL,
+	participantes INTEGER NOT NULL,
+	estado boolean NOT NULL,
+	administrador VARCHAR(20) NOT NULL,
+
+CONSTRAINT admin_fk FOREIGN KEY (administrador)
+REFERENCES Usuario(login)
+	
+);
+
+
+CREATE TABLE Invitacion_Evento (
+
+	usuario_uno VARCHAR(20) NOT NULL,
+	usuario_dos VARCHAR(20) NOT NULL,
+	id_evento VARCHAR(20) NOT NULL,
+	asistir boolean NOT NULL,
+
+CONSTRAINT invita_evento_pk PRIMARY KEY (usuario_uno, usuario_dos, id_evento),
+CONSTRAINT usuario_uno_fk FOREIGN KEY (usuario_uno)
+REFERENCES Usuario (login),
+CONSTRAINT usuario_dos_fk FOREIGN KEY (usuario_dos)
+REFERENCES Usuario (login),
+CONSTRAINT evento_fk FOREIGN KEY (id_evento)
+REFERENCES Evento(id_evento)
+);
+
+
+CREATE TABLE Notificacion_Evento (
+	id_evento VARCHAR(20) NOT NULL,
+	usuario VARCHAR(20) NOT NULL,
+	fecha timestamp without time zone NOT NULL,
+	mensaje_enviado VARCHAR(500) NOT NULL,
+	oculto boolean NOT NULL,
+	posponer boolean NOT NULL,
+	estado boolean NOT NULL,
+	visto boolean NOT NULL,
+
+	CONSTRAINT noti_evento_pk PRIMARY KEY (id_evento, usuario, fecha),
+	CONSTRAINT evento_fk FOREIGN KEY (id_evento)
+	REFERENCES Evento (id_evento),
+	CONSTRAINT usuario_fk FOREIGN KEY (usuario)
+	REFERENCES Usuario (login)
+
+);
+
+
+CREATE TABLE Usuario_Agenda (
+	num_actividad INTEGER NOT NULL PRIMARY KEY,
+	usuario VARCHAR(20) NOT NULL,
+	nombre VARCHAR(100) NOT NULL,
+	fecha timestamp without time zone NOT NULL,
+	lugar VARCHAR(100) NOT NULL,
+	descripcion VARCHAR(100) NOT NULL,
+
+CONSTRAINT usuario_fk FOREIGN KEY (usuario)
+REFERENCES Usuario(login)
+);
+
+
+CREATE TABLE Grupo (
+	nombre VARCHAR(50) NOT NULL PRIMARY KEY,
+	descripcion VARCHAR(300) NOT NULL,
+	administrador VARCHAR(20) NOT NULL,
+
+CONSTRAINT admin_fk FOREIGN KEY (administrador)
+REFERENCES Usuario(login)
+	
+);
+
+CREATE TABLE Invitacion_grupo (
+
+	usuario_uno VARCHAR(20) NOT NULL,
+	usuario_dos VARCHAR(20) NOT NULL,
+	grupo VARCHAR(50) NOT NULL,
+	asistir boolean NOT NULL,
+
+CONSTRAINT invita_grupo_pk PRIMARY KEY (usuario_uno, usuario_dos, grupo),
+CONSTRAINT usuario_uno_fk FOREIGN KEY (usuario_uno)
+REFERENCES Usuario (login),
+CONSTRAINT usuario_dos_fk FOREIGN KEY (usuario_dos)
+REFERENCES Usuario (login),
+CONSTRAINT grupo_fk FOREIGN KEY (grupo)
+REFERENCES Grupo(nombre)
+);
+
+
+
+
+
+CREATE TABLE Notificacion_Grupo (
+	grupo VARCHAR(50) NOT NULL,
+	usuario VARCHAR(20) NOT NULL,
+	fecha timestamp without time zone NOT NULL,
+	mensaje_enviado VARCHAR(500) NOT NULL,
+	oculto boolean NOT NULL,
+	posponer boolean NOT NULL,
+	estado boolean NOT NULL,
+	visto boolean NOT NULL,
+	CONSTRAINT noti_grupo_pk PRIMARY KEY (grupo, usuario, fecha),
+	CONSTRAINT grupo_fk FOREIGN KEY (grupo)
+	REFERENCES Grupo (nombre),
+	CONSTRAINT usuario_fk FOREIGN KEY (usuario)
+	REFERENCES Usuario (login)
+);
+
+
+
+insert into usuario values('Root1', 'camilog777@hotmail.es','Root1','Camilo Andres', 'Gonzalez','Rodriguez','Masculino','1','1151953353','CC','1', true);
+insert into administrador values('Root1');
+insert into universidad values('1','Universidad del Valle','Cali',true, 'Root1'),('2','Universidad Santiago de Cali','Cali',true, 'Root1');
+insert into carrera values('1','Ingenieria de sistemas e informacion','1',true,'Root1'),('2','Ingenieria Electronica','2', true,'Root1'); 
+
+ALTER TABLE Usuario ADD CONSTRAINT usuarios_fk1 FOREIGN KEY (universidad)
+REFERENCES universidad (universidad_id);
+
+ALTER TABLE Usuario ADD CONSTRAINT usuario_fk2 FOREIGN KEY (carrera)
+REFERENCES Carrera (carrera_id);
+
+insert into Evento values ('1','concierto babasonicos','rock, indie, electronica', '17-03-20015', 'cali', 100, true, 'Root1');
+insert into Evento values ('2','asamblea','comvocatoria al tropel estudiantil', '20-03-20015', 'cali', 500, true, 'Root1');	
+insert into Evento values ('3','El perol','comvocatoria al tropel estudiantil', '20-03-20015', 'cali', 14, true, 'Root1');
+insert into Evento values ('4','conversatorio','comvocatoria al tropel estudiantil', '20-03-20015', 'cali', 10, true, 'Root1');
+insert into Evento values ('5','torneo de futbol','comvocatoria al tropel estudiantil', '20-03-20015', 'cali', 7, true, 'Root1');
+insert into Evento values ('6','marcha','comvocatoria al tropel estudiantil', '20-03-20015', 'cali', 45, true, 'Root1');
+insert into Evento values ('7','la male','comvocatoria al tropel estudiantil', '20-03-20015', 'cali', 70, true, 'Root1');	
