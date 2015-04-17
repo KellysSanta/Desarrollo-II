@@ -113,7 +113,6 @@ CREATE TABLE Evento (
 	descripcion VARCHAR(300) NOT NULL,
 	fecha timestamp without time zone NOT NULL,
 	lugar VARCHAR(50) NOT NULL,
-	participantes INTEGER NOT NULL,
 	estado boolean NOT NULL,
 	administrador VARCHAR(20) NOT NULL,
 
@@ -218,23 +217,45 @@ CREATE TABLE Notificacion_Grupo (
 	REFERENCES Usuario (login)
 );
 
-
-
+---las siguientes inserciones a excepcion del administrador son prouebas. Se conservaran mientras se terminan de implemantar el resto de funcionalidades.
+--agregando ususario administrador ala base de datos
 insert into usuario values('Root1', 'camilog777@hotmail.es','Root1','Camilo Andres', 'Gonzalez','Rodriguez','Masculino','1','1151953353','CC','1', true);
 insert into administrador values('Root1');
-insert into universidad values('1','Universidad del Valle','Cali',true, 'Root1'),('2','Universidad Santiago de Cali','Cali',true, 'Root1');
-insert into carrera values('1','Ingenieria de sistemas e informacion','1',true,'Root1'),('2','Ingenieria Electronica','2', true,'Root1'); 
 
+--adicionando  universidades prueba
+insert into universidad values('1','Universidad del Valle','Cali',true, 'Root1'),('2','Universidad Santiago de Cali','Cali',true, 'Root1');
+insert into universidad values('3','Universidad Javeriana','Cali',true, 'Root1'),('4','Universidad Cooperativa de Colombia','Cali',true, 'Root1');	
+
+--adicionando carreras prueba
+insert into carrera values('1','Ingenieria de sistemas e informacion','1',true,'Root1'),('2','Ingenieria Electronica','2', true,'Root1'); 
+insert into carrera values('3','Ingenieria industrial','2',true,'Root1'),('4','Ingenieria agricola','1', true,'Root1');
+
+
+--agrgeando restricciones de llaves foranes a la tabla usuario
 ALTER TABLE Usuario ADD CONSTRAINT usuarios_fk1 FOREIGN KEY (universidad)
 REFERENCES universidad (universidad_id);
 
 ALTER TABLE Usuario ADD CONSTRAINT usuario_fk2 FOREIGN KEY (carrera)
 REFERENCES Carrera (carrera_id);
 
-insert into Evento values ('1','concierto babasonicos','rock, indie, electronica', '17-03-20015', 'cali', 100, true, 'Root1');
-insert into Evento values ('2','asamblea','comvocatoria al tropel estudiantil', '20-03-20015', 'cali', 500, true, 'Root1');	
-insert into Evento values ('3','El perol','comvocatoria al tropel estudiantil', '20-03-20015', 'cali', 14, true, 'Root1');
-insert into Evento values ('4','conversatorio','comvocatoria al tropel estudiantil', '20-03-20015', 'cali', 10, true, 'Root1');
-insert into Evento values ('5','torneo de futbol','comvocatoria al tropel estudiantil', '20-03-20015', 'cali', 7, true, 'Root1');
-insert into Evento values ('6','marcha','comvocatoria al tropel estudiantil', '20-03-20015', 'cali', 45, true, 'Root1');
-insert into Evento values ('7','la male','comvocatoria al tropel estudiantil', '20-03-20015', 'cali', 70, true, 'Root1');	
+
+--adicionando usuarios prueba
+insert into usuario values('jhon', 'jhon@hotmail.es','jhon','John freidy', 'Lourido','Astudillo','Masculino','1','1151953353','CC','1', true);	
+insert into usuario values('kellys', 'jhon@hotmail.es','kellys','kellys', 'Santa','Castañeda','Femenino','1','1151953353','CC','1', true);
+insert into usuario values('yaya', 'kellys@hotmail.es','kellys','kellys', 'Santa','Castañeda','Femenino','1','1151953353','CC','1', true);
+insert into usuario values('casanova', 'casanova@hotmail.es','casanova','stefa', 'casanova','Castañeda','Femenino','3','1151953353','CC','1', true);
+
+--adicionando eventos
+insert into Evento values ('1','concierto babasonicos','rock, indie, electronica', '17-03-20015', 'cali', true, 'jhon');
+insert into Evento values ('2','asamblea','comvocatoria al tropel estudiantil', '20-03-20015', 'cali', true, 'jhon');	
+insert into Evento values ('3','El perol','comvocatoria al tropel estudiantil', '20-03-20015', 'cali', true, 'kellys');
+insert into Evento values ('4','conversatorio','comvocatoria al tropel estudiantil', '20-03-20015', 'cali', true, 'jhon');
+insert into Evento values ('5','torneo de futbol','comvocatoria al tropel estudiantil', '20-03-20015', 'cali', true, 'jhon');
+insert into Evento values ('6','marcha','comvocatoria al tropel estudiantil', '20-03-20015', 'cali', true, 'casanova');
+insert into Evento values ('7','la male','comvocatoria al tropel estudiantil', '20-03-20015', 'cali', true, 'kellys');	
+
+--adiccionando invitaciones
+
+INSERT INTO Invitacion_Evento VALUES ('kellys','jhon','3',true), ('kellys','casanova','3',true), ('jhon','kellys','2',true), ('jhon','casanova','2',true), ('jhon','kellys','4',false);
+INSERT INTO Invitacion_Evento  VALUES ('casanova','kellys','3',true), ('kellys','casanova','4',true), ('jhon','kellys','6',true), ('jhon','casanova','4',true), ('jhon','kellys','5',true);
+INSERT INTO Invitacion_Evento VALUES ('jhon','kellys','7',true), ('jhon','casanova','7',true), ('casanova','kellys','7',false), ('jhon','casanova','1',true), ('jhon','kellys','1',false);
