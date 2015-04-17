@@ -74,10 +74,10 @@ function buscarContactoNombre($nombreU, $universidadU){
 }?>
 <?php
 function cincoMejoresEventos(){
-$sql_query = "select nombre, count(*) counter from 
+$sql_query = "select nombre, count(*) total_participantes from 
 				evento inner join Invitacion_evento as ie on evento.id_evento = ie.id_evento and ie.asistir = true 
 				group by nombre 
-				order by counter  desc;";
+				order by total_participantes  desc;";
 $consulta = pg_query($sql_query);
 $counter = 0;
 while($fila=pg_fetch_row($consulta) and $counter <5){
