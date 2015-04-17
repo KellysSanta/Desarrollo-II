@@ -49,7 +49,7 @@ if (pg_num_rows($arregloresultante) == 1){
 					<h5>¿Esta seguro que desea Eliminar el perfil?</h5>
 					<form name="elimanaPer" action="actualizatabla.php" method="post">
 						<input type='hidden' name='tabla' value='eliminaPerfil'> 
-						<?phP echo"<input type='hidden' name='user' value='$user'"
+						<?phP echo"<input type='hidden' name='user' value='$user'>";
 						?>
 					<button type="submit"  class="eliminar_perfil boton">Aceptar</button>
 					</form>
@@ -68,7 +68,7 @@ if (pg_num_rows($arregloresultante) == 1){
 					</div>			
 						<input type="hidden" name="tabla" value="cambiaContrasena">
 						<?php echo"<input type='hidden' name='user' value='$user'>";?>
-							<button type="submit"  class="cambiar_contraseña boton">Aceptar</button>
+						<button type="submit"  class="cambiar_contraseña boton">Aceptar</button>
 				</form>
 		</div>
 		<div class="columna1">
@@ -197,7 +197,7 @@ if (pg_num_rows($arregloresultante) == 1){
 				<ul class= "menu_principal"><!--la etiqueta ul por defecto tiene margenes -->
 					<li class="active" id="publicar_nav"><a href="#" class="principal" id="mostrar-agr">Agregar</a></li>
 					<li class="active"><a class="principal" id="mostrar-con" href="#">Consultar</a></li> <!--a es la etieuta href es el atributo que tiene la url (# significa que redirecciona a la misma página)-->
-					<li class="active"><a class="principal" href="#">Listar</a></li>
+					<li class="active"><a class="principal" href="contactos.php">Listar</a></li>
 					<li class="active"><a class="principal"  id="mostrar-eli" href="#">Eliminar</a></li> <!--Los elementos li son cajas y funcionan con block -->				
 				</ul>
 			</nav>			
@@ -209,22 +209,38 @@ if (pg_num_rows($arregloresultante) == 1){
 				</div>
 				<div class="sesion_formulario">
 					<label class="label2">Universidad:</label>
-					<input class="input" type="text" id="bUniversidad" name="bUniversidad">
+					<select class="select" id="bUniversidad" name="bUniversidad">
+								<option value='0'> No conozco la universidad</option>
+								<?php recorre_tabla("universidad", "nombre");?>
+					</select>
 				</div>
+
+
 				<div class="sesion_formulario">
 					<button type="submit" class="boton">Buscar</button>
 				</div>	
-				 <?php buscarContactoNombre("bNombre","bUniversidad")?>
+
+					<form <form name="agregarUsuario" action="actualizatabla.php" method="post">
+						<input type='hidden' name='tabla' value='agregaUsuario'> 
+						<?phP echo"<input type='hidden' name='user' value='$user'>";
+						?>
+					 <?php buscarContactoNombre("bNombre","bUniversidad");?>
+					</form>
+
+
 			</form>						
 			<form class="consultar" role="form">
 				<div class="cuadros"><h3>Consultar Contacto.</h3></div>
 				<div class="sesion_formulario">
 			 		<label class="label2">Nombre:</label>
-					<input class="input" id="inputAmigo" type="text">
+					<input class="input" id="inputAmigo" type="text" name="consultaA">
 				</div>
+
 				<div class="sesion_formulario">							
 					 <button type="submit" class="boton">Consultar</button>
 				</div>
+				<?php consultarContacto("consultaA", $user);?>
+
 			</form>
 			<div class="cuadros"><h3>Solicitudes de amistad.</h3>
 				<ul class="lista">

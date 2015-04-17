@@ -69,7 +69,7 @@
 
 				<div class="cuadros">
 
-						<?php listarrContacto($user);?>
+						<?php listarrContactos($user);?>
 				</div>
 			</div>
 				

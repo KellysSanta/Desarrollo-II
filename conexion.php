@@ -1,8 +1,8 @@
 <?php //Creamos las variables de conexion
 $server = "localhost";
-$db_name = "redsocialid";
+$db_name = "Redsocialid";
 $log = "postgres";
-$pass = "jhon07";
+$pass = "91012206912ksg";
 $port = "5432";
 $cadena_con= "host=$server port=$port dbname=$db_name user=$log password=$pass";
 
@@ -56,7 +56,8 @@ function buscarContactoNombre($nombreU, $universidadU){
 		while($fila=pg_fetch_row($consulta))
 			{
 				echo"<div class='sesion_formulario'>
-							<label class='label2' name=".$fila[1].">".$fila[0]."</label>
+							<input class='input' type='hidden'  name='usuario2' value='".$fila[1]."'>
+							<input class='input' type='text' OnFocus='this.blur()' value='".$fila[0]."'>
 							<button type='submit' class='boton'>Agregar</button>
 				</div>";
 			}
@@ -66,12 +67,56 @@ function buscarContactoNombre($nombreU, $universidadU){
 		while($fila=pg_fetch_row($consulta))
 			{
 				echo"<div class='sesion_formulario'>
-							<label class='label2' name=".$fila[1].">".$fila[0]."</label>
+							<input class='input' type='hidden' ' name='usuario2' value='".$fila[1]."'>
+							<input class='input' type='text' OnFocus='this.blur()' value='".$fila[0]."'>
 							<button type='submit' class='boton'>Agregar</button>
 				</div>";
 			}
 	}
 }?>
+
+<?php
+
+function consultarContactos($nombreC, $nombreU){
+
+		$sql_query = "select nombre from usuario inner join 
+					((select usuario_dos from contacto inner join (select login from usuario where nombre like upper('%$nombreC%')) as A on A.login = contacto.usuario_dos where contacto.usuario_uno='$nombreU')
+					union
+					(select usuario_uno from contacto inner join (select login from usuario where nombre like upper('%$nombreC%')) as A on A.login = contacto.usuario_uno where contacto.usuario_dos='$nombreU')) as R on usuario.login = R.usuario_dos;"
+		
+		$consulta=pg_query($sql_query):
+		while($fila=pg_fetch_row($consulta)){
+				echo"<div class='sesion_formulario'>
+							<input class='input' type='text' OnFocus='this.blur()' name='usuario2' value='".$fila[0]."'>
+					</div>";
+		}
+}?>
+
+<?php
+
+function listarContactos($nombreU){
+
+		$sql_query = "select U.nombre, Uni.nombre  from Universidad Uni inner join (select nombre, universidad from usuario inner join 
+						((select usuario_dos from contacto inner join (select login from usuario) as A on A.login = contacto.usuario_dos where contacto.usuario_uno='$nombreU')
+						union
+						(select usuario_uno from contacto inner join (select login from usuario) as A on A.login = contacto.usuario_uno where contacto.usuario_dos='$nombreU')) as R on usuario.login = R.usuario_dos) As U on U.universidad = Uni.universidad_id;"
+		
+		$consulta=pg_query($sql_query):
+		while($fila=pg_fetch_row($consulta)){
+				echo"<div class='sesion_formulario'>
+								<label class='label2'>Usuario</label>
+								<input class='input' type='text' OnFocus='this.blur()' name='usuario2' value='".$fila[0]."'>
+						</div>		
+						<div class='sesion_formulario'>
+								<label class='label2'>Universidad</label>
+								<input class='input' type='text' OnFocus='this.blur()' name='usuario2' value='".$fila[1]."'>
+						</div>	
+						<div class='sesion_formulario'>
+								<button type='submit'  class='boton'>Eliminar</button>
+						</div>";
+		}
+}?>
+
 <?php
 function cincoMejoresEventos(){
 $sql_query = "select nombre, count(*) total_participantes from 
