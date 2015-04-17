@@ -24,6 +24,8 @@ var $form = $('.agregar'),
 	$form_verCarreras = $ ('#profesionales'),
 	$button_verCarreras = $('#ver_profesionales'),
 	$button_cancelarAgregarCarreras = $('.cancelar_estudio')
+	$button_event = $('#mostrar-event')
+	$form_reporteevento =$('.reporteEventos')
 
 
 
@@ -101,6 +103,12 @@ function cancelar_AgregarCarrera()
 	return false; /*Quita el efecto que tiene por defecto la etiqueta a, ya que esta va a una url*/
 }
 
+function mostrarEventos()
+{
+	$form_reporteevento.slideToggle();/*Si esta oculto lo muestra, si esta visible lo oculta*/
+	return false; /*Quita el efecto que tiene por defecto la etiqueta a, ya que esta va a una url*/
+}
+
 //Eventos
 $button.click( mostrarFormulario );
 $button1.click( mostrarConsulta );
@@ -113,3 +121,4 @@ $button_cancelarUniversidades.click(ocultarAgregarUniversidades);
 $button_agregarCarrera.click(agregar_Carrera);
 $button_verCarreras.click(ver_Carreras);
 $button_cancelarAgregarCarreras.click(cancelar_AgregarCarrera);
+$button_event.click(mostrarEventos);

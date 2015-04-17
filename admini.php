@@ -35,15 +35,14 @@
 	$_SESSION['usuario'] = $user;
 	$login=$fila[0];
 	$correo=$fila[1];
-	$nombre=$fila[3];
-	$apellido1=$fila[4];
-	$apellido2=$fila[5];
-	$sexo=$fila[6];
-	$universidad=$fila[7];
-	$id=$fila[8];
-	$tipoid=$fila[9];
-	$carrera=$fila[10];?>
-
+	$nombre=$fila[2];
+	$apellido1=$fila[3];
+	$apellido2=$fila[4];
+	$sexo=$fila[5];
+	$universidad=$fila[6];
+	$id=$fila[7];
+	$tipoid=$fila[8];
+	$carrera=$fila[9];?>
 <div class="container">
 
 	<nav>
@@ -261,7 +260,7 @@
 
 									</li>
 									<li class="derecha active"><a class="principal" id="mostrar-con" href="#">Carrera</a></li> <!--a es la etieuta href es el atributo que tiene la url (# significa que redirecciona a la misma página)-->
-									<li class="derecha active"><a class="principal" href="#">Evento</a></li>	
+									<li class="derecha active"><a class="principal" id="mostrar-event" href="#">Evento</a></li>	
 								</ul>
 							</nav>
 
@@ -273,12 +272,7 @@
 										Usuarios por universidad
 									</h3>
 								</div>
-								<div class="sesion_formulario">
-						 			<label class="label2">Universidad:</label>
-									<input class="input" type="text">
-									<label class="label">Total:</label>
-									<input class="input2" type="text">
-								</div>							
+								<?php listarUsuariosPorUniversidad(); ?>						
 						</form>
 					
 				
@@ -289,26 +283,16 @@
 										Usuarios por Carrera
 									</h3>
 								</div>
-								<div class="sesion_formulario">
-						 			<label class="label2">Carrera:</label>
-									<input class="input" type="text">
-									<label class="label">Total:</label>
-									<input class="input2" type="text">
-								</div>	
+								<?php listarUsuariosPorCarreras(); ?>	
 						</form>
 					
-						<form role="form">
+						<form class="reporteEventos" role="form">
 							<div class="cuadros " >
 									<h3>
 										Eventos destacados
 									</h3>
 								</div>
-								<div class="sesion_formulario">
-						 			<label class="label">Evento:</label>
-									<input class="input" type="text">
-									<label class="label">Total:</label>
-									<input class="input2" type="text">
-								</div>	
+								<?php cincoMejoresEventos(); ?>
 						</form>		
 				</div>	
 			</div>	

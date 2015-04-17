@@ -1,15 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-	<meta charset="utf-8">
-	<title>Redsocial IN</title>
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<meta name="description" content="">
-	<meta name="author" content="">
-	<link href="css/perfilstyle.css" rel="stylesheet">
-	<link rel="shortcut icon" href="img/rs.png">
-</head>
-<body>
 <?php 
 include "conexion.php";
 $user = $_POST["user"];  
@@ -22,16 +10,28 @@ if (pg_num_rows($arregloresultante) == 1){
 	$_SESSION['usuario'] = $user;
 	$login=$fila[0];
 	$correo=$fila[1];
-	$nombre=$fila[3];
-	$apellido1=$fila[4];
-	$apellido2=$fila[5];
-	$sexo=$fila[6];
-	$universidad=$fila[7];
-	$id=$fila[8];
-	$tipoid=$fila[9];
-	$carrera=$fila[10];
+	$nombre=$fila[2];
+	$apellido1=$fila[3];
+	$apellido2=$fila[4];
+	$sexo=$fila[5];
+	$universidad=$fila[6];
+	$id=$fila[7];
+	$tipoid=$fila[8];
+	$carrera=$fila[9];
 }else{header("Location: index.php");}
 ?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>Redsocial IN</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="">
+	<meta name="author" content="">
+	<link href="css/perfilstyle.css" rel="stylesheet">
+	<link rel="shortcut icon" href="img/rs.png">
+</head>
+<body>
 <div class="container">
 	<nav>
 		<ul class="menu_principal">

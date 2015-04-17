@@ -1,8 +1,8 @@
 <?php //Creamos las variables de conexion
 $server = "localhost";
-$db_name = "Redsocialid";
-$log = "Admin";
-$pass = "Admin";
+$db_name = "redsocialid";
+$log = "postgres";
+$pass = "jhon07";
 $port = "5432";
 $cadena_con= "host=$server port=$port dbname=$db_name user=$log password=$pass";
 
@@ -11,13 +11,21 @@ $con = pg_connect($cadena_con) or die ('Ha fallado la conexion');
 ?>
 <?php //Buscamos el usuario y contraseña
 function verificauser($user, $password){
-$sql_query = "Select * From usuarios Where login = '$user' and pass = '$password' and estado = true";
+$sql_query = "Select login, correo, usuario.nombre, apellido, apellido2, 
+					sexo,universidad.nombre, identificacion, tipoid, 
+					carrera.nombre 
+					From usuario inner join administrador on usuario.login = administrador.admin_id 
+					inner join universidad on usuario.universidad = universidad.universidad_id 
+					inner join carrera on usuario.carrera = carrera.carrera_id 
+					Where login = '$user' and pass = '$password';";
 $result = pg_query($sql_query);
 return $result;
 }?>
 <?php //Miramos si es Admin
 function esadmin($user){
-$sql_queryadmin = "Select * From admins natural join usuarios AS datosadmin Where login = '$user'";	
+$sql_queryadmin = "Select * From usuario inner join administrador 
+					on administrador.admin_id = usuario.login 
+					Where login = '$user';";	
 $result = pg_query($sql_queryadmin);
 return $result;}
 ?>
@@ -37,8 +45,9 @@ echo "<div><select name='$selectDestino' id='$selectDestino' onChange='cargaCont
 echo "<option value='0'>Seleccione $nombreta</option>";
 while($fila=pg_fetch_row($consulta)){
 	echo "<option value='".$fila[0]."'>".$fila[0]."</option>";}			
-echo "</select></div>";
-
+echo "</select></div>";	
+}?>
+<?php
 function buscarContactoNombre($nombreU, $universidadU){
 	
 	if($universidadU == "No conozco la universidad"){
@@ -62,6 +71,45 @@ function buscarContactoNombre($nombreU, $universidadU){
 				</div>";
 			}
 	}
+}?>
+<?php
+function cincoMejoresEventos(){
+$sql_query = "select nombre, participantes from evento order by participantes desc;";
+$consulta = pg_query($sql_query);
+$counter = 0;
+while($fila=pg_fetch_row($consulta) and $counter <5){
+	$counter = $counter +1;
+	echo "<div class='sesion_formulario'>
+		<label class='label'>Evento:</label>
+		<input class='input' type='text' OnFocus='this.blur()' value = '$fila[0]'>
+	    <label class='label'>Total:</label>
+		<input class='input2' type='text' OnFocus='this.blur()'  value = '$fila[1]'>
+	</div>";
 }
-	
+}?>
+<?php
+function listarUsuariosPorCarreras(){
+$sql_query = "select  carrera.nombre, count(*) from usuario inner join carrera on usuario.carrera = carrera.carrera_id group by carrera.nombre;";
+$consulta = pg_query($sql_query);
+while($fila=pg_fetch_row($consulta)){
+	echo "<div class='sesion_formulario'>
+		<label class='label'>Carrera:</label>
+		<input class='input' type='text' OnFocus='this.blur()' value = '$fila[0]'>
+	    <label class='label'>Total:</label>
+		<input class='input2' type='text' OnFocus='this.blur()'  value = '$fila[1]'>
+	    </div>";
+}
+}?>
+<?php
+function listarUsuariosPorUniversidad(){
+$sql_query = "select  universidad.nombre, count(*) from usuario inner join universidad on usuario.universidad = universidad.universidad_id group by universidad.nombre;";
+$consulta = pg_query($sql_query);
+while($fila=pg_fetch_row($consulta)){
+	echo "<div class='sesion_formulario'>
+		<label class='label'>Universidad:</label>
+		<input class='input' type='text' OnFocus='this.blur()' value = '$fila[0]'>
+	    <label class='label'>Total:</label>
+		<input class='input2' type='text' OnFocus='this.blur()'  value = '$fila[1]'>
+	    </div>";
+}
 }?>
