@@ -83,7 +83,7 @@ $d1=$_POST["bNombre"];
 $d2=$_POST["bUniversidad"];
 $arregloresultante= verificaBusquedaNombre($d1, $d2);
 if (pg_num_rows($arregloresultante) >= 1){
-	buscarContactoNombre($d1, $d2)
+	buscarContactoNombre($d1, $d2);
 }else{
 	echo"<div class='sesion_formulario'>
 						<h3>No hay resultados</h3>

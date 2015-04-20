@@ -197,7 +197,7 @@ if (pg_num_rows($arregloresultante) == 1){
 				<ul class= "menu_principal"><!--la etiqueta ul por defecto tiene margenes -->
 					<li class="active" id="publicar_nav"><a href="#" class="principal" id="mostrar-agr">Agregar</a></li>
 					<li class="active"><a class="principal" id="mostrar-con" href="#">Consultar</a></li> <!--a es la etieuta href es el atributo que tiene la url (# significa que redirecciona a la misma página)-->
-					<li class="active"><a class="principal" href="contactos.php">Listar</a></li>
+					<?php echo "<li class='active'><a class='principal' href='contactos.php?usuario=$user'>Listar</a></li>";?>
 					<li class="active"><a class="principal"  id="mostrar-eli" href="#">Eliminar</a></li> <!--Los elementos li son cajas y funcionan con block -->				
 				</ul>
 			</nav>			

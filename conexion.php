@@ -70,7 +70,6 @@ function buscarContactoNombre($nombreU, $universidadU){
 			{
 				echo"<div class='sesion_formulario'>
 						<form <form name='agregarUsuario' action='actualizatabla.php' method='post'>
-							<input class='input' type='hidden'  name='usuario2' value='".$fila[1]."'>
 							<input class='input' type='text' OnFocus='this.blur()' value='".$fila[0]."'>
 
 							<input type='hidden' name='tabla' value='agregaUsuario'> 

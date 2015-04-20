@@ -21,7 +21,8 @@
 
   <!-- Fav and touch icons -->
   <link rel="shortcut icon" href="img/rs.png">
-  
+  <?php 
+  $usuario = _GET["usuario"];?>
 	
 </head>
 
@@ -59,7 +60,7 @@
 
 				<div class="cuadros">
 
-						<?php listarrContactos($user);?>
+						<?php listarContactos($usuario);?>
 				</div>
 			</div>
 				
