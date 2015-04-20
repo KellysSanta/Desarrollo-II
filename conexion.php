@@ -48,6 +48,19 @@ while($fila=pg_fetch_row($consulta)){
 echo "</select></div>";	
 }?>
 <?php
+
+function verificaBusquedaNombre($nombreU, $universidad){
+	if($universidadU == "No conozco la universidad"){
+		$sql_query = "Select nombre, login from Usuario where nombre LIKE '%$nombreU%';";
+		$result= pg_query($sql_query);
+	}else{
+		$sql_query = "select nombre, login from usuario inner join (Select universidad_id from  universidad where nombre ='$universidadU') as A on usuario.universidad = A.id where nombre LIKE upper('%$nombreU%');";
+		$result= pg_query($sql_query);
+	}
+	return $result;
+}?>
+
+<?php
 function buscarContactoNombre($nombreU, $universidadU){
 	
 	if($universidadU == "No conozco la universidad"){
@@ -56,9 +69,17 @@ function buscarContactoNombre($nombreU, $universidadU){
 		while($fila=pg_fetch_row($consulta))
 			{
 				echo"<div class='sesion_formulario'>
+						<form <form name='agregarUsuario' action='actualizatabla.php' method='post'>
 							<input class='input' type='hidden'  name='usuario2' value='".$fila[1]."'>
 							<input class='input' type='text' OnFocus='this.blur()' value='".$fila[0]."'>
+
+							<input type='hidden' name='tabla' value='agregaUsuario'> 
+							<?phP echo'<input type='hidden' name='user' value='$user'>';
+								  echo'<input class='input' type='hidden'  name='usuario2' value='".$fila[1]."'>;	
+							?>
+							
 							<button type='submit' class='boton'>Agregar</button>
+						</form>
 				</div>";
 			}
 	}else{
@@ -67,9 +88,17 @@ function buscarContactoNombre($nombreU, $universidadU){
 		while($fila=pg_fetch_row($consulta))
 			{
 				echo"<div class='sesion_formulario'>
-							<input class='input' type='hidden' ' name='usuario2' value='".$fila[1]."'>
+						<form <form name='agregarUsuario' action='actualizatabla.php' method='post'>
+							
 							<input class='input' type='text' OnFocus='this.blur()' value='".$fila[0]."'>
+
+							<input type='hidden' name='tabla' value='agregaUsuario'> 
+							<?phP echo'<input type='hidden' name='user' value='$user'>';
+								  echo'<input class='input' type='hidden'  name='usuario2' value='".$fila[1]."'>;	
+							?>
+							
 							<button type='submit' class='boton'>Agregar</button>
+						</form>
 				</div>";
 			}
 	}
@@ -85,10 +114,17 @@ function consultarContactos($nombreC, $nombreU){
 					(select usuario_uno from contacto inner join (select login from usuario where nombre like upper('%$nombreC%')) as A on A.login = contacto.usuario_uno where contacto.usuario_dos='$nombreU')) as R on usuario.login = R.usuario_dos;"
 		
 		$consulta=pg_query($sql_query):
-		while($fila=pg_fetch_row($consulta)){
-				echo"<div class='sesion_formulario'>
-							<input class='input' type='text' OnFocus='this.blur()' name='usuario2' value='".$fila[0]."'>
-					</div>";
+
+		if (pg_num_rows($consulta) >= 1){
+			while($fila=pg_fetch_row($consulta)){
+					echo"<div class='sesion_formulario'>
+								<input class='input' type='text' OnFocus='this.blur()' name='usuario2' value='".$fila[0]."'>
+						</div>";
+			}
+		}else{
+			echo"<div class='sesion_formulario'>
+						<h3>No hay resultados</h3>
+				</div>";
 		}
 }?>
 

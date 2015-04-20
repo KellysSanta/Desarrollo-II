@@ -217,15 +217,11 @@ if (pg_num_rows($arregloresultante) == 1){
 
 
 				<div class="sesion_formulario">
-					<button type="submit" class="boton">Buscar</button>
-				</div>	
-
-					<form <form name="agregarUsuario" action="actualizatabla.php" method="post">
-						<input type='hidden' name='tabla' value='agregaUsuario'> 
-						<?phP echo"<input type='hidden' name='user' value='$user'>";
-						?>
-					 <?php buscarContactoNombre("bNombre","bUniversidad");?>
+					<form <form name="buscarUsuario" action="actualizatabla.php" method="post">
+						<input type='hidden' name='tabla' value='buscaUsuario'> 
+						<button type="submit" class="boton">Buscar</button>
 					</form>
+				</div>	
 
 
 			</form>						
@@ -236,10 +232,14 @@ if (pg_num_rows($arregloresultante) == 1){
 					<input class="input" id="inputAmigo" type="text" name="consultaA">
 				</div>
 
-				<div class="sesion_formulario">							
+				<div class="sesion_formulario">		
+					<form name="consultarContacto" action="actualizatabla.php" method="post">
+						<input type='hidden' name='tabla' value='consultaContacto'> 
+						<?phP echo"<input type='hidden' name='user' value='$user'>";
+						?>					
 					 <button type="submit" class="boton">Consultar</button>
+					</form>
 				</div>
-				<?php consultarContacto("consultaA", $user);?>
 
 			</form>
 			<div class="cuadros"><h3>Solicitudes de amistad.</h3>

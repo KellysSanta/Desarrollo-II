@@ -13,7 +13,7 @@
 	<!--append ‘#!watch’ to the browser URL, then refresh the page. -->
 	
 	<link href="css/bootstrap.min.css" rel="stylesheet">
-	<link href="css/style.css" rel="stylesheet">
+	<link href="css/gruposstyle.css" rel="stylesheet">
 
   <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
   <!--[if lt IE 9]>
@@ -33,23 +33,13 @@
 
 	<nav>
 
-			<ul class="menu_principal">
-				<li class="active">
-					<a class="principal" href="#">Perfil</a>
-				</li>
-				<li class="active">
-					<a class="principal" href="#">Mensajes/Notificaciones</a>
-				</li>
-				<li class="active">
-					<a class="principal" href="#">Eventos</a>
-				</li>
-				<li class="active">
-					<a class="principal seleccionado" href="#">Grupos</a>
-				</li>
-				<li class="derecha active">
-					<a class="principal" href="#">Salir</a>
-				</li>
-			</ul>
+		<ul class="menu_principal">
+			<li class="active"><a class="principal seleccionado" href="perfil.php">Perfil</a></li>
+			<li class="active"><a class="principal" href="mensajes.php">Mensajes/Notificaciones</a></li>
+			<li class="active"><a class="principal" href="eventos.php">Eventos</a></li>
+			<li class="active"><a class="principal" href="grupos.php">Grupos</a></li>
+			<li class="derecha active"><a class="principal" href="logout.php">Salir</a></li>
+		</ul>
 
 	</nav>
 
@@ -62,7 +52,7 @@
 					</div>
 					<div class="nombre">
 							<h1>
-								Grupos			
+								<small>Grupos</small>			
 							</h1>
 
 					</div>

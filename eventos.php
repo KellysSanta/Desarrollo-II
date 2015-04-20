@@ -6,6 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="">
 <meta name="author" content="">
+<link href="css/bootstrap.min.css" rel="stylesheet">
 <link href="css/eventosstyle.css" rel="stylesheet">
 <link rel="shortcut icon" href="img/rs.png">	
 </head>
@@ -23,15 +24,15 @@
 	<div class="contenido">
 		<div class="columna1">
 			<div class="cuadros">
-					<div class=logo>
-						<img class="img-circulo" alt="140x140" src="img/foto.png">
-					</div>
-					<div class="nombre">
-							<h1>
-								Eventos			
-							</h1>
+						<div class="logo">
+							<img class="img-circulo" alt="140x140" src="img/foto.png">
+						</div>
+						<div class="nombre">
+								<h1>
+									<small>Eventos</small>			
+								</h1>
 
-					</div>
+						</div>
 			</div>
 			
 

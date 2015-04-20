@@ -65,6 +65,8 @@ $d1=$_POST["user"];
 $d2=$_POST["contactoAEliminar"];
 $sql_query = "delete from contacto where usuario_uno='$d1' and usuario_dos='$d2' ;";
 $consulta = pg_query($sql_query);
+$sql_query = "delete from contacto where usuario_dos='$d1' and usuario_uno='$d2' ;";
+$consulta = pg_query($sql_query);
 break;
 
 case "agregaUsuario":
@@ -74,6 +76,31 @@ $sql_query = "insert into contacto values ('$d1', '$d2', false, '01/01/1900');";
 $consulta = pg_query($sql_query);
 break;
 
+case "buscaUsuario":
+
+
+$d1=$_POST["bNombre"];
+$d2=$_POST["bUniversidad"];
+$arregloresultante= verificaBusquedaNombre($d1, $d2);
+if (pg_num_rows($arregloresultante) >= 1){
+	buscarContactoNombre($d1, $d2)
+}else{
+	echo"<div class='sesion_formulario'>
+						<h3>No hay resultados</h3>
+		</div>";
 }
+break;
+
+case "consultaContacto":
+$d1=$_POST["user"];
+$d2=$_POST["consultaA"];
+consultarContactos($d2, $d1);
+break;
+
+}
+
+
+
+
 header('Location: index.php');
 ?>
