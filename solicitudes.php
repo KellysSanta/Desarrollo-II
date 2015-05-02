@@ -34,21 +34,8 @@
 	<nav>
 
 			<ul class="menu_principal">
-				<li class="active">
-					<a class="principal" href="#">Perfil</a>
-				</li>
-				<li class="active">
-					<a class="principal " href="#">Mensajes/Notificaciones</a>
-				</li>
-				<li class="active">
-					<a class="principal" href="#">Eventos</a>
-				</li>
-				<li class="active">
-					<a class="principal" href="#">Grupos</a>
-				</li>
-				<li class="derecha active">
-					<a class="principal" href="#">Salir</a>
-				</li>
+				<li class="active"><a class="principal" href="perfil.php">Perfil</a></li>
+			<li class="derecha active"><a class="principal" href="logout.php">Salir</a></li>
 			</ul>
 
 	</nav>

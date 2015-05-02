@@ -4,7 +4,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>Redsocial IN - Contactos</title>
+  <title>Redsocial IN - Actividad</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="">
   <meta name="author" content="">
@@ -35,7 +35,7 @@
 		<nav>
 
 		<ul class="menu_principal">
-			<li class="active"><a class="principal seleccionado" href="perfil.php">Perfil</a></li>
+			<li class="active"><a class="principal" href="perfil.php">Perfil</a></li>
 			<li class="derecha active"><a class="principal" href="logout.php">Salir</a></li>
 		</ul>
 
@@ -59,6 +59,27 @@
 				<div class="cuadros">
 
 						<?php listarContactos($usuario);?>
+						<div class="sesion_formulario">
+							<label class="label2">Nombre:</label>
+							<input class="input" id="inputAmigo" type="text">
+						</div>
+						<div class="sesion_formulario">
+							<label class="label2">Fecha-hora:</label>
+							<input class="input" id="inputAmigo" type="text">
+						</div>
+						<h5>(yyyy/mm/dd hh:mm:ss)</h5>
+						<div class="sesion_formulario">
+							<label class="label2">Lugar:</label>
+							<input class="input" id="inputAmigo" type="text">
+						</div>
+						<div class="sesion_formulario">
+							<label class="label2">Descripción:</label>
+							<input class="input" id="inputAmigo" type="text">
+						</div>
+						<div class="sesion_formulario">
+							<button type="submit" class="boton">Editar</button>
+							<button type="submit" class="boton">Eliminar</button>
+						</div>
 				</div>
 			</div>
 				

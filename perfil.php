@@ -28,6 +28,7 @@ if (pg_num_rows($arregloresultante) == 1){
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta name="description" content="">
 	<meta name="author" content="">
+
 	<link href="css/perfilstyle.css" rel="stylesheet">
 	<link rel="shortcut icon" href="img/rs.png">
 </head>
@@ -196,8 +197,7 @@ if (pg_num_rows($arregloresultante) == 1){
 			<nav>
 				<ul class= "menu_principal"><!--la etiqueta ul por defecto tiene margenes -->
 					<li class="active" id="publicar_nav"><a href="#" class="principal" id="mostrar-agr">Agregar</a></li>
-					<li class="active"><a class="principal" id="mostrar-con" href="#">Consultar</a></li> <!--a es la etieuta href es el atributo que tiene la url (# significa que redirecciona a la misma página)-->
-					<?php echo "<li class='active'><a class='principal' href='contactos.php?usuario=$user'>Listar</a></li>";?>
+					<?php echo "<li class='active'><a class='principal' href='contactos.php?usuario=$user'>Consultar</a></li>";?>
 					<li class="active"><a class="principal"  id="mostrar-eli" href="#">Eliminar</a></li> <!--Los elementos li son cajas y funcionan con block -->				
 				</ul>
 			</nav>			
@@ -225,23 +225,7 @@ if (pg_num_rows($arregloresultante) == 1){
 
 
 			</form>						
-			<form class="consultar" role="form">
-				<div class="cuadros"><h3>Consultar Contacto.</h3></div>
-				<div class="sesion_formulario">
-			 		<label class="label2">Nombre:</label>
-					<input class="input" id="inputAmigo" type="text" name="consultaA">
-				</div>
-
-				<div class="sesion_formulario">		
-					<form name="consultarContacto" action="actualizatabla.php" method="post">
-						<input type='hidden' name='tabla' value='consultaContacto'> 
-						<?phP echo"<input type='hidden' name='user' value='$user'>";
-						?>					
-					 <button type="submit" class="boton">Consultar</button>
-					</form>
-				</div>
-
-			</form>
+			
 			<div class="cuadros"><h3>Solicitudes de amistad.</h3>
 				<ul class="lista">
 					<li class="solicitud">
@@ -278,7 +262,7 @@ if (pg_num_rows($arregloresultante) == 1){
 						</li>
 					</ul>
 				</nav>
-				<form id="agregar_actividad">	
+				<form id="agregar_actividad" action="actualizatabla.php" method="post">	
 					<div class="cuadros"><h3>Agregar Actividad</h3>
 						<div class="sesion_formulario">
 						 	<label class="label2">Nombre:</label>
@@ -315,27 +299,7 @@ if (pg_num_rows($arregloresultante) == 1){
 							<button type="submit" class="boton" id="cancelar_consultar">Cancelar</button>
 						</div>
 						<h3>----------------------------------------------</h3>
-						<div class="sesion_formulario">
-							<label class="label2">Nombre:</label>
-							<input class="input" id="inputAmigo" type="text">
-						</div>
-						<div class="sesion_formulario">
-							<label class="label2">Fecha-hora:</label>
-							<input class="input" id="inputAmigo" type="text">
-						</div>
-						<h5>(yyyy/mm/dd hh:mm:ss)</h5>
-						<div class="sesion_formulario">
-							<label class="label2">Lugar:</label>
-							<input class="input" id="inputAmigo" type="text">
-						</div>
-						<div class="sesion_formulario">
-							<label class="label2">Descripción:</label>
-							<input class="input" id="inputAmigo" type="text">
-						</div>
-						<div class="sesion_formulario">
-							<button type="submit" class="boton">Editar</button>
-							<button type="submit" class="boton">Eliminar</button>
-						</div>
+						
 					</div>
 				</form>	
 			</div>

@@ -34,10 +34,10 @@
 	<nav>
 
 		<ul class="menu_principal">
-			<li class="active"><a class="principal seleccionado" href="perfil.php">Perfil</a></li>
+			<li class="active"><a class="principal" href="perfil.php">Perfil</a></li>
 			<li class="active"><a class="principal" href="mensajes.php">Mensajes/Notificaciones</a></li>
 			<li class="active"><a class="principal" href="eventos.php">Eventos</a></li>
-			<li class="active"><a class="principal" href="grupos.php">Grupos</a></li>
+			<li class="active"><a class="principal seleccionado" href="grupos.php">Grupos</a></li>
 			<li class="derecha active"><a class="principal" href="logout.php">Salir</a></li>
 		</ul>
 
