@@ -22,23 +22,15 @@
   <!-- Fav and touch icons -->
   <link rel="shortcut icon" href="img/rs.png">
   <?php 
-<<<<<<< HEAD
   include "conexion.php";
   $usuario = $_POST["user"];
    $nombre = $_POST["bNombre"];
    $universidad= $_POST["bUniversidad"];?>
-=======
-  $usuario = _GET["usuario"];?>
->>>>>>> 186546cf8afb7255735be8c5617ed92c1e3d3493
 	
 </head>
 
 <body>
 
-<<<<<<< HEAD
-=======
-
->>>>>>> 186546cf8afb7255735be8c5617ed92c1e3d3493
 	<div class="container">
 
 		<nav>
@@ -67,11 +59,7 @@
 
 				<div class="cuadros">
 
-<<<<<<< HEAD
 						<?php buscarContactoNombre($nombre, $universidad,$usuario);?>
-=======
-						<?php listarContactos($usuario);?>
->>>>>>> 186546cf8afb7255735be8c5617ed92c1e3d3493
 				</div>
 			</div>
 				

@@ -23,12 +23,7 @@
 
   <!-- Fav and touch icons -->
   <link rel="shortcut icon" href="img/rs.png">
-<<<<<<< HEAD
 
-=======
-  <?php 
-  $usuario = _GET["usuario"];?>
->>>>>>> 186546cf8afb7255735be8c5617ed92c1e3d3493
 	
 </head>
 
