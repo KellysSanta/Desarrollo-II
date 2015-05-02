@@ -121,12 +121,23 @@ function buscarContactoNombre($nombreU, $universidadU, $log){
 		while($fila=pg_fetch_row($consulta))
 			{
 				echo"<div class='sesion_formulario'>
+<<<<<<< HEAD
 						<form name='agregarUsuario' action='actualizatabla.php' method='post'>
 							<label>Nombre : $fila[0]</label>
 							<br><label>Login : $fila[1]</label>
 							<input type='hidden' name='tabla' value='agregaUsuario'>
 							<input type='hidden' name='loginyo' value='$log'>
 							<input type='hidden' name='login' value='$fila[1]'>
+=======
+						<form <form name='agregarUsuario' action='actualizatabla.php' method='post'>
+							<input class='input' type='text' OnFocus='this.blur()' value='".$fila[0]."'>
+
+							<input type='hidden' name='tabla' value='agregaUsuario'> 
+							<?phP echo'<input type='hidden' name='user' value='$user'>';
+								  echo'<input class='input' type='hidden'  name='usuario2' value='".$fila[1]."'>;	
+							?>
+							
+>>>>>>> 186546cf8afb7255735be8c5617ed92c1e3d3493
 							<button type='submit' class='boton'>Agregar</button>
 						</form>
 				</div>";
