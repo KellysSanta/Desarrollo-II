@@ -1,4 +1,5 @@
-drop table if exists Usuario, Administrador, Universidad, Carrera,Usuario_Cliente, Estudio_Usuario, Contacto, Mensaje, Evento, Invitacion_Evento, Notificacion_Evento, Usuario_Agenda, Grupo, Invitacion_grupo, Notificacion_Grupo;
+﻿drop schema public cascade;
+create schema public;
 
 CREATE TABLE Usuario(
 login varchar(20) primary key,
@@ -8,10 +9,10 @@ nombre varchar(60),
 apellido varchar(30),
 apellido2 varchar(30),
 sexo varchar(30),
-universidad varchar(50),
+universidad int,
 identificacion varchar(20),
 tipoid varchar(2),
-carrera varchar(80),
+carrera int,
 estado boolean
 );
 
@@ -25,27 +26,20 @@ REFERENCES Usuario (login)
 
 
 CREATE TABLE Universidad (
-	universidad_id VARCHAR(50) NOT NULL PRIMARY KEY,
+	universidad_id serial NOT NULL PRIMARY KEY,
 	nombre VARCHAR(50) NOT NULL,
 	ciudad varchar(40) not NULL,
 	estado boolean NOT NULL,
-	admin_id VARCHAR(20) NOT NULL,
-
-CONSTRAINT universidad_fk FOREIGN KEY (admin_id)
-REFERENCES Administrador (admin_id)
-);
+	admin_id VARCHAR(20) NOT NULL references Administrador(admin_id));
 
 	
 
 CREATE TABLE Carrera (
-	carrera_id VARCHAR(20) NOT NULL,
+	carrera_id serial NOT NULL primary key,
 	nombre VARCHAR(50) NOT NULL,
-	universidad varchar(50),
+	universidad INT references universidad(universidad_id),
 	estado boolean NOT NULL,
 	admin_id VARCHAR(20) NOT NULL,
-CONSTRAINT usuario_pk PRIMARY KEY (carrera_id),
-CONSTRAINT carrera_fk FOREIGN KEY (universidad)
-REFERENCES Universidad (universidad_id),
 CONSTRAINT usuario_fk FOREIGN KEY (admin_id)
 REFERENCES Administrador (admin_id)
 );
@@ -53,7 +47,7 @@ REFERENCES Administrador (admin_id)
 
 CREATE TABLE Usuario_Cliente(
 	usuario_id VARCHAR(20) NOT NULL,
-	universidad_id VARCHAR(20) NOT NULL,
+	universidad_id int NOT NULL,
 	carrera_id VARCHAR(20) NOT NULL,
 CONSTRAINT Usuario_cliente_pk PRIMARY KEY (usuario_id),
 CONSTRAINT usuario_fk FOREIGN KEY (usuario_id)
@@ -223,12 +217,11 @@ insert into usuario values('Root1', 'camilog777@hotmail.es','Root1','Camilo Andr
 insert into administrador values('Root1');
 
 --adicionando  universidades prueba
-insert into universidad values('1','Universidad del Valle','Cali',true, 'Root1'),('2','Universidad Santiago de Cali','Cali',true, 'Root1');
-insert into universidad values('3','Universidad Javeriana','Cali',true, 'Root1'),('4','Universidad Cooperativa de Colombia','Cali',true, 'Root1');	
+insert into universidad(nombre,ciudad,estado,admin_id) values('Universidad del Valle','Cali',true, 'Root1'),('Universidad Santiago de Cali','Cali',true, 'Root1'),
+('Universidad Javeriana','Cali',true, 'Root1'),('Universidad Cooperativa de Colombia','Cali',true, 'Root1');	
 
 --adicionando carreras prueba
-insert into carrera values('1','Ingenieria de sistemas e informacion','1',true,'Root1'),('2','Ingenieria Electronica','2', true,'Root1'); 
-insert into carrera values('3','Ingenieria industrial','2',true,'Root1'),('4','Ingenieria agricola','1', true,'Root1');
+insert into carrera (nombre,universidad,estado,admin_id)values('Ingenieria de sistemas e informacion','1',true,'Root1'),('Ingenieria Electronica','2', true,'Root1'),('Ingenieria industrial','2',true,'Root1'),('Ingenieria agricola','1', true,'Root1');
 
 
 --agrgeando restricciones de llaves foranes a la tabla usuario

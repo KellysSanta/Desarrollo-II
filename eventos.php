@@ -24,15 +24,15 @@
 	<div class="contenido">
 		<div class="columna1">
 			<div class="cuadros">
-						<div class="logo">
-							<img class="img-circulo" alt="140x140" src="img/foto.png">
-						</div>
-						<div class="nombre">
-								<h1>
-									<small>Eventos</small>			
-								</h1>
+					<div class=logo>
+						<img class="img-circulo" alt="140x140" src="img/foto.png">
+					</div>
+					<div class="nombre">
+							<h1>
+								<small>Eventos</small>			
+							</h1>
 
-						</div>
+					</div>
 			</div>
 			
 

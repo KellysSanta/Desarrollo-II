@@ -1,6 +1,4 @@
 <!DOCTYPE html>
-  <?php $usuario = $_GET["usuario"];
-  include "conexion.php";?>
 <html lang="en">
 <head>
   <meta charset="utf-8">
@@ -23,12 +21,15 @@
 
   <!-- Fav and touch icons -->
   <link rel="shortcut icon" href="img/rs.png">
-
+  <?php 
+  include "conexion.php";
+  $usuario = $_POST["user"];
+   $nombre = $_POST["bNombre"];
+   $universidad= $_POST["bUniversidad"];?>
 	
 </head>
 
 <body>
-
 
 	<div class="container">
 
@@ -36,9 +37,6 @@
 
 		<ul class="menu_principal">
 			<li class="active"><a class="principal seleccionado" href="perfil.php">Perfil</a></li>
-			<li class="active"><a class="principal" href="mensajes.php">Mensajes/Notificaciones</a></li>
-			<li class="active"><a class="principal" href="eventos.php">Eventos</a></li>
-			<li class="active"><a class="principal" href="grupos.php">Grupos</a></li>
 			<li class="derecha active"><a class="principal" href="logout.php">Salir</a></li>
 		</ul>
 
@@ -53,7 +51,7 @@
 						</div>
 						<div class="nombre">
 								<h1>
-									<small>Lista de Contactos</small>			
+									<small>Busqueda de Usuarios</small>			
 								</h1>
 
 						</div>
@@ -61,7 +59,7 @@
 
 				<div class="cuadros">
 
-						<?php listarContactos($usuario);?>
+						<?php buscarContactoNombre($nombre, $universidad,$usuario);?>
 				</div>
 			</div>
 				

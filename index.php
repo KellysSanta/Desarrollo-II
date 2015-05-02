@@ -57,16 +57,16 @@
 					<div class="form-group">
 						<label for="inputEmail3" class="col-sm-2 control-label">Universidad</label>
 						<div class="col-sm-10">
-							<select id="universidad" name="universidad" onchange="cargaContenido(this.id)">
+							<select id="Universidad" name="Universidad" onchange="cargaContenido(this.id)">
 								<option value='0'> Seleccione Universidad...</option>
-								<?php recorre_tabla("universidad", "nombre");?>
+								<?php recorre_tabla("universidad", "nombre,universidad_id");?>
 							</select>
 						</div>	
 					</div>
 					<div class="form-group">
 						<label for="inputEmail3" class="col-sm-2 control-label">Carrera</label>
 						<div class="col-sm-10">
-							<select id="carrera" name="carrera" disabled = "disabled">
+							<select id="Carrera" name="Carrera" disabled = "disabled">
 							<option value='0'> Seleccione Universidad...</option>
 							</select>
 						</div>	

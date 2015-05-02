@@ -8,8 +8,8 @@ catch(e){
 return xmlhttp; 
 }
 var listadoSelects=new Array();
-listadoSelects[0]='universidad';
-listadoSelects[1]='carrera';
+listadoSelects[0]='Universidad';
+listadoSelects[1]='Carrera';
 function buscarEnArray(array, dato){
 var x=0;
 while(x<array.length){

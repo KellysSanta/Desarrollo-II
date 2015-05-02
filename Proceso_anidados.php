@@ -1,8 +1,8 @@
 <?php
 // Array que vincula los IDs de los selects declarados en el HTML con el nombre de la tabla donde se encuentra su contenido
 $listadoSelects=array(
-"universidad"=>"universidad",
-"carrera"=>"carrera"
+"Universidad"=>"Universidad",
+"Carrera"=>"Carrera"
 );
 
 function validaSelect($selectDestino){

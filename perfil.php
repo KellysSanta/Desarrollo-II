@@ -36,7 +36,7 @@ if (pg_num_rows($arregloresultante) == 1){
 	<nav>
 		<ul class="menu_principal">
 			<li class="active"><a class="principal seleccionado" href="perfil.php">Perfil</a></li>
-			<li class="active"><a class="principal" href="mensajes.php">Mensajes/Notificaciones</a></li>
+			<?php echo "<li class='active'><a class='principal' href='mensajes.php?usuario=$user'>Mensajes/Notificaciones</a></li>";?>
 			<li class="active"><a class="principal" href="eventos.php">Eventos</a></li>
 			<li class="active"><a class="principal" href="grupos.php">Grupos</a></li>
 			<li class="derecha active"><a class="principal" href="logout.php">Salir</a></li>
@@ -60,11 +60,11 @@ if (pg_num_rows($arregloresultante) == 1){
 				<form name="cambiaContra" action="actualizatabla.php" method="post">
 					<div class="sesion_formulario">
 						<label class="label3">Contraseña nueva:</label>
-						<input class="input" type="text" id="contraseña1" name="contraseña1">
+						<input class="input" type="text" id="contrasena1" name="contrasena1">
 					</div>
 					<div class="sesion_formulario">
 						<label class="label3">Confirmación:</label>
-						<input class="input" type="text" id="contraseña2" name="contraseña2">
+						<input class="input" type="text" id="contrasena2" name="contrasena2">
 					</div>			
 						<input type="hidden" name="tabla" value="cambiaContrasena">
 						<?php echo"<input type='hidden' name='user' value='$user'>";?>
@@ -107,7 +107,7 @@ if (pg_num_rows($arregloresultante) == 1){
 						<label class="label2">Universidad</label>
 						<select class="select" id="universidad" name="universidad">
 								<option value='0'> Seleccione Universidad...</option>
-								<?php recorre_tabla("universidad", "nombre");?>
+								<?php recorre_tabla("universidad", "nombre,universidad_id");?>
 						</select>
 					</div>	
 					<div class="sesion_formulario">
@@ -197,11 +197,11 @@ if (pg_num_rows($arregloresultante) == 1){
 				<ul class= "menu_principal"><!--la etiqueta ul por defecto tiene margenes -->
 					<li class="active" id="publicar_nav"><a href="#" class="principal" id="mostrar-agr">Agregar</a></li>
 					<li class="active"><a class="principal" id="mostrar-con" href="#">Consultar</a></li> <!--a es la etieuta href es el atributo que tiene la url (# significa que redirecciona a la misma página)-->
-					<li class="active"><a class="principal" href="contactos.php">Listar</a></li>
+					<?php echo "<li class='active'><a class='principal' href='contactos.php?usuario=$user'>Listar</a></li>";?>
 					<li class="active"><a class="principal"  id="mostrar-eli" href="#">Eliminar</a></li> <!--Los elementos li son cajas y funcionan con block -->				
 				</ul>
 			</nav>			
-			<form class="agregar" role="form" >
+			<form class="agregar" role="form" action ="buscarNombre.php" method="post">
 				<div class="cuadros "><h3>Agregar Contacto.</h3></div>
 				<div class="sesion_formulario">
 					<label class="label2">Nombre:</label>
@@ -217,10 +217,10 @@ if (pg_num_rows($arregloresultante) == 1){
 
 
 				<div class="sesion_formulario">
-					<form <form name="buscarUsuario" action="actualizatabla.php" method="post">
+				<?phP echo"<input type='hidden' name='user' value='$user'>";?>	
 						<input type='hidden' name='tabla' value='buscaUsuario'> 
 						<button type="submit" class="boton">Buscar</button>
-					</form>
+					
 				</div>	
 
 

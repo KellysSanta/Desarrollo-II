@@ -1,8 +1,8 @@
 
 var $form = $('.agregar'),
-	$button = $('#mostrar-agr')
+	$button = $('#mostrar-agr'),
 	$form1 = $('.consultar'),
-	$button1 = $('#mostrar-con')
+	$button1 = $('#mostrar-con'),
 	$form2 = $('.eliminar'),
 	$button2 = $('#mostrar-eli'),
 
@@ -56,6 +56,7 @@ function mostrarEditarPersonal()
 	$form_personal.slideToggle();
 	$form_e_personal.slideToggle();/*Si esta oculto lo muestra, si esta visible lo oculta*/
 	 /*Quita el efecto que tiene por defecto la etiqueta a, ya que esta va a una url*/
+	return false;
 }
 
 function ocultarEditarPersonal()
