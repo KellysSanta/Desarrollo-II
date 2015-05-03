@@ -2,6 +2,18 @@
 include "conexion.php";
 switch($_POST["tabla"]){
 
+case "agregarActividad":
+$d1=$_POST["user"];
+$d2=$_POST[""];
+$d3=$_POST["contrasena2"];
+$d4=$_POST[""];
+$D5=$_post[""]:
+if($d2 == $d3){
+	$sql_query="update usuario set pass='$d2' where login='$d1';";
+	$consulta = pg_query($sql_query);
+}
+break;
+
 case "datospersonales":
 $d1=$_POST["tipodoc"];
 $d2=$_POST["doc"];

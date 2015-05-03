@@ -152,11 +152,13 @@ CREATE TABLE Notificacion_Evento (
 );
 
 
+CREATE SEQUENCE ACTIVIDAD_seq;
+
 CREATE TABLE Usuario_Agenda (
-	num_actividad INTEGER NOT NULL PRIMARY KEY,
+	num_actividad INTEGER DEFAULT nextval ('actividad_seq'::regclass) NOT NULL PRIMARY KEY,
 	usuario VARCHAR(20) NOT NULL,
 	nombre VARCHAR(100) NOT NULL,
-	fecha timestamp without time zone NOT NULL,
+	fecha DATE NOT NULL,
 	lugar VARCHAR(100) NOT NULL,
 	descripcion VARCHAR(100) NOT NULL,
 
@@ -210,6 +212,8 @@ CREATE TABLE Notificacion_Grupo (
 	CONSTRAINT usuario_fk FOREIGN KEY (usuario)
 	REFERENCES Usuario (login)
 );
+
+
 
 ---las siguientes inserciones a excepcion del administrador son prouebas. Se conservaran mientras se terminan de implemantar el resto de funcionalidades.
 --agregando ususario administrador ala base de datos

@@ -266,22 +266,23 @@ if (pg_num_rows($arregloresultante) == 1){
 					<div class="cuadros"><h3>Agregar Actividad</h3>
 						<div class="sesion_formulario">
 						 	<label class="label2">Nombre:</label>
-							<input class="input" id="inputAmigo" type="text">
+							<input class="input" id="nombreActividad" type="text" name="nombreActividad">
 						</div>
 						<div class="sesion_formulario">
 							<label class="label2">Fecha-hora:</label>
-							<input class="input" id="inputAmigo" type="text">
+							<input class="input" id="fechaActividad" type="text" name="fechaActividad">
 						</div>
-						<h5>(yyyy/mm/dd hh:mm:ss)</h5>
+						<h5>(yyyy/mm/dd)</h5>
 						<div class="sesion_formulario">
 							<label class="label2">Lugar:</label>
-							<input class="input" id="inputAmigo" type="text">
+							<input class="input" id="lugarActividad" type="text" name="lugarActividad">
 						</div>
 						<div class="sesion_formulario">
 							<label class="label2">Descripción:</label>
-							<input class="input" id="inputAmigo" type="text">
+							<input class="input" id="descricionActividad" type="text" name="descripcionActividad">
 						</div>
-						<div class="sesion_formulario">
+						<div class="sesion_formulario"><input type="hidden" name="tabla" value="agregarActividad">
+							<?php echo"<input type='hidden' name='user' value='$user'>";?>
 							<button type="submit" class="boton">Agregar</button>
 							<button type="submit" class="boton" id="cancelar_agregar">Cancelar</button>
 						</div>
@@ -293,7 +294,7 @@ if (pg_num_rows($arregloresultante) == 1){
 							<label class="label2">fecha:</label>
 							<input class="input" id="inputAmigo" type="text">
 						</div>
-						<h5>(yyyy/mm/dd hh:mm:ss)</h5>
+						<h5>(yyyy/mm/dd)</h5>
 						<div class="sesion_formulario">
 							<button type="submit" class="boton">Consultar</button>
 							<button type="submit" class="boton" id="cancelar_consultar">Cancelar</button>
