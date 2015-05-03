@@ -4,13 +4,12 @@ switch($_POST["tabla"]){
 
 case "agregarActividad":
 $d1=$_POST["user"];
-$d2=$_POST[""];
-$d3=$_POST["contrasena2"];
-$d4=$_POST[""];
-$D5=$_post[""]:
-if($d2 == $d3){
-	$sql_query="update usuario set pass='$d2' where login='$d1';";
-	$consulta = pg_query($sql_query);
+$d2=$_POST["nombreActividad"];
+$d3=$_POST["fechaActividad"];
+$d4=$_POST["lugarActividad"];
+$d5=$_post["descripcionActividad"];
+$sql_query= "Insert into Usuario_Agenda (usuario, nombre, fecha, lugar, descripcion) values ('$d1', '$d2', '$d3', '$d4', '$d5');"
+$consulta = pg_query($sql_query);
 }
 break;
 
