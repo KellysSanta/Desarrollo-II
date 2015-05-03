@@ -268,11 +268,20 @@ if (pg_num_rows($arregloresultante) == 1){
 						 	<label class="label2">Nombre:</label>
 							<input class="input" id="nombreActividad" type="text" name="nombreActividad">
 						</div>
+						<h5>Fecha: Los datos de la fecha deben ser numericos</h5>
 						<div class="sesion_formulario">
-							<label class="label2">Fecha-hora:</label>
-							<input class="input" id="fechaActividad" type="text" name="fechaActividad">
+							<label class="label2">Dia:</label>
+							<input class="input" id="fechaDActividad" type="text" name="fechaDActividad">
 						</div>
-						<h5>(yyyy/mm/dd)</h5>
+						<div class="sesion_formulario">
+							<label class="label2">Mes:</label>
+							<input class="input" id="fechaMActividad" type="text" name="fechaMActividad">
+						</div>
+						<div class="sesion_formulario">
+							<label class="label2">Año:</label>
+							<input class="input" id="fechaAActividad" type="text" name="fechaAActividad">
+						</div>
+						
 						<div class="sesion_formulario">
 							<label class="label2">Lugar:</label>
 							<input class="input" id="lugarActividad" type="text" name="lugarActividad">
@@ -290,11 +299,19 @@ if (pg_num_rows($arregloresultante) == 1){
 				</form>
 				<form id="consultar_actividad">	
 					<div class="cuadros"><h3>Consultar Actividad</h3>
+						<h5>Fecha: Los datos de la fecha deben ser numericos</h5>
 						<div class="sesion_formulario">
-							<label class="label2">fecha:</label>
-							<input class="input" id="inputAmigo" type="text">
+							<label class="label2">Dia:</label>
+							<input class="input" type="text">
 						</div>
-						<h5>(yyyy/mm/dd)</h5>
+						<div class="sesion_formulario">
+							<label class="label2">Mes:</label>
+							<input class="input" type="text">
+						</div>
+						<div class="sesion_formulario">
+							<label class="label2">Año:</label>
+							<input class="input" type="text">
+						</div>
 						<div class="sesion_formulario">
 							<button type="submit" class="boton">Consultar</button>
 							<button type="submit" class="boton" id="cancelar_consultar">Cancelar</button>

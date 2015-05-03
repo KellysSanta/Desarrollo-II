@@ -197,3 +197,59 @@ function listarContactos($nombreU){
 						</div>";
 		}
 }?>
+
+<?php
+
+function validarTamanoRango($variable, $tamano1, $tamano2){
+	$valido = False;
+		if(strlen(string $variable) >= $tamano1 && strlen(string $variable) <= $tamano2){
+			$valido = True;
+		}
+	return $valido;
+}?>
+
+<?php
+
+function validarTamano2($variable, $tamano1){
+	$valido = False;
+		if(strlen(string $variable) == $tamano1){
+			$valido = True;
+		}
+	return $valido;
+}?>
+
+<?php
+
+function validarEsNumerico($variable){
+	$numero = False;
+		if(is_numeric($variable)){
+			$numero = True;
+		}
+	return $numero;
+}?>
+
+<?php
+function validarFecha($dia, $mes, $anio){
+	$valida=False;
+	$validaD = validarTamano2($dia, 2);
+	$validaM = validarTamano2($mes, 2);
+	$validaA = validarTamano2($anio, 4);
+	if($validaD && $validaM && $validaA){
+		if(validarEsNumerico($dia) && validarEsNumerico($mes) && validarEsNumerico($anio)){
+			$valida=True;
+		}
+	}
+	return $valida;
+}?>
+
+<?php
+function validarLetras($cadena){ 
+	$permitidos = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ "; 
+	for ($i=0; $i<strlen($cadena); $i++){ 
+		if (strpos($permitidos, substr($cadena,$i,1))===false){ 
+		return false; 
+		} 
+	}  
+	return true; 
+} 
+}?>
