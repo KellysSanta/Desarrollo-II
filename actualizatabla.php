@@ -10,9 +10,8 @@ $d4=$_POST["fechaMActividad"];
 $d5=$_POST["fechaAActividad"];
 $d6=$_POST["lugarActividad"];
 $d7=$_post["descripcionActividad"];
-$sql_query= "Insert into Usuario_Agenda (usuario, nombre, fecha, lugar, descripcion) values ('$d1', '$d2', '$d3/$d4/$d5', '$d6', '$d7');"
+$sql_query= "Insert into Usuario_Agenda (usuario, nombre, fecha, lugar, descripcion) values ('$d1', '$d2', '$d3/$d4/$d5', '$d6', '$d7');";
 $consulta = pg_query($sql_query);
-}
 break;
 
 case "datospersonales":
@@ -150,6 +149,14 @@ $d2=$_POST["consultaA"];
 consultarContactos($d2, $d1);
 break;
 
+
+case "consultaactivitad":
+$user=$_POST["user"];
+$fecha=$_POST["fechaActividad"];
+consultaActividad($user, $fecha);
+break;
+
+
 case "nuevomensaje":
 $d1=$_POST["destino"];
 $sql_querydestino="Select login From usuario Where correo='$d1'";
@@ -161,5 +168,4 @@ $d3=$_POST["origen"];
 $sql_query = "insert into mensaje values ('$d3', '$d1','01/01/1900','$d2',false,false,false,false);";
 $consulta = pg_query($sql_query);
 break;}
-
 ?>

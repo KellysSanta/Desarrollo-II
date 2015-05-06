@@ -31,6 +31,21 @@ if (pg_num_rows($arregloresultante) == 1){
 
 	<link href="css/perfilstyle.css" rel="stylesheet">
 	<link rel="shortcut icon" href="img/rs.png">
+	<link rel="stylesheet" type="text/css" href="css/calendario.css">
+	<script type="text/javascript" src="js/jquery.js"></script>
+	<script type="text/javascript" src="js/calendario.js"></script>
+	<script type="text/javascript">
+		$(function(){
+			$("#fechaActividad").datepicker({
+				changeMonth:true,
+				changeYear:true,
+				showOn: "button",
+				buttonImage: "css/images/jn.png",
+				buttonImageOnly: true,
+				showButtonPanel: true,
+				});
+		})
+	</script>
 </head>
 <body>
 <div class="container">
@@ -297,22 +312,15 @@ if (pg_num_rows($arregloresultante) == 1){
 						</div>
 					</div>
 				</form>
-				<form id="consultar_actividad">	
+				<form id="consultar_actividad"  action="actualizatabla.php" metod="post">	
 					<div class="cuadros"><h3>Consultar Actividad</h3>
-						<h5>Fecha: Los datos de la fecha deben ser numericos</h5>
+						<h5>Seleccione la fecha</h5>
 						<div class="sesion_formulario">
-							<label class="label2">Dia:</label>
-							<input class="input" type="text">
+							<input class="input"  name="fechaActividad" id="fechaActividad" OnFocus="this.blur()" type="text">
 						</div>
 						<div class="sesion_formulario">
-							<label class="label2">Mes:</label>
-							<input class="input" type="text">
-						</div>
-						<div class="sesion_formulario">
-							<label class="label2">Año:</label>
-							<input class="input" type="text">
-						</div>
-						<div class="sesion_formulario">
+							<input type="hidden" name="tabla" value="consultaactivitad">
+							<?php echo"<input type='hidden' name='user' value='$user'>";?>
 							<button type="submit" class="boton">Consultar</button>
 							<button type="submit" class="boton" id="cancelar_consultar">Cancelar</button>
 						</div>
@@ -324,7 +332,7 @@ if (pg_num_rows($arregloresultante) == 1){
 		</div>
 	</div>
 </div>
-<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+<!--script src="http://code.jquery.com/jquery-1.10.1.min.js"></script-->
 <script type="text/javascript" src="js/perfilscripts.js"></script>
 </body>
 </html>

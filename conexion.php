@@ -46,7 +46,6 @@ while($fila=pg_fetch_row($consulta)){
 	echo "<option value='".$fila[0]."'>".$fila[1]."</option>";}			
 echo "</select></div>";	
 }?>
-
 <?php
 function cincoMejoresEventos(){
 $sql_query = "select nombre, count(*) total_participantes from 
@@ -101,7 +100,6 @@ return $cantidad;
 }
 ?>
 <?php
-
 function verificaBusquedaNombre($nombreU, $universidad){
 	if($universidadU == "No conozco la universidad"){
 		$sql_query = "Select nombre, login from Usuario where nombre LIKE '%$nombreU%';";
@@ -113,8 +111,7 @@ function verificaBusquedaNombre($nombreU, $universidad){
 	return $result;
 }?>
 <?php
-function buscarContactoNombre($nombreU, $universidadU, $log){
-	
+function buscarContactoNombre($nombreU, $universidadU, $log){	
 	if($universidadU ==0){
 		$sql_query = "Select nombre, login from Usuario where nombre LIKE '%$nombreU%';";
 		$consulta= pg_query($sql_query);
@@ -148,9 +145,7 @@ function buscarContactoNombre($nombreU, $universidadU, $log){
 			}
 	}
 }?>
-
 <?php
-
 function consultarContactos($nombreC, $nombreU){
 
 		$sql_query = "select nombre from usuario inner join 
@@ -172,9 +167,7 @@ function consultarContactos($nombreC, $nombreU){
 				</div>";
 		}
 }?>
-
 <?php
-
 function listarContactos($nombreU){
 
 		$sql_query = "select U.nombre, Uni.nombre  from Universidad Uni inner join (select nombre, universidad from usuario inner join 
@@ -197,9 +190,7 @@ function listarContactos($nombreU){
 						</div>";
 		}
 }?>
-
 <?php
-
 function validarTamanoRango($variable, $tamano1, $tamano2){
 	$valido = False;
 		if(strlen($variable) >= $tamano1 && strlen($variable) <= $tamano2){
@@ -207,9 +198,7 @@ function validarTamanoRango($variable, $tamano1, $tamano2){
 		}
 	return $valido;
 }?>
-
 <?php
-
 function validarTamano2($variable, $tamano1){
 	$valido = False;
 		if(strlen($variable) == $tamano1){
@@ -217,9 +206,7 @@ function validarTamano2($variable, $tamano1){
 		}
 	return $valido;
 }?>
-
 <?php
-
 function validarEsNumerico($variable){
 	$numero = False;
 		if(is_numeric($variable)){
@@ -227,7 +214,6 @@ function validarEsNumerico($variable){
 		}
 	return $numero;
 }?>
-
 <?php
 function validarFecha($dia, $mes, $anio){
 	$valida=False;
@@ -241,7 +227,6 @@ function validarFecha($dia, $mes, $anio){
 	}
 	return $valida;
 }?>
-
 <?php
 function validarLetras($cadena){ 
 	$permitidos = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ "; 
@@ -252,3 +237,30 @@ function validarLetras($cadena){
 	}  
 	return true; 
 }?>
+<?php
+function consultaActividad($user, $fecha){
+	$sql_query = "select * from Usuario_Agenda where usuario='$user' and fecha='$fecha';";
+
+	$consulta=pg_query($sql_query);
+	if (pg_num_rows($consulta) >= 1){
+		while($fila=pg_fetch_row($consulta)){
+			echo	"<div class='cuadros'><h3>".$fila[3]."</h3>												
+						<div class='sesion_formulario'>
+							<label class='label2'>Lugar:</label>
+							<input class='input' id='lugarActividad' type='text' name='lugarActividad' OnFocus='this.blur()' value='".$fila[5]."'>
+						</div>
+						<div class='sesion_formulario'>
+							<label class='label2'>Descripción:</label>
+							<input class='input' id='descricionActividad' type='text' name='descripcionActividad' value='".$fila[6]."'>
+						</div>
+					</div>";
+		}
+	}else {
+
+		echo"<div class='sesion_formulario'>
+						<h3>No hay actividades programadas para la fecha seleccionada</h3>
+				</div>";
+
+	}	
+} 
+?>
