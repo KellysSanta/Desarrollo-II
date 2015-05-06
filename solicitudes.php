@@ -11,7 +11,6 @@
 	<!--link rel="stylesheet/less" href="less/responsive.less" type="text/css" /-->
 	<!--script src="js/less-1.3.3.min.js"></script-->
 	<!--append ‘#!watch’ to the browser URL, then refresh the page. -->
-	<link href="css/bootstrap.min.css" rel="stylesheet">
 	<link href="css/solicitudesstyle.css" rel="stylesheet">
 	
 

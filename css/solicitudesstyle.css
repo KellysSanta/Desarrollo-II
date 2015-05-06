@@ -8,6 +8,26 @@ body
 		display: block;
 	}
 
+  h1
+{
+  font-size: 300%;
+  margin-top: 20px;
+  margin-bottom: 10px;
+  font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+  font-weight: 500;
+  line-height: 1.1;
+  color: inherit;
+  display: block;
+}
+
+h1 small {
+    font-size: 50%;
+    line-height: 1;
+    color: #676767;
+    font-weight: bolder;
+    display: block;
+}
+
 nav
 	{
 		display: block;
