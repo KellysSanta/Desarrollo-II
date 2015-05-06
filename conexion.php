@@ -1,8 +1,8 @@
 <?php //Creamos las variables de conexion
 $server = "localhost";
 $db_name = "Redsocialin";
-$log = "Admin";
-$pass = "Admin";
+$log = "postgres";
+$pass = "jhon07";
 $port = "5432";
 $cadena_con= "host=$server port=$port dbname=$db_name user=$log password=$pass";
 
@@ -202,7 +202,7 @@ function listarContactos($nombreU){
 
 function validarTamanoRango($variable, $tamano1, $tamano2){
 	$valido = False;
-		if(strlen(string $variable) >= $tamano1 && strlen(string $variable) <= $tamano2){
+		if(strlen($variable) >= $tamano1 && strlen($variable) <= $tamano2){
 			$valido = True;
 		}
 	return $valido;
@@ -212,7 +212,7 @@ function validarTamanoRango($variable, $tamano1, $tamano2){
 
 function validarTamano2($variable, $tamano1){
 	$valido = False;
-		if(strlen(string $variable) == $tamano1){
+		if(strlen($variable) == $tamano1){
 			$valido = True;
 		}
 	return $valido;
@@ -251,5 +251,4 @@ function validarLetras($cadena){
 		} 
 	}  
 	return true; 
-} 
 }?>
