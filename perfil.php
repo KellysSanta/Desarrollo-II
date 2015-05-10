@@ -1,13 +1,12 @@
 <?php 
 include "conexion.php";
-$user = $_POST["user"];  
-$password = $_POST["password"];
+$user = $_REQUEST["user"];  
+$password = $_REQUEST["password"];
 $arregloresultante= verificauser($user, $password);
 if (pg_num_rows($arregloresultante) == 1){
 	$arregloadmin=esadmin($user);
 	if (pg_num_rows($arregloadmin) == 1){header("Location:admini.php?user=$user&pass=$password");}
 	$fila=pg_fetch_row($arregloresultante);
-	$_SESSION['usuario'] = $user;
 	$login=$fila[0];
 	$correo=$fila[1];
 	$nombre=$fila[2];
@@ -37,6 +36,14 @@ if (pg_num_rows($arregloresultante) == 1){
 	<script type="text/javascript">
 		$(function(){
 			$("#fechaActividad").datepicker({
+				changeMonth:true,
+				changeYear:true,
+				showOn: "button",
+				buttonImage: "css/images/jn.png",
+				buttonImageOnly: true,
+				showButtonPanel: true,
+				});
+			$("#fechaActividad1").datepicker({
 				changeMonth:true,
 				changeYear:true,
 				showOn: "button",
@@ -76,11 +83,11 @@ if (pg_num_rows($arregloresultante) == 1){
 				<form name="cambiaContra" action="actualizatabla.php" method="post">
 					<div class="sesion_formulario">
 						<label class="label3">Contraseña nueva:</label>
-						<input class="input" type="text" id="contrasena1" name="contrasena1">
+						<input class="input" type="password" id="contrasena1" name="contrasena1" maxlength = '32' required>
 					</div>
 					<div class="sesion_formulario">
 						<label class="label3">Confirmación:</label>
-						<input class="input" type="text" id="contrasena2" name="contrasena2">
+						<input class="input" type="password" id="contrasena2" name="contrasena2" maxlength = '32' required>
 					</div>			
 						<input type="hidden" name="tabla" value="cambiaContrasena">
 						<?php echo"<input type='hidden' name='user' value='$user'>";?>
@@ -113,11 +120,11 @@ if (pg_num_rows($arregloresultante) == 1){
 					</div>
 					<div class="sesion_formulario">
 						<label class="label2">Apellido 1</label>
-						<input class="input" type="text" id="apellido" name="apellido">
+						<input class="input" type="text" id="apellido" name="apellido" maxlength = '30'>
 					</div>
 					<div class="sesion_formulario">
 						<label class="label2">Apellido 2</label>
-						<input class="input" type="text" id="apellido2" name="apellido2">
+						<input class="input" type="text" id="apellido2" name="apellido2" maxlength = '30'>
 					</div>
 					<div class="sesion_formulario">
 						<label class="label2">Universidad</label>
@@ -128,7 +135,7 @@ if (pg_num_rows($arregloresultante) == 1){
 					</div>	
 					<div class="sesion_formulario">
 						<label class="label2">Tipo documento</label>
-						<select class="select" id="tipodoc" name="tipodoc">
+						<select class="select" id="tipodoc" name="tipodoc" >
 							<option>TI</option>
 							<option>CC</option>
 							<option>CE</option>
@@ -136,7 +143,7 @@ if (pg_num_rows($arregloresultante) == 1){
 					</div>					
 					<div class="sesion_formulario">
 						<label class="label2">Numero documento</label>
-						<input class="input" type="text" id="doc" name="doc">
+						<input class="input" type="text" id="doc" name="doc" maxlength = '20' required>
 					</div>	
 					<div class="sesion_formulario">
 						<label class="label2">Genero</label>
@@ -147,7 +154,7 @@ if (pg_num_rows($arregloresultante) == 1){
 					</div>
 					<div class="sesion_formulario">
 						<label class="label2">E-mail</label>
-						<input class="input" type="text" id="mail" name="mail">
+						<input class="input" type="email" id="mail" name="mail">
 					</div>
 					<div class="sesion_formulario">
 						<input type="hidden" name="tabla" value="datospersonales">
@@ -212,7 +219,7 @@ if (pg_num_rows($arregloresultante) == 1){
 			<nav>
 				<ul class= "menu_principal"><!--la etiqueta ul por defecto tiene margenes -->
 					<li class="active" id="publicar_nav"><a href="#" class="principal" id="mostrar-agr">Agregar</a></li>
-					<?php echo "<li class='active'><a class='principal' href='contactos.php?usuario=$user'>Consultar</a></li>";?>
+					<?php echo "<li class='active'><a class='principal' href='contactos.php?user=$user&password=$password'>Consultar</a></li>";?>
 					<li class="active"><a class="principal"  id="mostrar-eli" href="#">Eliminar</a></li> <!--Los elementos li son cajas y funcionan con block -->				
 				</ul>
 			</nav>			
@@ -248,7 +255,7 @@ if (pg_num_rows($arregloresultante) == 1){
 					</li>
 				</ul>
 			</div>					
-			<form name="eliminaCon" class="eliminar" role="form">
+			<form name="eliminaCon" class="eliminar" role="form" method='post' action='eliminarxNombre.php'>
 				<div class="cuadros"><h3>Eliminar Contacto.</h3></div>
 				<div class="sesion_formulario">
 					<label class="label2" >Nombre:</label>
@@ -285,25 +292,16 @@ if (pg_num_rows($arregloresultante) == 1){
 						</div>
 						<h5>Fecha: Los datos de la fecha deben ser numericos</h5>
 						<div class="sesion_formulario">
-							<label class="label2">Dia:</label>
-							<input class="input" id="fechaDActividad" type="text" name="fechaDActividad">
+							<label class="label2">fecha:</label>
+							<input class="input" id="fechaActividad1" type="text" name="fechaActividad1"   OnFocus="this.blur()" >
 						</div>
-						<div class="sesion_formulario">
-							<label class="label2">Mes:</label>
-							<input class="input" id="fechaMActividad" type="text" name="fechaMActividad">
-						</div>
-						<div class="sesion_formulario">
-							<label class="label2">Año:</label>
-							<input class="input" id="fechaAActividad" type="text" name="fechaAActividad">
-						</div>
-						
 						<div class="sesion_formulario">
 							<label class="label2">Lugar:</label>
 							<input class="input" id="lugarActividad" type="text" name="lugarActividad">
 						</div>
 						<div class="sesion_formulario">
 							<label class="label2">Descripción:</label>
-							<input class="input" id="descricionActividad" type="text" name="descripcionActividad">
+							<input class="input" id="descricionActividad" type="text" name="descripcionActividad" >
 						</div>
 						<div class="sesion_formulario"><input type="hidden" name="tabla" value="agregarActividad">
 							<?php echo"<input type='hidden' name='user' value='$user'>";?>
@@ -312,15 +310,15 @@ if (pg_num_rows($arregloresultante) == 1){
 						</div>
 					</div>
 				</form>
-				<form id="consultar_actividad"  action="actualizatabla.php" metod="post">	
+				<form id="consultar_actividad"  action="actividad.php" method="post">	
 					<div class="cuadros"><h3>Consultar Actividad</h3>
 						<h5>Seleccione la fecha</h5>
 						<div class="sesion_formulario">
 							<input class="input"  name="fechaActividad" id="fechaActividad" OnFocus="this.blur()" type="text">
 						</div>
 						<div class="sesion_formulario">
-							<input type="hidden" name="tabla" value="consultaactivitad">
-							<?php echo"<input type='hidden' name='user' value='$user'>";?>
+							<input type="hidden" name="tabla" value="consultaactividad">
+							<?php echo"<input type='hidden' name='usuario' value='$user'>";?>
 							<button type="submit" class="boton">Consultar</button>
 							<button type="submit" class="boton" id="cancelar_consultar">Cancelar</button>
 						</div>

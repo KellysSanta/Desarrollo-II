@@ -146,6 +146,24 @@ function buscarContactoNombre($nombreU, $universidadU, $log){
 	}
 }?>
 <?php
+function buscarContactoEliminar($nombreU, $log){	
+		$sql_query = "Select nombre, login from Usuario where nombre LIKE '%$nombreU%' and login IN (select usuario_dos from contacto where usuario_uno='$log');";
+		$consulta= pg_query($sql_query);
+		while($fila=pg_fetch_row($consulta))
+			{
+				echo"<div class='sesion_formulario'>
+						<form name='eliminarContacto' action='actualizatabla.php' method='post'>
+							<label>Nombre : $fila[0]</label>
+							<br><label>Login : $fila[1]</label>
+							<input type='hidden' name='tabla' value='eliminarContacto'>
+							<input type='hidden' name='login' value='$log'>
+							<input type='hidden' name='contacto' value='$fila[1]'>
+							<button type='submit' class='boton'>Eliminar</button>
+						</form>
+				</div>";
+			}
+}?>
+<?php
 function consultarContactos($nombreC, $nombreU){
 
 		$sql_query = "select nombre from usuario inner join 
@@ -244,21 +262,33 @@ function consultaActividad($user, $fecha){
 	$consulta=pg_query($sql_query);
 	if (pg_num_rows($consulta) >= 1){
 		while($fila=pg_fetch_row($consulta)){
-			echo	"<div class='cuadros'><h3>".$fila[3]."</h3>												
+			echo	"<div class='cuadros'>
 						<div class='sesion_formulario'>
-							<label class='label2'>Lugar:</label>
-							<input class='input' id='lugarActividad' type='text' name='lugarActividad' OnFocus='this.blur()' value='".$fila[5]."'>
+							<label class='label2'>Nombre:</label>
+							<input class='input' id='inputAmigo' type='text' value='$fila[2]' OnFocus='this.blur()'>
+						</div>
+						<div class='sesion_formulario'>
+							<label class='label2'>Fecha:</label>
+							<input class='input' id='nputAmigo' type='text' value = '$fila[3]' OnFocus='this.blur()'>
+						</div>
+						<div class='sesion_formulario'>
+							<label class='label'>Lugar:</label>
+							<input class='input' id='inputAmigo' type='text' value = '$fila[4]' OnFocus='this.blur()'>
 						</div>
 						<div class='sesion_formulario'>
 							<label class='label2'>Descripción:</label>
-							<input class='input' id='descricionActividad' type='text' name='descripcionActividad' value='".$fila[6]."'>
+							<input class='input' id='inputAmigo' type='text' value = '$fila[5]' OnFocus='this.blur()'>
 						</div>
-					</div>";
+						<div class='sesion_formulario'>
+							<button type='submit' class'boton'>Editar</button>
+							<button type='submit' class='boton'>Eliminar</button>
+						</div>
+				</div>";
 		}
 	}else {
 
 		echo"<div class='sesion_formulario'>
-						<h3>No hay actividades programadas para la fecha seleccionada</h3>
+						<h3>No hay actividades programadas para la fecha seleccionada.$fecha</h3>
 				</div>";
 
 	}	

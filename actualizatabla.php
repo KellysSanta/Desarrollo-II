@@ -1,17 +1,21 @@
 <?php
 include "conexion.php";
+
 switch($_POST["tabla"]){
 
 case "agregarActividad":
 $d1=$_POST["user"];
 $d2=$_POST["nombreActividad"];
-$d3=$_POST["fechaDActividad"];
-$d4=$_POST["fechaMActividad"];
-$d5=$_POST["fechaAActividad"];
+$d3=$_POST["fechaActividad1"];
 $d6=$_POST["lugarActividad"];
-$d7=$_post["descripcionActividad"];
-$sql_query= "Insert into Usuario_Agenda (usuario, nombre, fecha, lugar, descripcion) values ('$d1', '$d2', '$d3/$d4/$d5', '$d6', '$d7');";
+$d7=$_POST["descripcionActividad"];
+$sql_query= "Insert into Usuario_Agenda (usuario, nombre, fecha, lugar, descripcion) values ('$d1', '$d2', '$d3', '$d6', '$d7');";
 $consulta = pg_query($sql_query);
+$sql_query = "select pass from usuario where login='$d1';";
+$consultpass = pg_query($sql_query);
+$passrow = pg_fetch_row($consultpass); 
+$pass = $passrow[0];
+header('Location: http://localhost/Desarrollo-II/perfil.php?user=$d1&password=$pass');
 break;
 
 case "datospersonales":
@@ -45,6 +49,7 @@ else if((pg_num_rows($resultmail)==1)){}
 else{
 $sql_query="Insert into usuario(login, correo, pass, universidad, carrera, estado) values ('$d1','$d6','$d4',$d2,$d3, true)";
 $consulta = pg_query($sql_query);}
+header('Location: http://localhost/Desarrollo-II/index.php');
 break;
 
 case "nuevauni":
@@ -116,13 +121,6 @@ if($d2 == $d3){
 }
 break;
 
-case "eliminaContacto":
-$d1=$_POST["user"];
-$d2=$_POST["contactoAEliminar"];
-$sql_query = "delete from contacto where usuario_uno='$d1' and usuario_dos='$d2' ;";
-$consulta = pg_query($sql_query);
-break;
-
 case "agregaUsuario":
 $d1=$_POST["loginyo"];
 $d2=$_POST["login"];
@@ -150,7 +148,7 @@ consultarContactos($d2, $d1);
 break;
 
 
-case "consultaactivitad":
+case "consultaactividad":
 $user=$_POST["user"];
 $fecha=$_POST["fechaActividad"];
 consultaActividad($user, $fecha);
@@ -167,5 +165,13 @@ $d2=$_POST["mensaje"];
 $d3=$_POST["origen"];
 $sql_query = "insert into mensaje values ('$d3', '$d1','01/01/1900','$d2',false,false,false,false);";
 $consulta = pg_query($sql_query);
+break;
+
+case "eliminarContacto":
+$user = $_POST["login"];
+$contacto = $_POST["contacto"];
+$sql_query = "update contacto set solicitud = false where usuario_uno = '$user' and usuario_dos = '$contacto';" ;
+
 break;}
+
 ?>

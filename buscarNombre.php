@@ -22,9 +22,11 @@
   <link rel="shortcut icon" href="img/rs.png">
   <?php 
   include "conexion.php";
-  $usuario = $_POST["user"];
+   $usuario = $_POST["user"];
    $nombre = $_POST["bNombre"];
-   $universidad= $_POST["bUniversidad"];?>
+   $universidad= $_POST["bUniversidad"];
+   $password=$_POST["password"];
+   ?>
 	
 </head>
 
@@ -35,7 +37,7 @@
 		<nav>
 
 		<ul class="menu_principal">
-			<li class="active"><a class="principal" href="perfil.php">Perfil</a></li>
+			<?php echo "<li class='active'><a class='principal' href='perfil.php?user=$usuario&password=$password'>Perfil</a></li>";?>
 			<li class="derecha active"><a class="principal" href="logout.php">Salir</a></li>
 		</ul>
 

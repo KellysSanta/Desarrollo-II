@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-  <?php $usuario = $_GET["usuario"];
+  <?php $usuario = $_POST["usuario"];
+  $fecha = $_POST["fechaActividad"];
   include "conexion.php";?>
 <html lang="en">
 <head>
@@ -55,31 +56,7 @@
 						</div>
 					</div>
 
-				<div class="cuadros">
-
-						<?php listarContactos($usuario);?>
-						<div class="sesion_formulario">
-							<label class="label2">Nombre:</label>
-							<input class="input" id="inputAmigo" type="text">
-						</div>
-						<div class="sesion_formulario">
-							<label class="label2">Fecha-hora:</label>
-							<input class="input" id="inputAmigo" type="text">
-						</div>
-						<h5>(yyyy/mm/dd hh:mm:ss)</h5>
-						<div class="sesion_formulario">
-							<label class="label2">Lugar:</label>
-							<input class="input" id="inputAmigo" type="text">
-						</div>
-						<div class="sesion_formulario">
-							<label class="label2">Descripción:</label>
-							<input class="input" id="inputAmigo" type="text">
-						</div>
-						<div class="sesion_formulario">
-							<button type="submit" class="boton">Editar</button>
-							<button type="submit" class="boton">Eliminar</button>
-						</div>
-				</div>
+						<?php consultaActividad($usuario, $fecha);?>
 			</div>
 				
 		</div>

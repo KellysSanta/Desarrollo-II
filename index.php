@@ -31,13 +31,13 @@
 					<div class="form-group">
 						<label for="inputEmail3" class="col-sm-2 control-label">Usuario</label>
 						<div class="col-sm-10">
-							<input class="form-control" id="user" type="text" name="user">
+							<input class="form-control" id="user" type="text" name="user" maxlength ="20">
 						</div>
 					</div>
 					<div class="form-group">
 						<label for="inputPassword3" class="col-sm-2 control-label">Clave</label>
 						<div class="col-sm-10">
-							<input class="form-control" id="password" name="password" type="password">
+							<input class="form-control" id="password" name="password" type="password" maxlength ="32">
 						</div>
 					</div>
 					<div class="form-group">
@@ -52,7 +52,7 @@
 				<form class="form-horizontal" role ="form" action="actualizatabla.php" method="post">
 					<div class="form-group">
 						<label for="inputEmail3" class="col-sm-2 control-label">Usuario</label>
-						<div class="col-sm-10"><input class="form-control" id="nuser" type="text" name="nuser"></div>	
+						<div class="col-sm-10"><input class="form-control" id="nuser" type = "text" name="nuser" maxlength = '20' required ></div>	
 					</div>	
 					<div class="form-group">
 						<label for="inputEmail3" class="col-sm-2 control-label">Universidad</label>
@@ -73,18 +73,18 @@
 					</div>	
 					<div class="form-group">
 						<label for="inputEmail3" class="col-sm-2 control-label">Email</label>
-						<div class="col-sm-10"><input class="form-control" id="mail" type="text" name="mail"></div>	
+						<div class="col-sm-10"><input class="form-control" id="mail" type="email" name="mail" maxlength = '70' required></div>	
 					</div>
 					<div class="form-group">
 						<label for="inputPassword3" class="col-sm-2 control-label">Clave</label>
 						<div class="col-sm-10">
-							<input class="form-control" id="npassword" type="password" name="npassword" >							
+							<input class="form-control" id="npassword" type="password" name="npassword" maxlength = '32' required>							
 						</div>
 					</div>
 					<div class="form-group">
 						<label for="inputPassword3" class="col-sm-2 control-label">Confirmar Clave</label>
 						<div class="col-sm-10">
-							<input class="form-control" id="npassword2" type="password" name="npassword2">
+							<input class="form-control" id="npassword2" type="password" name="npassword2" maxlength = '32' required >
 						</div>
 						<input type="hidden" name="tabla" value="nuevousuario">
 						<button type="submit"  class="finalizar btn btn-default">Cancelar</button>

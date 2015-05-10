@@ -40,7 +40,7 @@ else if(idSelectOrigen!=listadoSelects[listadoSelects.length-1]){
 	var idSelectDestino=listadoSelects[posicionSelectDestino];
 	var selectDestino=document.getElementById(idSelectDestino);
 	var ajax=nuevoAjax();
-	ajax.open("GET", "http://localhost/Proceso_anidados.php?select="+idSelectDestino+"&opcion="+opcionSeleccionada, true);
+	ajax.open("GET", "http://localhost/Desarrollo-II/Proceso_anidados.php?select="+idSelectDestino+"&opcion="+opcionSeleccionada, true);
 	ajax.onreadystatechange=function(){ 
 		if (ajax.readyState==1){
 			selectDestino.length=0;
