@@ -1,4 +1,6 @@
 <!DOCTYPE html>
+<?php $usuario=$_GET["usuario"];
+include "conexion.php";?>
 <html lang="en">
 <head>
   <meta charset="utf-8">
@@ -12,7 +14,6 @@
 	<!--script src="js/less-1.3.3.min.js"></script-->
 	<!--append ‘#!watch’ to the browser URL, then refresh the page. -->
 	
-	<link href="css/bootstrap.min.css" rel="stylesheet">
 	<link href="css/mensajesstyle.css" rel="stylesheet">
 
   <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
@@ -32,10 +33,9 @@
 <div class="container">
 
 	<nav>
-
-			<ul class="menu_principal">
-			<li class="active"><a class="principal seleccionado" href="perfil.php">Perfil</a></li>
-			<li class="active"><a class="principal" href="mensajes.php">Mensajes/Notificaciones</a></li>
+		<ul class="menu_principal">
+			<li class="active"><a class="principal" href="perfil.php">Perfil</a></li>
+			<li class="active"><a class="principal seleccionado" href="mensajes.php">Mensajes/Notificaciones</a></li>
 			<li class="active"><a class="principal" href="eventos.php">Eventos</a></li>
 			<li class="active"><a class="principal" href="grupos.php">Grupos</a></li>
 			<li class="derecha active"><a class="principal" href="logout.php">Salir</a></li>
@@ -56,6 +56,7 @@
 							</h1>
 
 					</div>
+					Cantidad de Mensajes Nuevos: <?php $cantidad=cantidadMensajes($usuario); echo "$cantidad"; ?>
 			</div>
 			
 
@@ -126,16 +127,19 @@
 
 			
 				<div class="cuadros">
-					<form role="form" >	
+					<form role="form" name="enviomensajes" action="actualizatabla.php" method="post">	
 						<div class="sesion_formulario">
-								<label class="label2">Usuario (s)</label>
-								<input class="input" type="text">
+								<label class="label2">Correo Destinatario:</label>
+								<input type="text" name="destino">
 						</div>
 						<div class="sesion_formulario">		
 								<label class="label2">Mensaje</label>
-									<textarea class="cuerpo_mensaje" NAME="Texto"> 
+									<textarea class="cuerpo_mensaje" name="mensaje"> 
 									</textarea>	
 					    </div>
+						<input type="hidden" name="tabla" value="nuevomensaje">
+						<?php echo"<input type='hidden' name='origen' value='$usuario'>";?>
+						
 						<div class="sesion_formulario">	
 								<button type="submit"  class="eniar_mensaje boton">Enviar Mensaje</button>
 						</div>
