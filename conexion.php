@@ -9,6 +9,13 @@ $cadena_con= "host=$server port=$port dbname=$db_name user=$log password=$pass";
 //Conectamos con la cadena de conexion
 $con = pg_connect($cadena_con) or die ('Ha fallado la conexion');
 ?>
+
+<?php
+function agregarInvitadosGrupo($invitados, $user, $nombre){
+	$invitadosGrupo = explode(";", )
+	
+}?>
+
 <?php //Buscamos el usuario y contraseña
 function verificauser($user, $password){
 $sql_query = "Select login, correo, usuario.nombre, apellido, apellido2, 
