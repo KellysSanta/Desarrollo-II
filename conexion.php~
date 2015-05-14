@@ -266,19 +266,19 @@ function consultaActividad($user, $fecha){
 						<form name='gestionActividad' action='actualizatabla.php' method='post'>
 							<div class='sesion_formulario'>
 								<label class='label2'>Nombre:</label>
-								<input class='input'  type='text' name ='nombreAct' value='$fila[2]' OnFocus='this.blur()'>
+								<input class='input' id='inputAmigo' type='text' value='$fila[2]' OnFocus='this.blur()'>
 							</div>
 							<div class='sesion_formulario'>
 								<label class='label2'>Fecha:</label>
-								<input class='input'  type='text' name='fechaAct' value = '$fila[3]' OnFocus='this.blur()'>
+								<input class='input' id='nputAmigo' type='text' value = '$fila[3]' OnFocus='this.blur()'>
 							</div>
 							<div class='sesion_formulario'>
 								<label class='label'>Lugar:</label>
-								<input class='input' type='text' name='lugarcAct' value = '$fila[4]' OnFocus='this.blur()'>
+								<input class='input' id='inputAmigo' type='text' value = '$fila[4]' OnFocus='this.blur()'>
 							</div>
 							<div class='sesion_formulario'>
 								<label class='label2'>Descripción:</label>
-								<input class='input' type='text' name='descAct' value = '$fila[5]' OnFocus='this.blur()'>
+								<input class='input' id='inputAmigo' type='text' value = '$fila[5]' OnFocus='this.blur()'>
 							</div>
 							<div class='sesion_formulario'>
 								<input type='hidden' name='tabla' value='eliminaActividad'>

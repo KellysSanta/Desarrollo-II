@@ -171,7 +171,28 @@ case "eliminarContacto":
 $user = $_POST["login"];
 $contacto = $_POST["contacto"];
 $sql_query = "update contacto set solicitud = false where usuario_uno = '$user' and usuario_dos = '$contacto';" ;
+$consulta= pg_query($sql_query);
 
 break;}
+
+case "eliminaActividad":
+$user=$_POST["user"];
+$nombre=$_POST["nombreAct"];
+$fecha=$_POST["fechaAct"];
+$lugar=$_POST["lugarAct"];
+$descripcion=$_POST["descAct"];
+$sql_query="Delete from Usuario_Agenda where usuario='$user' and nombre='$nombre' and fecha='$fecha' and lugar='$lugar' and descripcion='$descripcion';";
+$consulta= pg_query($sql_query);
+break;
+
+case "creaGrupo":
+$user=$_POST["user"];
+$nombre=$_POST["nombreGrupo"];
+$descripcion=$_POST["descGrupo"];
+$invitados = $_POST["invitados"];
+$sql_query="Insert into Grupo values ('$nombre', '$descripcion', '$user');";
+$consulta= pg_query($sql_query);
+agregarInvitadosGrupo($invitados, $user, $nombre);
+break;
 
 ?>
