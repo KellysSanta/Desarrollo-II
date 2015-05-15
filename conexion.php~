@@ -9,43 +9,12 @@ $cadena_con= "host=$server port=$port dbname=$db_name user=$log password=$pass";
 //Conectamos con la cadena de conexion
 $con = pg_connect($cadena_con) or die ('Ha fallado la conexion');
 ?>
-<?php //Buscamos el usuario y contraseña
-function verificauser($user, $password){
-$sql_query = "Select login, correo, usuario.nombre, apellido, apellido2, 
-					sexo,universidad.nombre, identificacion, tipoid, 
-					carrera.nombre 
-					From usuario inner join universidad on usuario.universidad = universidad.universidad_id 
-					inner join carrera on usuario.carrera = carrera.carrera_id 
-					Where login = '$user' and pass = '$password' and usuario.estado=true;";
-$result = pg_query($sql_query);
-return $result;
-}?>
-<?php //Miramos si es Admin
-function esadmin($user){
-$sql_queryadmin = "Select * From usuario inner join administrador 
-					on administrador.admin_id = usuario.login 
-					Where login = '$user';";	
-$result = pg_query($sql_queryadmin);
-return $result;}
-?>
-<?php //Recorremos tabla (modificado actualmente solo sirve para universidad)mostrnado campos especificos NOTA:modificare nombre apenas pueda
-function recorre_tabla($nombret,$campot){
-$sql_query= "Select $campot From $nombret where estado=true";
-$consulta = pg_query($sql_query);
-while($fila=pg_fetch_row($consulta)) 
- { echo "<option value='".$fila[1]."'>".$fila[0]."</option>"; } 
-}
-?>
-<?php //Crea un select a partir de la opcion seleccionada en otro select
-function recorre_tabla_anidada($nombreta, $nombretp, $selectDestino){
-$sql_query= "Select * From $nombreta Where universidad = '$nombretp'";	
-$consulta=pg_query($sql_query);
-echo "<div><select name='$selectDestino' id='$selectDestino' onChange='cargaContenido(this.id)'>";
-echo "<option value='0'>Seleccione $nombreta</option>";
-while($fila=pg_fetch_row($consulta)){
-	echo "<option value='".$fila[0]."'>".$fila[1]."</option>";}			
-echo "</select></div>";	
-}?>
+
+
+
+
+<?php /**********************************************************Administrador**************************************************/ ?>
+
 <?php
 function cincoMejoresEventos(){
 $sql_query = "select nombre, count(*) total_participantes from 
@@ -64,6 +33,7 @@ while($fila=pg_fetch_row($consulta) and $counter <5){
 	</div>";
 }
 }?>
+
 <?php
 function listarUsuariosPorCarreras(){
 $sql_query = "select  carrera.nombre, count(*) from usuario inner join carrera on usuario.carrera = carrera.carrera_id group by carrera.nombre;";
@@ -77,6 +47,7 @@ while($fila=pg_fetch_row($consulta)){
 	    </div>";
 }
 }?>
+
 <?php
 function listarUsuariosPorUniversidad(){
 $sql_query = "select  universidad.nombre, count(*) from usuario inner join universidad on usuario.universidad = universidad.universidad_id group by universidad.nombre;";
@@ -90,15 +61,58 @@ while($fila=pg_fetch_row($consulta)){
 	    </div>";
 }
 }?>
-<?php //Muestra cantidad msj usuario 
-function cantidadMensajes($usuario){
-$sql_query = "SELECT count(*) from mensaje where usuario_dos='$usuario'";
-$consulta = pg_query($sql_query);
-$cuenta=pg_fetch_row($consulta);
-$cantidad=$cuenta[0];
-return $cantidad;
-}
+
+
+<?php /******************************************************************Agenda***********************************************/ ?>
+
+<?php
+function consultaActividad($user, $fecha){
+	$sql_query = "select * from Usuario_Agenda where usuario='$user' and fecha='$fecha';";
+
+	$consulta=pg_query($sql_query);
+	if (pg_num_rows($consulta) >= 1){
+		while($fila=pg_fetch_row($consulta)){
+			echo	"<div class='cuadros'>
+						<form name='gestionActividad' action='actualizatabla.php' method='post'>
+							<div class='sesion_formulario'>
+								<label class='label2'>Nombre:</label>
+								<input class='input'  type='text' name ='nombreAct' value='$fila[2]' OnFocus='this.blur()'>
+							</div>
+							<div class='sesion_formulario'>
+								<label class='label2'>Fecha:</label>
+								<input class='input'  type='text' name='fechaAct' value = '$fila[3]' OnFocus='this.blur()'>
+							</div>
+							<div class='sesion_formulario'>
+								<label class='label'>Lugar:</label>
+								<input class='input' type='text' name='lugarcAct' value = '$fila[4]' OnFocus='this.blur()'>
+							</div>
+							<div class='sesion_formulario'>
+								<label class='label2'>Descripción:</label>
+								<input class='input' type='text' name='descAct' value = '$fila[5]' OnFocus='this.blur()'>
+							</div>
+							<div class='sesion_formulario'>
+								<input type='hidden' name='tabla' value='eliminaActividad'>
+								<input type='hidden' name='user' value='$user'>
+								<button type='submit' class'boton'>Editar</button>
+								<button type='submit' class='boton'>Eliminar</button>
+							</div>
+						</form>	
+				</div>";
+		}
+	}else {
+
+		echo"<div class='sesion_formulario'>
+						<h3>No hay actividades programadas para la fecha seleccionada.$fecha</h3>
+				</div>";
+
+	}	
+} 
 ?>
+
+
+
+<?php /***********************************************************************Contactos****************************************************************************/ ?>
+
 <?php
 function verificaBusquedaNombre($nombreU, $universidad){
 	if($universidadU == "No conozco la universidad"){
@@ -110,6 +124,7 @@ function verificaBusquedaNombre($nombreU, $universidad){
 	}
 	return $result;
 }?>
+
 <?php
 function buscarContactoNombre($nombreU, $universidadU, $log){	
 	if($universidadU ==0){
@@ -145,6 +160,7 @@ function buscarContactoNombre($nombreU, $universidadU, $log){
 			}
 	}
 }?>
+
 <?php
 function buscarContactoEliminar($nombreU, $log){	
 		$sql_query = "Select nombre, login from Usuario where nombre LIKE '%$nombreU%' and login IN (select usuario_dos from contacto where usuario_uno='$log');";
@@ -163,6 +179,7 @@ function buscarContactoEliminar($nombreU, $log){
 				</div>";
 			}
 }?>
+
 <?php
 function consultarContactos($nombreC, $nombreU){
 
@@ -185,6 +202,7 @@ function consultarContactos($nombreC, $nombreU){
 				</div>";
 		}
 }?>
+
 <?php
 function listarContactos($nombreU){
 
@@ -208,6 +226,120 @@ function listarContactos($nombreU){
 						</div>";
 		}
 }?>
+
+<?php /***********************************************************************Eventos*********************************************************************/ ?>
+
+
+<?php /************************************************************************Grupos********************************************************************/ ?>
+
+<?php
+function agregarInvitadosGrupo($invitados, $user, $nombre){
+	$invitadosGrupo = explode(";", );
+	
+	foreach($invitadosGrupo as $valor){
+		$sql_query="Insert into Invitacion_grupo values ('$user', '$valor', '$nombre', 'false');";
+		$consulta = pg_query($sql_query);
+	}
+}?>
+
+
+<?php /**********************************************************Mensajes***********************************************************/ ?>
+
+<?php //Muestra cantidad msj usuario 
+function cantidadMensajes($usuario){
+$sql_query = "SELECT count(*) from mensaje where usuario_dos='$usuario' and visto='false'";
+$consulta = pg_query($sql_query);
+$cuenta=pg_fetch_row($consulta);
+$cantidad=$cuenta[0];
+return $cantidad;
+}
+?>
+
+<?php //Muestra mensajes enviados 
+function mensajesEnviados($usuario){
+$sql_query = "SELECT usuario_dos, fecha, mensaje_enviado FROM Mensajes where usuario_uno='$usuario'";
+$consulta = pg_query($sql_query);
+		while($fila=pg_fetch_row($consulta)){
+				echo"<form>
+						<div class='sesion_formulario'>
+								<label class='label2'>Usuario</label>
+								<input  type='text' OnFocus='this.blur()' name='usuario2' value='".$fila[0]."'>
+						</div>		
+						<div class='sesion_formulario'>
+								<label class='label2'>Fecha</label>
+								<input  type='text' OnFocus='this.blur()' name='fecha' value='".$fila[1]."'>
+						</div>	
+						<div class='sesion_formulario'>
+								<label class='label2'>Mensaje</label>
+								<textarea  type='text' OnFocus='this.blur()' name='mensaje' value='".$fila[2]."'></textarea>
+						</div>
+						<div class='sesion_formulario'>
+								input type='hidden' name='tabla' value='eliminaMenEnviado'>
+								<input type='hidden' name='user' value='$usuario'>
+								<button type='submit'  class='boton'>Eliminar</button>
+						</div>
+					</form>";
+				}
+			
+}
+?>
+
+
+<?php /**********************************************************perfil*************************************************************/ ?>
+
+
+<?php //Buscamos el usuario y contraseña
+function verificauser($user, $password){
+$sql_query = "Select login, correo, usuario.nombre, apellido, apellido2, 
+					sexo,universidad.nombre, identificacion, tipoid, 
+					carrera.nombre 
+					From usuario inner join universidad on usuario.universidad = universidad.universidad_id 
+					inner join carrera on usuario.carrera = carrera.carrera_id 
+					Where login = '$user' and pass = '$password' and usuario.estado=true;";
+$result = pg_query($sql_query);
+return $result;
+}?>
+
+ 
+
+<?php //Miramos si es Admin
+function esadmin($user){
+$sql_queryadmin = "Select * From usuario inner join administrador 
+					on administrador.admin_id = usuario.login 
+					Where login = '$user';";	
+$result = pg_query($sql_queryadmin);
+return $result;}
+?>
+
+
+
+
+
+<?php /******************************************************Auxiliares*********************************************************************/?>
+<?php //Recorremos tabla (modificado actualmente solo sirve para universidad)mostrnado campos especificos NOTA:modificare nombre apenas pueda
+function recorre_tabla($nombret,$campot){
+$sql_query= "Select $campot From $nombret where estado=true";
+$consulta = pg_query($sql_query);
+while($fila=pg_fetch_row($consulta)) 
+ { echo "<option value='".$fila[1]."'>".$fila[0]."</option>"; } 
+}
+?>
+
+<?php //Crea un select a partir de la opcion seleccionada en otro select
+function recorre_tabla_anidada($nombreta, $nombretp, $selectDestino){
+$sql_query= "Select * From $nombreta Where universidad = '$nombretp'";	
+$consulta=pg_query($sql_query);
+echo "<div><select name='$selectDestino' id='$selectDestino' onChange='cargaContenido(this.id)'>";
+echo "<option value='0'>Seleccione $nombreta</option>";
+while($fila=pg_fetch_row($consulta)){
+	echo "<option value='".$fila[0]."'>".$fila[1]."</option>";}			
+echo "</select></div>";	
+}?>
+
+
+
+
+
 <?php
 function validarTamanoRango($variable, $tamano1, $tamano2){
 	$valido = False;
@@ -216,6 +348,7 @@ function validarTamanoRango($variable, $tamano1, $tamano2){
 		}
 	return $valido;
 }?>
+
 <?php
 function validarTamano2($variable, $tamano1){
 	$valido = False;
@@ -224,6 +357,7 @@ function validarTamano2($variable, $tamano1){
 		}
 	return $valido;
 }?>
+
 <?php
 function validarEsNumerico($variable){
 	$numero = False;
@@ -232,6 +366,7 @@ function validarEsNumerico($variable){
 		}
 	return $numero;
 }?>
+
 <?php
 function validarFecha($dia, $mes, $anio){
 	$valida=False;
@@ -245,6 +380,7 @@ function validarFecha($dia, $mes, $anio){
 	}
 	return $valida;
 }?>
+
 <?php
 function validarLetras($cadena){ 
 	$permitidos = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ "; 
@@ -255,46 +391,5 @@ function validarLetras($cadena){
 	}  
 	return true; 
 }?>
-<?php
-function consultaActividad($user, $fecha){
-	$sql_query = "select * from Usuario_Agenda where usuario='$user' and fecha='$fecha';";
 
-	$consulta=pg_query($sql_query);
-	if (pg_num_rows($consulta) >= 1){
-		while($fila=pg_fetch_row($consulta)){
-			echo	"<div class='cuadros'>
-						<form name='gestionActividad' action='actualizatabla.php' method='post'>
-							<div class='sesion_formulario'>
-								<label class='label2'>Nombre:</label>
-								<input class='input' id='inputAmigo' type='text' value='$fila[2]' OnFocus='this.blur()'>
-							</div>
-							<div class='sesion_formulario'>
-								<label class='label2'>Fecha:</label>
-								<input class='input' id='nputAmigo' type='text' value = '$fila[3]' OnFocus='this.blur()'>
-							</div>
-							<div class='sesion_formulario'>
-								<label class='label'>Lugar:</label>
-								<input class='input' id='inputAmigo' type='text' value = '$fila[4]' OnFocus='this.blur()'>
-							</div>
-							<div class='sesion_formulario'>
-								<label class='label2'>Descripción:</label>
-								<input class='input' id='inputAmigo' type='text' value = '$fila[5]' OnFocus='this.blur()'>
-							</div>
-							<div class='sesion_formulario'>
-								<input type='hidden' name='tabla' value='eliminaActividad'>
-								<input type='hidden' name='user' value='$user'>
-								<button type='submit' class'boton'>Editar</button>
-								<button type='submit' class='boton'>Eliminar</button>
-							</div>
-						</form>	
-				</div>";
-		}
-	}else {
 
-		echo"<div class='sesion_formulario'>
-						<h3>No hay actividades programadas para la fecha seleccionada.$fecha</h3>
-				</div>";
-
-	}	
-} 
-?>

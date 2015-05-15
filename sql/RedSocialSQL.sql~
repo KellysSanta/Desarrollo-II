@@ -71,7 +71,7 @@ CREATE TABLE Contacto (
 	usuario_uno VARCHAR(20) NOT NULL,
 	usuario_dos VARCHAR(20) NOT NULL,
 	solicitud boolean NOT NULL,
-	fecha date NOT NULL,
+	fecha timestamp without time zone NOT NULL,
 
 CONSTRAINT contacto_pk PRIMARY KEY (usuario_uno, usuario_dos),
 CONSTRAINT usuario_uno_fk FOREIGN KEY (usuario_uno)
@@ -85,7 +85,7 @@ REFERENCES Usuario (login)
 CREATE TABLE Mensaje (
 	usuario_uno VARCHAR(20) NOT NULL,
 	usuario_dos VARCHAR(20) NOT NULL,
-	fecha date NOT NULL,
+	fecha timestamp without time zone NOT NULL,
 	mensaje_enviado VARCHAR(500) NOT NULL,
 	oculto boolean NOT NULL,
 	posponer boolean NOT NULL,
@@ -105,7 +105,7 @@ CREATE TABLE Evento (
 	id_evento VARCHAR(20) NOT NULL PRIMARY KEY,
 	nombre VARCHAR(50) NOT NULL,
 	descripcion VARCHAR(300) NOT NULL,
-	fecha date NOT NULL,
+	fecha timestamp without time zone NOT NULL,
 	lugar VARCHAR(50) NOT NULL,
 	estado boolean NOT NULL,
 	administrador VARCHAR(20) NOT NULL,
@@ -136,7 +136,7 @@ REFERENCES Evento(id_evento)
 CREATE TABLE Notificacion_Evento (
 	id_evento VARCHAR(20) NOT NULL,
 	usuario VARCHAR(20) NOT NULL,
-	fecha date NOT NULL,
+	fecha timestamp without time zone NOT NULL,
 	mensaje_enviado VARCHAR(500) NOT NULL,
 	oculto boolean NOT NULL,
 	posponer boolean NOT NULL,
@@ -200,7 +200,7 @@ REFERENCES Grupo(nombre)
 CREATE TABLE Notificacion_Grupo (
 	grupo VARCHAR(50) NOT NULL,
 	usuario VARCHAR(20) NOT NULL,
-	fecha date NOT NULL,
+	fecha timestamp without time zone NOT NULL,
 	mensaje_enviado VARCHAR(500) NOT NULL,
 	oculto boolean NOT NULL,
 	posponer boolean NOT NULL,

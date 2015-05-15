@@ -154,9 +154,18 @@ $fila=pg_fetch_row($consulta);
 $d1=$fila[0];
 $d2=$_POST["mensaje"];
 $d3=$_POST["origen"];
-$sql_query = "insert into mensaje values ('$d3', '$d1','01/01/1900','$d2',false,false,false,false);";
+$sql_query = "insert into mensaje values ('$d3', '$d1','01/01/1900','$d2',false,false,true,false);";
 $consulta = pg_query($sql_query);
 break;
+
+case "eliminaMenEnviado":
+$d1=$_POST["user"];
+$d2=$_POST["usuario2"];
+$d3=$_POST["fecha"];
+$d4=$_POST["mensaje"];
+
+$sql_query="UPDATE Mensaje SET estado='false' where usuario_uno='$d1' and usuario_dos='$d2' and fecha='$d3' and mensaje='$d4';"
+breaK;
 
 <?php /***********************************************************************Perfil****************************************************************************/ ?>
 

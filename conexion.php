@@ -247,11 +247,40 @@ function agregarInvitadosGrupo($invitados, $user, $nombre){
 
 <?php //Muestra cantidad msj usuario 
 function cantidadMensajes($usuario){
-$sql_query = "SELECT count(*) from mensaje where usuario_dos='$usuario'";
+$sql_query = "SELECT count(*) from mensaje where usuario_dos='$usuario' and visto='false'";
 $consulta = pg_query($sql_query);
 $cuenta=pg_fetch_row($consulta);
 $cantidad=$cuenta[0];
 return $cantidad;
+}
+?>
+
+<?php //Muestra mensajes enviados 
+function mensajesEnviados($usuario){
+$sql_query = "SELECT usuario_dos, fecha, mensaje_enviado FROM Mensajes where usuario_uno='$usuario'";
+$consulta = pg_query($sql_query);
+		while($fila=pg_fetch_row($consulta)){
+				echo"<form name='gestionMEnviados' action='actualizatabla.php' method='post'>
+						<div class='sesion_formulario'>
+								<label class='label2'>Usuario</label>
+								<input  type='text' OnFocus='this.blur()' name='usuario2' value='".$fila[0]."'>
+						</div>		
+						<div class='sesion_formulario'>
+								<label class='label2'>Fecha</label>
+								<input  type='text' OnFocus='this.blur()' name='fecha' value='".$fila[1]."'>
+						</div>	
+						<div class='sesion_formulario'>
+								<label class='label2'>Mensaje</label>
+								<textarea  type='text' OnFocus='this.blur()' name='mensaje' value='".$fila[2]."'></textarea>
+						</div>
+						<div class='sesion_formulario'>
+								input type='hidden' name='tabla' value='eliminaMenEnviado'>
+								<input type='hidden' name='user' value='$usuario'>
+								<button type='submit'  class='boton'>Eliminar</button>
+						</div>
+					</form>";
+				}
+			
 }
 ?>
 
