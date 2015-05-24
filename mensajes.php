@@ -194,49 +194,19 @@ include "conexion.php";?>
 				<div class="cuadros" id="grupos_pospuestos">
 					<h3>Notificaciónes Pospuestas
 					</h3>
-						<div class="sesion_formulario">
-								<label class="label2">Grupo</label>
-						</div>		
-						<div class="sesion_formulario">
-								<label class="label2">Mensaje</label>
-						</div>	
-						<div class="sesion_formulario">
-								<button type="submit"  class="ocultar_mensaje boton">Ocultar</button>
-								<button type="submit"  class="no_posponer_mensaje boton">No posponer mas</button>
-								<button type="submit"  class="Eliminar_mensaje boton">Eliminar</button>
-						</div>
+						<?php notificacionGruposPospuestos($usuario);?>
 				</div>
 
 				<div class="cuadros" id="grupos_ocultos">
 					<h3>Notificaciones Ocultas
 					</h3>
-						<div class="sesion_formulario">
-								<label class="label2">Grupo</label>
-						</div>		
-						<div class="sesion_formulario">
-								<label class="label2">Mensaje</label>
-						</div>	
-						<div class="sesion_formulario">
-								<button type="submit"  class="no_ocultar_mensaje boton">No ocultar mas</button>
-								<button type="submit"  class="posponer_mensaje boton">Posponer</button>
-								<button type="submit"  class="Eliminar_mensaje boton">Eliminar</button>
-						</div>
+						<?php notificacionGruposOcultos($usuario);?>
 				</div>
 
 				<div class="cuadros" id="grupos_consultar">
 					<h3>Consultar Notificaciones
 					</h3>
-						<div class="sesion_formulario">
-								<label class="label2">Grupo</label>
-						</div>		
-						<div class="sesion_formulario">
-								<label class="label2">Mensaje</label>
-						</div>	
-						<div class="sesion_formulario">
-								<button type="submit"  class="ocultar_mensaje boton">Ocultar</button>
-								<button type="submit"  class="posponer_mensaje boton">Posponer</button>
-								<button type="submit"  class="Eliminar_mensaje boton">Eliminar</button>
-						</div>
+						<?php notificacionGrupos($usuario);?>
 				</div>
 			
 				<div class="cuadros">

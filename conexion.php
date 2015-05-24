@@ -235,12 +235,6 @@ function notificacionEventos($usuario){
 $sql_query = "SELECT id_evento, mensaje from Notificacion_Evento where usuario='$usuario' and oculto='false' and posponer='false' and estado='true'; ";
 $consulta = pg_query($sql_query);
 
-		echo"
-			<nav class='personal'>
-				<ul class='menu_principal'>
-					<li><h4>Notificaciones</h4></li>
-				</ul>
-			</nav>";
 		while($fila=pg_fetch_row($consulta)){
 
 			$sql_query1 = "SELECT nombre from Evento where id_evento = '"$fila[0]"';";
@@ -282,12 +276,6 @@ function notificacionEventosOcultos($usuario){
 $sql_query = "SELECT id_evento, mensaje from Notificacion_Evento where usuario='$usuario' and oculto='true' and posponer='false' and estado='true'; ";
 $consulta = pg_query($sql_query);
 
-		echo"
-			<nav class='personal'>
-				<ul class='menu_principal'>
-					<li><h4>Notificaciones Ocultas</h4></li>
-				</ul>
-			</nav>";
 		while($fila=pg_fetch_row($consulta)){
 
 			$sql_query1 = "SELECT nombre from Evento where id_evento = '"$fila[0]"';";
@@ -295,7 +283,7 @@ $consulta = pg_query($sql_query);
 			$fila2=pg_fetch_row($consulta);
 				echo"
 
-						<form name='gestionNotEventos' action='actualizatabla.php' method='post'>
+						<form name='gestionNotEventosO' action='actualizatabla.php' method='post'>
 								<div class='sesion_formulario'>
 										<label class='label2'>Nombre</label>
 										<input type='hidden' name='idEvento' value='".$fila[0]."'>
@@ -328,12 +316,6 @@ function notificacionEventosPospuestos($usuario){
 $sql_query = "SELECT id_evento, mensaje from Notificacion_Evento where usuario='$usuario' and oculto='false' and posponer='true' and estado='true'; ";
 $consulta = pg_query($sql_query);
 
-		echo"
-			<nav class='personal'>
-				<ul class='menu_principal'>
-					<li><h4>Notificaciones Pospuestas</h4></li>
-				</ul>
-			</nav>";
 		while($fila=pg_fetch_row($consulta)){
 
 			$sql_query1 = "SELECT nombre from Evento where id_evento = '"$fila[0]"';";
@@ -341,7 +323,7 @@ $consulta = pg_query($sql_query);
 			$fila2=pg_fetch_row($consulta);
 				echo"
 
-						<form name='gestionNotEventos' action='actualizatabla.php' method='post'>
+						<form name='gestionNotEventosp' action='actualizatabla.php' method='post'>
 								<div class='sesion_formulario'>
 										<label class='label2'>Nombre</label>
 										<input type='hidden' name='idEvento' value='".$fila[0]."'>
@@ -379,6 +361,113 @@ function agregarInvitadosGrupo($invitados, $user, $nombre){
 		$consulta = pg_query($sql_query);
 	}
 }?>
+
+
+<?php 
+function notificacionGrupos($usuario){
+
+$sql_query = "SELECT grupo, mensaje from Notificacion_Grupo where usuario='$usuario' and oculto='false' and posponer='false' and estado='true'; ";
+$consulta = pg_query($sql_query);
+
+		while($fila=pg_fetch_row($consulta)){
+
+				echo"
+						<form name='gestionNotGrupos' action='actualizatabla.php' method='post'>
+								<div class='sesion_formulario'>
+										<label class='label2'>Grupo</label>
+										<input  type='text' OnFocus='this.blur()' name='nombreGrupo' value='".$fila[0]."'>
+								</div>		
+								<div class='sesion_formulario'>
+										<label class='label2'>Notificacion</label>
+										<input  type='text' OnFocus='this.blur()' name='notificacionG' value='".$fila[1]."'>
+								</div>	
+								
+								<div class='sesion_formulario'>
+										<input type='hidden' name='tabla' value='ocultarNotGrupo'> 
+										<input type='hidden' name='tabla' value='posponerNotGrupo'>
+										<input type='hidden' name='tabla' value='eliminarNotGrupo'>
+										<input type='hidden' name='user' value='$usuario'>
+										<button type='submit'  class='boton'>Ocultar</button>
+										<button type='submit'  class='boton'>Posponer</button>
+										<button type='submit'  class='boton'>Eliminar</button>
+								</div>
+
+						</form>
+						<h3>--------------------------------------------------------------------------</h3>";
+				}
+			
+}
+?>
+
+<?php 
+function notificacionGruposOcultos($usuario){
+
+$sql_query = "SELECT grupo, mensaje from Notificacion_Grupo where usuario='$usuario' and oculto='true' and posponer='false' and estado='true'; ";
+$consulta = pg_query($sql_query);
+
+
+		while($fila=pg_fetch_row($consulta)){
+				echo"
+
+						<form name='gestionNotGrupos' action='actualizatabla.php' method='post'>
+								<div class='sesion_formulario'>
+										<label class='label2'>Grupo</label>
+										<input  type='text' OnFocus='this.blur()' name='nombreGrupo' value='".$fila[0]."'>
+								</div>		
+								<div class='sesion_formulario'>
+										<label class='label2'>Notificacion</label>
+										<input  type='text' OnFocus='this.blur()' name='notificacionG' value='".$fila[1]."'>
+								</div>	
+								
+								<div class='sesion_formulario'>
+										<input type='hidden' name='tabla' value='dejarOcultarNotGrupo'> 
+										<input type='hidden' name='tabla' value='eliminarNotGrupo'>
+										<input type='hidden' name='user' value='$usuario'>
+										<button type='submit'  class='boton'>Dejar de Ocultar</button>
+										<button type='submit'  class='boton'>Eliminar</button>
+								</div>
+
+						</form>
+						<h3>--------------------------------------------------------------------------</h3>";
+				}
+			
+}
+?>
+
+
+<?php 
+function notificacionGruposPospuestos($usuario){
+
+$sql_query = "SELECT grupo, mensaje from Notificacion_Grupo where usuario='$usuario' and oculto='false' and posponer='true' and estado='true'; ";
+$consulta = pg_query($sql_query);
+
+		while($fila=pg_fetch_row($consulta)){
+
+				echo"
+						<form name='gestionNotGrupos' action='actualizatabla.php' method='post'>
+								<div class='sesion_formulario'>
+										<label class='label2'>Grupo</label>
+										<input  type='text' OnFocus='this.blur()' name='nombreGrupo' value='".$fila[0]."'>
+								</div>		
+								<div class='sesion_formulario'>
+										<label class='label2'>Notificacion</label>
+										<input  type='text' OnFocus='this.blur()' name='notificacionG' value='".$fila[1]."'>
+								</div>	
+								
+								<div class='sesion_formulario'>
+										<input type='hidden' name='tabla' value='dejarPosponerNotGrupo'>
+										input type='hidden' name='tabla' value='eliminarNotGrupo'>
+										<input type='hidden' name='user' value='$usuario'>
+										<button type='submit'  class='boton'>Dejar de posponer</button>
+										<button type='submit'  class='boton'>Eliminar</button>
+								</div>
+
+						</form>
+						<h3>--------------------------------------------------------------------------</h3>";
+				}
+			
+}
+?>
 
 
 <?php /**********************************************************Mensajes***********************************************************/ ?>
@@ -428,10 +517,10 @@ $sql_query = "SELECT usuario_uno, mensaje_enviado FROM Mensaje where usuario_dos
 $consulta = pg_query($sql_query);
 
 		while($fila=pg_fetch_row($consulta)){
-				echo"<form name='gestionMPospuestos' action='actualizatabla.php' method='post'>
+				echo"<form name='gestionMRecibidos' action='actualizatabla.php' method='post'>
 						<div class='sesion_formulario'>
 								<label class='label2'>Usuario</label>
-								<input  type='text' OnFocus='this.blur()' name='usuario2' value='".$fila[0]."'>
+								<input  type='text' OnFocus='this.blur()' name='usuario1' value='".$fila[0]."'>
 						</div>			
 						<div class='sesion_formulario'>
 								<label class='label2'>Mensaje</label>
@@ -461,7 +550,7 @@ $consulta = pg_query($sql_query);
 				echo"<form name='gestionMPospuestos' action='actualizatabla.php' method='post'>
 						<div class='sesion_formulario'>
 								<label class='label2'>Usuario</label>
-								<input  type='text' OnFocus='this.blur()' name='usuario2' value='".$fila[0]."'>
+								<input  type='text' OnFocus='this.blur()' name='usuario1' value='".$fila[0]."'>
 						</div>			
 						<div class='sesion_formulario'>
 								<label class='label2'>Mensaje</label>
@@ -487,10 +576,10 @@ $sql_query = "SELECT usuario_uno, mensaje_enviado FROM Mensaje where usuario_dos
 $consulta = pg_query($sql_query);
 
 		while($fila=pg_fetch_row($consulta)){
-				echo"<form name='gestionMPospuestos' action='actualizatabla.php' method='post'>
+				echo"<form name='gestionMOcultos' action='actualizatabla.php' method='post'>
 						<div class='sesion_formulario'>
 								<label class='label2'>Usuario</label>
-								<input  type='text' OnFocus='this.blur()' name='usuario2' value='".$fila[0]."'>
+								<input  type='text' OnFocus='this.blur()' name='usuario1' value='".$fila[0]."'>
 						</div>			
 						<div class='sesion_formulario'>
 								<label class='label2'>Mensaje</label>
