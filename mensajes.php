@@ -66,7 +66,10 @@ include "conexion.php";?>
 						<h4>Mensajes</h4>
 					</li>
 					<li class="derecha active">
-						<a class="principal" id="ver_consultar" href="#">Consultar</a>
+						<a class="principal"  href="#">Enviados</a>
+					</li>
+					<li class="derecha active">
+						<a class="principal" id="ver_consultar" href="#">Recibidos</a>
 					</li>
 					<li class="derecha active">
 						<a class="principal" id="ver_ocultos" href="#">Ocultos</a>
@@ -80,49 +83,20 @@ include "conexion.php";?>
 			<div class="cuadros" id="mensajes_pospuestos">
 				<h3>Mensajes Pospuestos
 				</h3>
-					<div class="sesion_formulario">
-							<label class="label2">Usuario</label>
-					</div>		
-					<div class="sesion_formulario">
-							<label class="label2">Mensaje</label>
-					</div>	
-					<div class="sesion_formulario">
-							<button type="submit"  class="ocultar_mensaje boton">Ocultar</button>
-							<button type="submit"  class="no_posponer_mensaje boton">No posponer mas</button>
-							<button type="submit"  class="Eliminar_mensaje boton">Eliminar</button>
-					</div>
+
+					<?php mensajesPospuestos($usuario); ?>
 			</div>
 
 			<div class="cuadros" id="mensajes_ocultos">
 				<h3>Mensajes Ocultos
 				</h3>
-					<div class="sesion_formulario">
-							<label class="label2">Usuario</label>
-					</div>		
-					<div class="sesion_formulario">
-							<label class="label2">Mensaje</label>
-					</div>	
-					<div class="sesion_formulario">
-							<button type="submit"  class="no_ocultar_mensaje boton">No ocultar mas</button>
-							<button type="submit"  class="posponer_mensaje boton">Posponer</button>
-							<button type="submit"  class="Eliminar_mensaje boton">Eliminar</button>
-					</div>
+					<?php mensajesOcultos($usuario); ?>
 			</div>
 
 			<div class="cuadros" id="mensajes_consultar">
 				<h3>Consultar Mensajes
 				</h3>
-					<div class="sesion_formulario">
-							<label class="label2">Usuario</label>
-					</div>		
-					<div class="sesion_formulario">
-							<label class="label2">Mensaje</label>
-					</div>	
-					<div class="sesion_formulario">
-							<button type="submit"  class="ocultar_mensaje boton">Ocultar</button>
-							<button type="submit"  class="posponer_mensaje boton">Posponer</button>
-							<button type="submit"  class="Eliminar_mensaje boton">Eliminar</button>
-					</div>
+					<?php mensajesRecibidos($usuario); ?>
 			</div>
 
 			
@@ -168,49 +142,19 @@ include "conexion.php";?>
 			<div class="cuadros" id="eventos_pospuestos">
 				<h3>Notificaciónes Pospuestas
 				</h3>
-					<div class="sesion_formulario">
-							<label class="label2">Evento</label>
-					</div>		
-					<div class="sesion_formulario">
-							<label class="label2">Mensaje</label>
-					</div>	
-					<div class="sesion_formulario">
-							<button type="submit"  class="ocultar_mensaje boton">Ocultar</button>
-							<button type="submit"  class="no_posponer_mensaje boton">No posponer mas</button>
-							<button type="submit"  class="Eliminar_mensaje btn boton">Eliminar</button>
-					</div>
+					<?php notificacionEventosPospuestos($usuario);?>
 			</div>
 
 			<div class="cuadros" id="eventos_ocultos">
 				<h3>Notificaciones Ocultas
 				</h3>
-					<div class="sesion_formulario">
-							<label class="label2">Evento</label>
-					</div>		
-					<div class="sesion_formulario">
-							<label class="label2">Mensaje</label>
-					</div>	
-					<div class="sesion_formulario">
-							<button type="submit"  class="no_ocultar_mensaje boton">No ocultar mas</button>
-							<button type="submit"  class="posponer_mensaje boton">Posponer</button>
-							<button type="submit"  class="Eliminar_mensaje boton">Eliminar</button>
-					</div>
+					<?php notificacionEventosOcultos($usuario);?>
 			</div>
 
 			<div class="cuadros" id="eventos_consultar">
 				<h3>Consultar Notificaciones
 				</h3>
-					<div class="sesion_formulario">
-							<label class="label2">Evento</label>
-					</div>		
-					<div class="sesion_formulario">
-							<label class="label2">Mensaje</label>
-					</div>	
-					<div class="sesion_formulario">
-							<button type="submit"  class="ocultar_mensaje boton">Ocultar</button>
-							<button type="submit"  class="posponer_mensaje boton">Posponer</button>
-							<button type="submit"  class="Eliminar_mensaje boton">Eliminar</button>
-					</div>
+					<?php notificacionEventos($usuario);?>
 			</div>
 			
 			<div class="cuadros">

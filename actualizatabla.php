@@ -3,7 +3,7 @@ include "conexion.php";
 
 switch($_POST["tabla"]){
 
-<?php /***********************************************************************Administrador****************************************************************************/ ?>
+/***********************************************************************Administrador****************************************************************************/ 
 
 case "nuevauni":
 $d1=$_POST["ciudad"];
@@ -59,7 +59,7 @@ $consulta = pg_query($sql_query);
 break;
 
 
-<?php /***********************************************************************Agenda****************************************************************************/ ?>
+/***********************************************************************Agenda****************************************************************************/ 
 
 case "agregarActividad":
 $d1=$_POST["user"];
@@ -92,7 +92,7 @@ $sql_query="Delete from Usuario_Agenda where usuario='$user' and nombre='$nombre
 $consulta= pg_query($sql_query);
 break;
 
-<?php /***********************************************************************Contactos****************************************************************************/ ?>	
+/***********************************************************************Contactos****************************************************************************/	
 
 case "agregaUsuario":
 $d1=$_POST["loginyo"];
@@ -126,12 +126,12 @@ $contacto = $_POST["contacto"];
 $sql_query = "update contacto set solicitud = false where usuario_uno = '$user' and usuario_dos = '$contacto';" ;
 $consulta= pg_query($sql_query);
 
-break;}
+break;
 
-<?php /***********************************************************************Eventos****************************************************************************/ ?>
+/***********************************************************************Eventos****************************************************************************/ 
 
 
-<?php /***********************************************************************Grupos****************************************************************************/ ?>
+/***********************************************************************Grupos****************************************************************************/ 
 
 case "creaGrupo":
 $user=$_POST["user"];
@@ -143,19 +143,19 @@ $consulta= pg_query($sql_query);
 agregarInvitadosGrupo($invitados, $user, $nombre);
 break;
 
-?>
-<?php /***********************************************************************Mensajes****************************************************************************/ ?>
+
+/***********************************************************************Mensajes****************************************************************************/ 
 
 case "nuevomensaje":
 $d1=$_POST["destino"];
-$sql_querydestino="Select login From usuario Where correo='$d1'";
-$consulta = pg_query($sql_querydestino);
-$fila=pg_fetch_row($consulta);
-$d1=$fila[0];
+$destinos = explode(",",$d1);
 $d2=$_POST["mensaje"];
 $d3=$_POST["origen"];
-$sql_query = "insert into mensaje values ('$d3', '$d1','01/01/1900','$d2',false,false,true,false);";
-$consulta = pg_query($sql_query);
+foreach ($destinos as $destinatario) {
+	$sql_query = "insert into mensaje values ('$d3', '$destinatario','01/01/1900','$d2',false,false,true,false);";
+	$consulta = pg_query($sql_query);
+}
+unset($destinatario);
 break;
 
 case "eliminaMenEnviado":
@@ -164,10 +164,11 @@ $d2=$_POST["usuario2"];
 $d3=$_POST["fecha"];
 $d4=$_POST["mensaje"];
 
-$sql_query="UPDATE Mensaje SET estado='false' where usuario_uno='$d1' and usuario_dos='$d2' and fecha='$d3' and mensaje='$d4';"
+$sql_query="UPDATE Mensaje SET estado='false' where usuario_uno='$d1' and usuario_dos='$d2' and fecha='$d3' and mensaje='$d4';";
+$consulta = pg_query($sql_query);
 breaK;
 
-<?php /***********************************************************************Perfil****************************************************************************/ ?>
+/***********************************************************************Perfil****************************************************************************/ 
 
 case "datospersonales":
 $d1=$_POST["tipodoc"];
@@ -220,8 +221,9 @@ if($d2 == $d3){
 	$sql_query="update usuario set pass='$d2' where login='$d1';";
 	$consulta = pg_query($sql_query);
 }
-break;
+break;}
 
+?>
 
 
 
