@@ -266,6 +266,56 @@ $sql_query="UPDATE Mensaje SET estado='false' where usuario_uno='$d1' and usuari
 $consulta = pg_query($sql_query);
 breaK;
 
+case "ocultarMensaje":
+$user=$_POST["user"];
+$usuario1=$_POST["usuario1"];
+$mensaje=$_POST["mensaje"];
+$oculto=$_POST["oculto"];
+$posponer=$_POST["posponer"];
+$sql_query="UPDATE Mensaje set oculto='true', posponer='false' where usuario_uno='$usuario1' and usuario_dos='$user' and mensaje_enviado='$mensaje' and oculto='$oculto' and posponer='$posponer';"
+$consulta=pg_query($sql_query);
+break;
+
+case "posponerMensaje":
+$user=$_POST["user"];
+$usuario1=$_POST["usuario1"];
+$mensaje=$_POST["mensaje"];
+$oculto=$_POST["oculto"];
+$posponer=$_POST["posponer"];
+$sql_query="UPDATE Mensaje set oculto='false', posponer='true' where usuario_uno='$usuario1' and usuario_dos='$user' and mensaje_enviado='$mensaje' and oculto='$oculto' and posponer='$posponer';"
+$consulta=pg_query($sql_query);
+break;
+
+case "eliminarMensaje":
+$user=$_POST["user"];
+$usuario1=$_POST["usuario1"];
+$mensaje=$_POST["mensaje"];
+$oculto=$_POST["oculto"];
+$posponer=$_POST["posponer"];
+$sql_query="UPDATE Mensaje set estado='false' where usuario_uno='$usuario1' and usuario_dos='$user' and mensaje_enviado='$mensaje' and oculto='$oculto' and posponer='$posponer';"
+$consulta=pg_query($sql_query);
+break;
+
+case "dejarOcultarMensaje":
+$user=$_POST["user"];
+$usuario1=$_POST["usuario1"];
+$mensaje=$_POST["mensaje"];
+$oculto=$_POST["oculto"];
+$posponer=$_POST["posponer"];
+$sql_query="UPDATE Mensaje set oculto='false' where usuario_uno='$usuario1' and usuario_dos='$user' and mensaje_enviado='$mensaje' and oculto='$oculto' and posponer='$posponer';"
+$consulta=pg_query($sql_query);
+break;
+
+case "dejarPosponerMensaje":
+$user=$_POST["user"];
+$usuario1=$_POST["usuario1"];
+$mensaje=$_POST["mensaje"];
+$oculto=$_POST["oculto"];
+$posponer=$_POST["posponer"];
+$sql_query="UPDATE Mensaje set posponer='false' where usuario_uno='$usuario1' and usuario_dos='$user' and mensaje_enviado='$mensaje' and oculto='$oculto' and posponer='$posponer';"
+$consulta=pg_query($sql_query);
+break;
+
 /***********************************************************************Perfil****************************************************************************/ 
 
 case "datospersonales":
