@@ -193,15 +193,19 @@ if (pg_num_rows($arregloresultante) == 1){
 			</div>
 			</div>
 			<div class="cuadros" id="agregar_profesionales">
-				<h3 class="text-success text-center">Agregar información profesional</h3>
-				<div class="sesion_formulario">
-					<label class="label2">Estudio</label>
-					<input class="input" type="text">
-				</div>	
-				<div class="sesion_formulario">
-					<button type="submit"  class="agregar_estudio boton">Agregar</button>
-					<button type="submit"  class="cancelar_estudio boton">Cancelar</button>
-				</div>	
+				<form name="agregaEstudio" action="actualizatabla.php" method="post">
+					<h3 class="text-success text-center">Agregar información profesional</h3>
+					<div class="sesion_formulario">
+						<label class="label2">Estudio</label>
+						<input class="input" type="text">
+					</div>	
+					<div class="sesion_formulario">
+						<input type="hidden" name="tabla" value="agregarEstudio">
+						<?php echo"<input type='hidden' name='user' value='$user'>";?>
+						<button type="submit"  class="agregar_estudio boton">Agregar</button>
+						<button type="submit"  class="cancelar_estudio boton">Cancelar</button>
+					</div>
+				</form>	
 			</div>
 			<div class="cuadros profesional">
 				<p class="datos">Carrera: <?php echo " $carrera"?></p>
