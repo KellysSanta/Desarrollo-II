@@ -130,6 +130,55 @@ break;
 
 /***********************************************************************Eventos****************************************************************************/ 
 
+case "ocultarNotEvento":
+$user=$_POST["user"];
+$idEvent=$_POST["idEvento"];
+$mensaje=$_POST["notificacionE"];
+$oculto=$_POST["oculto"];
+$posponer=$_POST["posponer"];
+$sql_query="UPDATE Notificacion_Evento set oculto='true', posponer='false' where id_evento='$idEvent' and usuario='$user' and mensaje_enviado='$mensaje' and oculto='$oculto' and posponer='$posponer';"
+$consulta=pg_query($sql_query);
+break;
+
+case "posponerNotEvento":
+$user=$_POST["user"];
+$idEvent=$_POST["idEvento"];
+$mensaje=$_POST["notificacionE"];
+$oculto=$_POST["oculto"];
+$posponer=$_POST["posponer"];
+$sql_query="UPDATE Notificacion_Evento set oculto='false', posponer='true' where id_evento='$idEvent' and usuario='$user' and mensaje_enviado='$mensaje' and oculto='$oculto' and posponer='$posponer';"
+$consulta=pg_query($sql_query);
+break;
+
+case "eliminarNotEvento":
+$user=$_POST["user"];
+$idEvent=$_POST["idEvento"];
+$mensaje=$_POST["notificacionE"];
+$oculto=$_POST["oculto"];
+$posponer=$_POST["posponer"];
+$sql_query="UPDATE Notificacion_Evento set estado='false' where id_evento='$idEvent' and usuario='$user' and mensaje_enviado='$mensaje' and oculto='$oculto' and posponer='$posponer';"
+$consulta=pg_query($sql_query);
+break;
+
+case "dejarOcultarNotEvento":
+$user=$_POST["user"];
+$idEvent=$_POST["idEvento"];
+$mensaje=$_POST["notificacionE"];
+$oculto=$_POST["oculto"];
+$posponer=$_POST["posponer"];
+$sql_query="UPDATE Notificacion_Evento set oculto='false' where id_evento='$idEvent' and usuario='$user' and mensaje_enviado='$mensaje' and oculto='$oculto' and posponer='$posponer';"
+$consulta=pg_query($sql_query);
+break;
+
+case "dejarPosponerNotEvento":
+$user=$_POST["user"];
+$idEvent=$_POST["idEvento"];
+$mensaje=$_POST["notificacionE"];
+$oculto=$_POST["oculto"];
+$posponer=$_POST["posponer"];
+$sql_query="UPDATE Notificacion_Evento set posponer='false' where id_evento='$idEvent' and usuario='$user' and mensaje_enviado='$mensaje' and oculto='$oculto' and posponer='$posponer';"
+$consulta=pg_query($sql_query);
+break;
 
 /***********************************************************************Grupos****************************************************************************/ 
 
@@ -143,6 +192,55 @@ $consulta= pg_query($sql_query);
 agregarInvitadosGrupo($invitados, $user, $nombre);
 break;
 
+case "ocultarNotGrupo":
+$user=$_POST["user"];
+$nombreG=$_POST["nombreGrupo"];
+$mensaje=$_POST["notificacionG"];
+$oculto=$_POST["oculto"];
+$posponer=$_POST["posponer"];
+$sql_query="UPDATE Notificacion_Grupo set oculto='true', posponer='false' where grupo='$nombreG' and usuario='$user' and mensaje_enviado='$mensaje' and oculto='$oculto' and posponer='$posponer';"
+$consulta=pg_query($sql_query);
+break;
+
+case "posponerNotGrupo":
+$user=$_POST["user"];
+$nombreG=$_POST["nombreGrupo"];
+$mensaje=$_POST["notificacionG"];
+$oculto=$_POST["oculto"];
+$posponer=$_POST["posponer"];
+$sql_query="UPDATE Notificacion_Grupo set oculto='false', posponer='true' where grupo='$nombreG' and usuario='$user' and mensaje_enviado='$mensaje' and oculto='$oculto' and posponer='$posponer';"
+$consulta=pg_query($sql_query);
+break;
+
+case "eliminarNotGrupo":
+$user=$_POST["user"];
+$nombreG=$_POST["nombreGrupo"];
+$mensaje=$_POST["notificacionG"];
+$oculto=$_POST["oculto"];
+$posponer=$_POST["posponer"];
+$sql_query="UPDATE Notificacion_Grupo set estado='false' where grupo='$nombreG' and usuario='$user' and mensaje_enviado='$mensaje' and oculto='$oculto' and posponer='$posponer';"
+$consulta=pg_query($sql_query);
+break;
+
+case "dejarOcultarNotGrupo":
+$user=$_POST["user"];
+$nombreG=$_POST["nombreGrupo"];
+$mensaje=$_POST["notificacionG"];
+$oculto=$_POST["oculto"];
+$posponer=$_POST["posponer"];
+$sql_query="UPDATE Notificacion_Grupo set oculto='false' where grupo='$nombreG' and usuario='$user' and mensaje_enviado='$mensaje' and oculto='$oculto' and posponer='$posponer';"
+$consulta=pg_query($sql_query);
+break;
+
+case "dejarPosponerNotGrupo":
+$user=$_POST["user"];
+$nombreG=$_POST["nombreGrupo"];
+$mensaje=$_POST["notificacionG"];
+$oculto=$_POST["oculto"];
+$posponer=$_POST["posponer"];
+$sql_query="UPDATE Notificacion_Grupo set posponer='false' where grupo='$nombreG' and usuario='$user' and mensaje_enviado='$mensaje' and oculto='$oculto' and posponer='$posponer';"
+$consulta=pg_query($sql_query);
+break;
 
 /***********************************************************************Mensajes****************************************************************************/ 
 
