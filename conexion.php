@@ -1,8 +1,8 @@
 <?php //Creamos las variables de conexion
 $server = "localhost";
-$db_name = "Redsocialin";
+$db_name = "Redsocialid";
 $log = "postgres";
-$pass = "jhon07";
+$pass = "91012206912ksg";
 $port = "5432";
 $cadena_con= "host=$server port=$port dbname=$db_name user=$log password=$pass";
 
@@ -250,7 +250,7 @@ $consulta = pg_query($sql_query);
 								</div>		
 								<div class='sesion_formulario'>
 										<label class='label2'>Notificacion</label>
-										<input  type='text' OnFocus='this.blur()' name='notificacionE' value='".$fila[3]."'>
+										<textarea type='text' OnFocus='this.blur()' name='mensaje' value='".$fila[3]."'>".$fila[3]."</textarea>
 								</div>	
 								
 								<div class='sesion_formulario'>
@@ -296,7 +296,7 @@ $consulta = pg_query($sql_query);
 								</div>		
 								<div class='sesion_formulario'>
 										<label class='label2'>Notificacion</label>
-										<input  type='text' OnFocus='this.blur()' name='notificacionE' value='".$fila[3]."'>
+										<textarea type='text' OnFocus='this.blur()' name='mensaje' value='".$fila[3]."'>".$fila[3]."</textarea>
 								</div>	
 								
 								<div class='sesion_formulario'>
@@ -340,7 +340,7 @@ $consulta = pg_query($sql_query);
 								</div>		
 								<div class='sesion_formulario'>
 										<label class='label2'>Notificacion</label>
-										<input  type='text' OnFocus='this.blur()' name='notificacionE' value='".$fila[3]."'>
+										<textarea type='text' OnFocus='this.blur()' name='mensaje' value='".$fila[3]."'>".$fila[3]."</textarea>
 								</div>	
 								
 								<div class='sesion_formulario'>
@@ -391,7 +391,7 @@ $consulta = pg_query($sql_query);
 								</div>		
 								<div class='sesion_formulario'>
 										<label class='label2'>Notificacion</label>
-										<input  type='text' OnFocus='this.blur()' name='notificacionG' value='".$fila[3]."'>
+										<textarea type='text' OnFocus='this.blur()' name='mensaje' value='".$fila[3]."'>".$fila[3]."</textarea>
 								</div>	
 								
 								<div class='sesion_formulario'>
@@ -418,7 +418,7 @@ $consulta = pg_query($sql_query);
 <?php 
 function notificacionGruposOcultos($usuario){
 
-$sql_query = "SELECT grupo, mensaje from Notificacion_Grupo where usuario='$usuario' and oculto='true' and posponer='false' and estado='true'; ";
+$sql_query = "SELECT * from Notificacion_Grupo where usuario='$usuario' and oculto='true' and posponer='false' and estado='true'; ";
 $consulta = pg_query($sql_query);
 
 
@@ -432,7 +432,7 @@ $consulta = pg_query($sql_query);
 								</div>		
 								<div class='sesion_formulario'>
 										<label class='label2'>Notificacion</label>
-										<input  type='text' OnFocus='this.blur()' name='notificacionG' value='".$fila[1]."'>
+										<textarea type='text' OnFocus='this.blur()' name='mensaje' value='".$fila[3]."'>".$fila[3]."</textarea>
 								</div>	
 								
 								<div class='sesion_formulario'>
@@ -457,7 +457,7 @@ $consulta = pg_query($sql_query);
 <?php 
 function notificacionGruposPospuestos($usuario){
 
-$sql_query = "SELECT grupo, mensaje from Notificacion_Grupo where usuario='$usuario' and oculto='false' and posponer='true' and estado='true'; ";
+$sql_query = "SELECT * from Notificacion_Grupo where usuario='$usuario' and oculto='false' and posponer='true' and estado='true'; ";
 $consulta = pg_query($sql_query);
 
 		while($fila=pg_fetch_row($consulta)){
@@ -470,7 +470,7 @@ $consulta = pg_query($sql_query);
 								</div>		
 								<div class='sesion_formulario'>
 										<label class='label2'>Notificacion</label>
-										<input  type='text' OnFocus='this.blur()' name='notificacionG' value='".$fila[1]."'>
+										<textarea type='text' OnFocus='this.blur()' name='mensaje' value='".$fila[3]."'>".$fila[3]."</textarea>
 								</div>	
 								
 								<div class='sesion_formulario'>
@@ -546,7 +546,7 @@ $consulta = pg_query($sql_query);
 						</div>			
 						<div class='sesion_formulario'>
 								<label class='label2'>Mensaje</label>
-								<textarea  type='text' OnFocus='this.blur()' name='mensaje' value='".$fila[3]."'></textarea>
+								<textarea type='text' OnFocus='this.blur()' name='mensaje' value='".$fila[3]."'>".$fila[3]."</textarea>
 						</div>
 						<div class='sesion_formulario'>
 								<input type='hidden' id='tablaMa' name='tabla' value='ocultarMensaje'> 
@@ -580,7 +580,7 @@ $consulta = pg_query($sql_query);
 						</div>			
 						<div class='sesion_formulario'>
 								<label class='label2'>Mensaje</label>
-								<textarea  type='text' OnFocus='this.blur()' name='mensaje' value='".$fila[3]."'></textarea>
+								<textarea type='text' OnFocus='this.blur()' name='mensaje' value='".$fila[3]."'>".$fila[3]."</textarea>
 						</div>
 						<div class='sesion_formulario'>
 								<input type='hidden' name='tablaMb' value='dejarPosponerMensaje'>
@@ -612,7 +612,7 @@ $consulta = pg_query($sql_query);
 						</div>			
 						<div class='sesion_formulario'>
 								<label class='label2'>Mensaje</label>
-								<textarea  type='text' OnFocus='this.blur()' name='mensaje' value='".$fila[3]."'></textarea>
+								<textarea type='text' OnFocus='this.blur()' name='mensaje' value='".$fila[3]."'>".$fila[3]."</textarea>
 						</div>
 						<div class='sesion_formulario'>
 								<input type='hidden' name='tablaMc' value='dejarOcultarMensaje'> 						
