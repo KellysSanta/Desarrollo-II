@@ -76,7 +76,7 @@ function consultaActividad($user, $fecha){
 						<form name='gestionActividad' action='actualizatabla.php' method='post'>
 							<div class='sesion_formulario'>
 								<label class='label2'>Nombre:</label>
-								<input class='input'  type='text' name ='nombreAct' value='$fila[2]'>
+								<input class='input'  type='text' name ='nombreAct' value='$fila[2]' maxlength='100'>
 							</div>
 							<div class='sesion_formulario'>
 								<label class='label2'>Fecha:</label>
@@ -84,11 +84,11 @@ function consultaActividad($user, $fecha){
 							</div>
 							<div class='sesion_formulario'>
 								<label class='label'>Lugar:</label>
-								<input class='input' type='text' name='lugarcAct' value = '$fila[4]'>
+								<input class='input' type='text' name='lugarcAct' value = '$fila[4]' maxlength='100'>
 							</div>
 							<div class='sesion_formulario'>
 								<label class='label2'>Descripción:</label>
-								<input class='input' type='text' name='descAct' value = '$fila[5]'>
+								<input class='input' type='text' name='descAct' value = '$fila[5]' maxlength='100'>
 							</div>
 							<div class='sesion_formulario'>
 								<input type='hidden' id='tablae' name='tabla' value='eliminaActividad'>
