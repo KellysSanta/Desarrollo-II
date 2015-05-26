@@ -116,7 +116,7 @@ if (pg_num_rows($arregloresultante) == 1){
 				<form name="actualizarinfo" action="actualizatabla.php" method="post" >
 					<div class="sesion_formulario">
 						<label class="label2">Nombre(s)</label>
-						<input class="input" type="text" id="nom" name="nom">
+						<input class="input" type="text" id="nom" name="nom" maxlength="60" required>
 					</div>
 					<div class="sesion_formulario">
 						<label class="label2">Apellido 1</label>
@@ -154,7 +154,7 @@ if (pg_num_rows($arregloresultante) == 1){
 					</div>
 					<div class="sesion_formulario">
 						<label class="label2">E-mail</label>
-						<input class="input" type="email" id="mail" name="mail">
+						<input class="input" type="email" id="mail" name="mail" maxlength="70">
 					</div>
 					<div class="sesion_formulario">
 						<input type="hidden" name="tabla" value="datospersonales">
@@ -184,7 +184,7 @@ if (pg_num_rows($arregloresultante) == 1){
 					<h3 class="text-success text-center">Agregar información profesional</h3>
 					<div class="sesion_formulario">
 						<label class="label2">Estudio</label>
-						<input class="input" type="text" name="estudioNuevo">
+						<input class="input" type="text" name="estudioNuevo" maxlength="100">
 					</div>	
 					<div class="sesion_formulario">
 						<input type="hidden" name="tabla" value="agregarEstudio">
@@ -213,7 +213,7 @@ if (pg_num_rows($arregloresultante) == 1){
 				<div class="cuadros "><h3>Agregar Contacto.</h3></div>
 				<div class="sesion_formulario">
 					<label class="label2">Nombre:</label>
-					<input class="input" type="text" id="bNombre" name="bNombre">
+					<input class="input" type="text" id="bNombre" name="bNombre" maxlength="60">
 				</div>
 				<div class="sesion_formulario">
 					<label class="label2">Universidad:</label>
@@ -245,7 +245,7 @@ if (pg_num_rows($arregloresultante) == 1){
 				<div class="cuadros"><h3>Eliminar Contacto.</h3></div>
 				<div class="sesion_formulario">
 					<label class="label2" >Nombre:</label>
-					<input class="input" id="contactoAEliminar" type="text" name="contactoAEliminar">
+					<input class="input" id="contactoAEliminar" type="text" name="contactoAEliminar" maxlength="60">
 				</div>
 				<div class="sesion_formulario">
 					<input type="hidden" name="tabla" value="eliminaContacto">
@@ -269,7 +269,7 @@ if (pg_num_rows($arregloresultante) == 1){
 					<div class="cuadros"><h3>Agregar Actividad</h3>
 						<div class="sesion_formulario">
 						 	<label class="label2">Nombre:</label>
-							<input class="input" id="nombreActividad" type="text" name="nombreActividad">
+							<input class="input" id="nombreActividad" type="text" name="nombreActividad" maxlength="100">
 						</div>
 						<h5>Fecha: Los datos de la fecha deben ser numericos</h5>
 						<div class="sesion_formulario">
@@ -278,11 +278,11 @@ if (pg_num_rows($arregloresultante) == 1){
 						</div>
 						<div class="sesion_formulario">
 							<label class="label2">Lugar:</label>
-							<input class="input" id="lugarActividad" type="text" name="lugarActividad">
+							<input class="input" id="lugarActividad" type="text" name="lugarActividad" maxlength="100">
 						</div>
 						<div class="sesion_formulario">
 							<label class="label2">Descripción:</label>
-							<input class="input" id="descricionActividad" type="text" name="descripcionActividad" >
+							<input class="input" id="descricionActividad" type="text" name="descripcionActividad" maxlength="100">
 						</div>
 						<div class="sesion_formulario"><input type="hidden" name="tabla" value="agregarActividad">
 							<?php echo"<input type='hidden' name='user' value='$user'>";?>
