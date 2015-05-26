@@ -538,11 +538,30 @@ function queryLastGroupCreate($user){
 
 <?php //Muestra cantidad msj usuario 
 function cantidadMensajes($usuario){
-$sql_query = "SELECT count(*) from mensaje where usuario_dos='$usuario' and visto='false'";
+$sql_query = "SELECT count(*) from mensaje where usuario_dos='$usuario' and visto='false' and estado='true';";
 $consulta = pg_query($sql_query);
 $cuenta=pg_fetch_row($consulta);
 $cantidad=$cuenta[0];
-return $cantidad;
+$sql_query1 = "SELECT count(*) from Notificacion_Evento where usuario='$usuario' and visto='false' and estado='true';";
+$consulta2 = pg_query($sql_query2);
+$cuenta2=pg_fetch_row($consulta2);
+$cantidad2=$cuenta2[0];
+$sql_query3 = "SELECT count(*) from Notificacion_Grupo where usuario='$usuario' and visto='false' and estado='true';";
+$consulta3 = pg_query($sql_query3);
+$cuenta3=pg_fetch_row($consulta3);
+$cantidad3=$cuenta3[0];
+return $cantidad + $cantidad2 + $cantidad3;
+}
+?>
+
+<?php 
+function cambiarVisto($usuario){
+$sql_query = "Update mensaje set visto='true' where usuario_dos='$usuario';";
+$consulta = pg_query($sql_query);
+$sql_query1 = "Update Notificacion_Evento set visto='true' where usuario_dos='$usuario';";
+$consulta1 = pg_query($sql_query1);
+$sql_query2 = "Update Notificacion_Grupo set visto='true' where usuario_dos='$usuario';";
+$consulta2 = pg_query($sql_query2);
 }
 ?>
 

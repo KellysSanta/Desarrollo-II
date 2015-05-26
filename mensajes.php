@@ -56,7 +56,7 @@ include "conexion.php";?>
 							</h1>
 
 					</div>
-					Cantidad de Mensajes Nuevos: <?php $cantidad=cantidadMensajes($usuario); echo "$cantidad"; ?>
+					Cantidad de Mensajes y Notificaciones Nuevas: <?php $cantidad=cantidadMensajes($usuario); echo "$cantidad"; ?>
 			</div>
 			
 
@@ -64,6 +64,7 @@ include "conexion.php";?>
 				<ul class="menu_principal">
 					<li>
 						<h4>Mensajes</h4>
+						<?php cambiarVisto($usuario);?>		
 					</li>
 					<li class="derecha active">
 						<a class="principal"  href="#">Enviados</a>
@@ -104,7 +105,7 @@ include "conexion.php";?>
 					<form role="form" name="enviomensajes" action="actualizatabla.php" method="post">	
 						<div class="sesion_formulario">
 								<label class="label2">Correo Destinatario:</label>
-								<input type="text" name="destino">
+								<input type="text" name="destino" placeholder="Usuarios separados por ;">
 						</div>
 						<div class="sesion_formulario">		
 								<label class="label2">Mensaje</label>
