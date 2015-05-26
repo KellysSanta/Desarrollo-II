@@ -46,5 +46,4 @@ function createGroup(){
 	nombreGrupo.val('');
 	descripcion.val('');
 
-
 }
