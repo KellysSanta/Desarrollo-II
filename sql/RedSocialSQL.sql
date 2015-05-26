@@ -171,6 +171,7 @@ CREATE TABLE Grupo (
 	nombre VARCHAR(50) NOT NULL PRIMARY KEY,
 	descripcion VARCHAR(300) NOT NULL,
 	administrador VARCHAR(20) NOT NULL,
+	fechacreacion DATE NOT NULL,
 
 CONSTRAINT admin_fk FOREIGN KEY (administrador)
 REFERENCES Usuario(login)
@@ -256,3 +257,7 @@ insert into Evento values ('7','la male','comvocatoria al tropel estudiantil', '
 INSERT INTO Invitacion_Evento VALUES ('kellys','jhon','3',true), ('kellys','casanova','3',true), ('jhon','kellys','2',true), ('jhon','casanova','2',true), ('jhon','kellys','4',false);
 INSERT INTO Invitacion_Evento  VALUES ('casanova','kellys','3',true), ('kellys','casanova','4',true), ('jhon','kellys','6',true), ('jhon','casanova','4',true), ('jhon','kellys','5',true);
 INSERT INTO Invitacion_Evento VALUES ('jhon','kellys','7',true), ('jhon','casanova','7',true), ('casanova','kellys','7',false), ('jhon','casanova','1',true), ('jhon','kellys','1',false);
+
+--adicionando grupo
+INSERT INTO Grupo VALUES ('grupo1','grupo1','jhon','11/08/2015'),
+			('grupo2','grupo2','jhon','11/04/2015');

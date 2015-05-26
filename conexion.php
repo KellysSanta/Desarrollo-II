@@ -1,8 +1,8 @@
 <?php //Creamos las variables de conexion
 $server = "localhost";
-$db_name = "Redsocialid";
+$db_name = "redsocialid";
 $log = "postgres";
-$pass = "91012206912ksg";
+$pass = "jhon07";
 $port = "5432";
 $cadena_con= "host=$server port=$port dbname=$db_name user=$log password=$pass";
 
@@ -495,6 +495,44 @@ $consulta = pg_query($sql_query);
 }
 ?>
 
+<?php
+function queryLastGroupCreate($user){
+	$sqlSentence ="select * from grupo where fechacreacion in (select max(fechacreacion) from grupo) and administrador = '$user';";
+	$consulta = pg_query($sqlSentence);
+
+	while($fila = pg_fetch_row($consulta)){
+		echo "<div class='cuadros'>
+				<h3>Ultimo Grupo creado
+				</h3>
+				<form name = 'infoGrupos'  >
+						<div class='sesion_formulario'>
+							<label class='label2'>Nombre: </label>
+							<input class='input' type='text' id = 'nombreeditGrupo".$fila[0]."' value = ".$fila[0].">
+						</div>
+						<div class='sesion_formulario'>		
+							<label class='label2'>Descripción:</label>
+							<input class='input' type='text'   id = 'descripGrup".$fila[0]."' value = ".$fila[1].">
+						</div>
+						<div class='sesion_formulario'>		
+							<label class='label2'>Lista de usuarios</label>
+							<input class='input' type='text' value = 'por hacer'>
+						</div>
+						<div class='sesion_formulario'>		
+							<label class='label2'>Mensaje</label>
+							<textarea class='cuerpo_mensaje' NAME='Texto'> 
+							</textarea>	
+						</div>
+						<div class='sesion_formulario'>							
+							<input type='hidden' id='nombreGrupo' value= ".$fila[0].">
+							<button type='button'  class='enviar_mensaje boton'>Enviar mensaje</button>
+							<button type='button'  class='editar_grupo boton' id='editar_grupo'>Editar</button>
+							<button type='button'  class='eliminar_grupo boton'>Eliminar</button>
+						</div>
+				</form>
+		   	</div>";
+	}
+}	
+?>
 
 <?php /**********************************************************Mensajes***********************************************************/ ?>
 

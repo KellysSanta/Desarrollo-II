@@ -61,7 +61,7 @@ if (pg_num_rows($arregloresultante) == 1){
 			<li class="active"><a class="principal seleccionado" href="perfil.php">Perfil</a></li>
 			<?php echo "<li class='active'><a class='principal' href='mensajes.php?usuario=$user'>Mensajes/Notificaciones</a></li>";?>
 			<li class="active"><a class="principal" href="eventos.php">Eventos</a></li>
-			<li class="active"><a class="principal" href="grupos.php">Grupos</a></li>
+			<?php echo "<li class='active'><a class='principal' href='grupos.php?user=$user'>Grupos</a></li>" ?>
 			<li class="derecha active"><a class="principal" href="logout.php">Salir</a></li>
 			<li class="derecha active"><a class="principal eliminar_p" href="#">Eliminar Perfil</a></li>
 			<li class="derecha active"><a class="principal cambia_cont" href="#">Cambiar contraseña</a></li>

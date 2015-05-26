@@ -1,3 +1,7 @@
+<?php
+include "conexion.php";
+$user = $_REQUEST["user"];
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -27,7 +31,6 @@
 </head>
 
 <body>
-
 
 <div class="container">
 
@@ -71,20 +74,18 @@
 					<form role="form" name='crearGrupo' action='actualizatabla.php' method='post'>	
 						<div class="sesion_formulario">
 								<label class="label2">Nombre</label>
-								<input class="input" type="text" name="nombreGrupo">
+								<input class="input" type="text" name="nombreGrupo" id= 'nomGroupCreate'>
 						</div>
 						<div class="sesion_formulario">		
 								<label class="label2">Descripción</label>
-								<input class="input" type="text" name="descGrupo">
+								<input class="input" type="text" name="descripGroupCreate" id = 'descripGroupCreate'>
 					    </div>
 					    <div class="sesion_formulario">		
 								<label class="label2">Invitados</label>
 								<input class="input2" type="text" name="invitados">
 					    </div>
 						<div class="sesion_formulario">	
-								<input type='hidden' name='tabla' value='creaGrupo'>
-								<input type='hidden' name='user' value='$user'>
-								<button type="submit"  class=" boton">Crear</button>
+								<button type="button" id= 'btnCreate'  class=" boton">Crear</button>
 						</div>
 				    </form>
 				</div>			
@@ -97,7 +98,7 @@
 							<h4>Consultar Grupos Creados</h4> 
 						</li>
 						<li class="derecha active">
-							<a class="principal" id="ver_gru_creado" href="#">Ver todos</a>
+							<a class='principal' id='ver_gru_creado' href='#'>Ver todos</a>
 						</li>
 					</ul>
 			</nav>
@@ -106,42 +107,13 @@
 					<h3>Grupos Creados
 					</h3>
 					<br>
-					<div class="sesion_formulario">
-						<label class="label2">Nombre</label>
+					<div class= "cuadros" id="cadaGrupo">
+						
 					</div>
-					<div class="sesion_formulario">		
-						<label class="label2">Descripción</label>
-					</div>
-					<div class="sesion_formulario">		
-						<label class="label2">Lista de usuarios</label>
-					</div>
-					<div class="sesion_formulario">		
-						<label class="label2">Mensaje</label>
-						<textarea class="cuerpo_mensaje" NAME="Texto"> 
-						</textarea>	
-					</div>
-					<div class="sesion_formulario">
-							<button type="submit"  class="enviar_mensaje boton">Enviar mensaje</button>
-							<button type="submit"  class="editar_grupo boton">Editar</button>
-							<button type="submit"  class="eliminar_grupo boton">Eliminar</button>
-					</div>
+
 			</div>
 		
-			<div class="cuadros">
-				<h3>Ultimo Grupo creado
-				</h3>
-				<br>
-
-					<div class="sesion_formulario">
-						<label class="label2">Nombre</label>
-					</div>
-					<div class="sesion_formulario">		
-						<label class="label2">Descripción</label>
-				    </div>
-				    <div class="sesion_formulario">		
-						<label class="label2">Invitados</label>
-				    </div>
-		   </div>
+			<?php queryLastGroupCreate($user)?>
 
 				<nav>
 					<ul class="menu_principal">
@@ -233,9 +205,10 @@
 						</div>
 				</div>
 		</div>
-
+		<input type="hidden" id="user" value="<?php echo $user;?>">
 	<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
 	<script type="text/javascript" src="js/gruposscripts.js"></script>
+	<script src="grupos.js"></script>
 </body>
 </html>
 
