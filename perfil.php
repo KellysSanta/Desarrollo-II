@@ -177,27 +177,14 @@ if (pg_num_rows($arregloresultante) == 1){
 			</nav>
 			<div class="cuadros" id="profesionales">
 				<h3 class="text-success text-center">Información profesional</h3>
-				<div class="sesion_formulario">
-				<label class="label2">Carrera</label>
-					<select class="select"></select>
-			</div>	
-				<div class="sesion_formulario">
-				<button type="submit"  class="editar_carrera boton">Editar</button>
-				<button type="submit"  class="eliminar_carrera boton">Eliminar</button>
-			</div>	
-				<div class="sesion_formulario">
-				<label class="label2">Estudio</label>
-			</div>	
-				<div class="sesion_formulario">
-				<button type="submit"  class="eliminar_estudio boton">Eliminar</button>
-			</div>
+			       <?php muestraEstudios($user); ?>
 			</div>
 			<div class="cuadros" id="agregar_profesionales">
 				<form name="agregaEstudio" action="actualizatabla.php" method="post">
 					<h3 class="text-success text-center">Agregar información profesional</h3>
 					<div class="sesion_formulario">
 						<label class="label2">Estudio</label>
-						<input class="input" type="text">
+						<input class="input" type="text" name="estudioNuevo">
 					</div>	
 					<div class="sesion_formulario">
 						<input type="hidden" name="tabla" value="agregarEstudio">
@@ -209,11 +196,6 @@ if (pg_num_rows($arregloresultante) == 1){
 			</div>
 			<div class="cuadros profesional">
 				<p class="datos">Carrera: <?php echo " $carrera"?></p>
-				<p class="datos">Ultimos estudios</p>
-				<h5 class="importante"> Se muestran los tres ultimo estudios ingresados.</h5>
-				<p class="datos">Estudio 1:</p><br>
-				<p class="datos">Estudio 2:</p><br>
-				<p class="datos">Estudio 3:</p><br>
 			</div>
 		</div>
 		<div class="columna2">
@@ -273,11 +255,6 @@ if (pg_num_rows($arregloresultante) == 1){
 			</form>
 			<div class="div_agenda">
 				<img class="agenda_titulo" alt="1x18" src="img/agenda.png">
-				<h4> Actividades Proximas </h4><br>
-				<p class="datos">Actividad 1:</p><br>
-				<p class="datos">Actividad 2:</p><br>
-				<p class="datos">Actividad 3:</p><br>
-				<p class="datos">Actividad 4:</p><br><br>
 				<nav class="barra_actividad">
 					<ul class="menu_principal">
 						<li class="derecha active">

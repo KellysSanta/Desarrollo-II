@@ -76,7 +76,7 @@ function consultaActividad($user, $fecha){
 						<form name='gestionActividad' action='actualizatabla.php' method='post'>
 							<div class='sesion_formulario'>
 								<label class='label2'>Nombre:</label>
-								<input class='input'  type='text' name ='nombreAct' value='$fila[2]' OnFocus='this.blur()'>
+								<input class='input'  type='text' name ='nombreAct' value='$fila[2]'>
 							</div>
 							<div class='sesion_formulario'>
 								<label class='label2'>Fecha:</label>
@@ -84,17 +84,21 @@ function consultaActividad($user, $fecha){
 							</div>
 							<div class='sesion_formulario'>
 								<label class='label'>Lugar:</label>
-								<input class='input' type='text' name='lugarcAct' value = '$fila[4]' OnFocus='this.blur()'>
+								<input class='input' type='text' name='lugarcAct' value = '$fila[4]'>
 							</div>
 							<div class='sesion_formulario'>
 								<label class='label2'>Descripción:</label>
-								<input class='input' type='text' name='descAct' value = '$fila[5]' OnFocus='this.blur()'>
+								<input class='input' type='text' name='descAct' value = '$fila[5]'>
 							</div>
 							<div class='sesion_formulario'>
-								<input type='hidden' name='tabla' value='eliminaActividad'>
+								<input type='hidden' id='tablae' name='tabla' value='eliminaActividad'>
 								<input type='hidden' name='user' value='$user'>
-								<button type='submit' class'boton'>Editar</button>
+								<input type='hidden' name='numero' value='$fila[0]'>
 								<button type='submit' class='boton'>Eliminar</button>
+								<script>function EditaActividad(){x=document.getElementById('tablae');
+										x.value = 'editarActividad';}</script>
+								<button type='submit'  class='boton' onclick='EditaActividad'>Editar</button>
+								
 							</div>
 						</form>	
 				</div>";
@@ -300,7 +304,7 @@ $consulta = pg_query($sql_query);
 								</div>	
 								
 								<div class='sesion_formulario'>
-										<input type='hidden' name='tablaO' value='dejarOcultarNotEvento'> 						
+										<input type='hidden' id='tablaO' name='tabla' value='dejarOcultarNotEvento'> 						
 										<input type='hidden' name='user' value='$usuario'>
 										<input type='hidden' name='oculto' value=".$fila[4].">
 										<input type='hidden' name='posponer' value=".$fila[5].">
@@ -344,7 +348,7 @@ $consulta = pg_query($sql_query);
 								</div>	
 								
 								<div class='sesion_formulario'>
-										<input type='hidden' name='tablaP' value='dejarPosponerNotEvento'>
+										<input type='hidden' id='tablaP' name='tabla' value='dejarPosponerNotEvento'>
 										<input type='hidden' name='user' value='$usuario'>
 										<input type='hidden' name='oculto' value=".$fila[4].">
 										<input type='hidden' name='posponer' value=".$fila[5].">
@@ -436,7 +440,7 @@ $consulta = pg_query($sql_query);
 								</div>	
 								
 								<div class='sesion_formulario'>
-										<input type='hidden' name='tablaGb' value='dejarOcultarNotGrupo'> 						
+										<input type='hidden' id='tablaGb' name='tabla' value='dejarOcultarNotGrupo'> 						
 										<input type='hidden' name='user' value='$usuario'>
 										<input type='hidden' name='oculto' value=".$fila[4].">
 										<input type='hidden' name='posponer' value=".$fila[5].">
@@ -474,7 +478,7 @@ $consulta = pg_query($sql_query);
 								</div>	
 								
 								<div class='sesion_formulario'>
-										<input type='hidden' name='tablaGc' value='dejarPosponerNotGrupo'>
+										<input type='hidden' id='tablaGc' name='tabla' value='dejarPosponerNotGrupo'>
 										<input type='hidden' name='user' value='$usuario'>
 										<input type='hidden' name='oculto' value=".$fila[4].">
 										<input type='hidden' name='posponer' value=".$fila[5].">
@@ -583,7 +587,7 @@ $consulta = pg_query($sql_query);
 								<textarea type='text' OnFocus='this.blur()' name='mensaje' value='".$fila[3]."'>".$fila[3]."</textarea>
 						</div>
 						<div class='sesion_formulario'>
-								<input type='hidden' name='tablaMb' value='dejarPosponerMensaje'>
+								<input type='hidden' id='tablaMb' name='tabla' value='dejarPosponerMensaje'>
 								<input type='hidden' name='user' value='$usuario'>
 								<input type='hidden' name='oculto' value=".$fila[4].">
 								<input type='hidden' name='posponer' value=".$fila[5].">
@@ -615,14 +619,14 @@ $consulta = pg_query($sql_query);
 								<textarea type='text' OnFocus='this.blur()' name='mensaje' value='".$fila[3]."'>".$fila[3]."</textarea>
 						</div>
 						<div class='sesion_formulario'>
-								<input type='hidden' name='tablaMc' value='dejarOcultarMensaje'> 						
-										<input type='hidden' name='user' value='$usuario'>
-										<input type='hidden' name='oculto' value=".$fila[4].">
-										<input type='hidden' name='posponer' value=".$fila[5].">
-										<button type='submit'  class='boton'>Dejar de Ocultar</button>
-										<script>function eliminarMensajeO(){x=document.getElementById('tablaMc');
-													x.value = 'eliminarMensaje';}</script>
-										<button type='submit'  class='boton' onclick='eliminarMensajeO'>Eliminar</button>
+								<input type='hidden' id='tablaMc' name='tabla' value='dejarOcultarMensaje'> 						
+								<input type='hidden' name='user' value='$usuario'>
+								<input type='hidden' name='oculto' value=".$fila[4].">
+								<input type='hidden' name='posponer' value=".$fila[5].">
+								<button type='submit'  class='boton'>Dejar de Ocultar</button>
+								<script>function eliminarMensajeO(){x=document.getElementById('tablaMc');
+											x.value = 'eliminarMensaje';}</script>
+								<button type='submit'  class='boton' onclick='eliminarMensajeO'>Eliminar</button>
 						</div>
 					</form>";
 				}
@@ -659,6 +663,38 @@ $result = pg_query($sql_queryadmin);
 return $result;}
 ?>
 
+<?php 
+function muestraEstudios($usuario){
+$sql_query = "SELECT * FROM Estudio_Usuario where usuario_id='$usuario' and estado='true';";
+$consulta = pg_query($sql_query);
+$sql_query2 = "SELECT nombre FROM Carrera where carrera_id= (SELECT carrera from Usuario where login='$usuario');";
+$consulta2 = pg_query($sql_query);
+
+	
+		while($fila2=pg_fetch_row($consulta2)){
+				echo"<form name='gestionCarrera' action='actualizatabla.php' method='post'>
+						<div class='sesion_formulario'>
+							<label class='label2'>Carrera</label>
+							<input  type='text' OnFocus='this.blur()' name='carrera' value='".$fila2[0]."'>
+						</div>	
+					</form>";
+			}
+
+		while($fila=pg_fetch_row($consulta)){
+				echo"<form name='gestionEstudios' action='actualizatabla.php' method='post'>
+						<div class='sesion_formulario'>
+							<label class='label2'>Estudio</label>
+							<input  type='text' OnFocus='this.blur()' name='estudio' value='".$fila[1]."'>
+						</div>	
+						<div class='sesion_formulario'>
+							<input type='hidden' name='tabla' value='eliminarEstudio'> 						
+							<input type='hidden' name='user' value='$usuario'>
+							<button type='submit'  class='eliminar_estudio boton'>Eliminar</button>
+						</div>
+					</form>";
+				}
+}
+?>
 
 
 

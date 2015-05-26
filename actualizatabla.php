@@ -82,13 +82,18 @@ $fecha=$_POST["fechaActividad"];
 consultaActividad($user, $fecha);
 break;
 
+case "'editarActividad":
+$d1=$_POST["numero"];
+$d3=$_POST["nombreAct"];
+$d4=$_POST["lugarAct"];
+$d5=$_POST["descripcionAct"];
+$sql_query = "update Actividad set nombre = '$d3', lugar='$d4', descripcion='$d5' where num_actividad = '$d1';" ;
+$consulta= pg_query($sql_query);
+break;
+
 case "eliminaActividad":
-$user=$_POST["user"];
-$nombre=$_POST["nombreAct"];
-$fecha=$_POST["fechaAct"];
-$lugar=$_POST["lugarAct"];
-$descripcion=$_POST["descAct"];
-$sql_query="Delete from Usuario_Agenda where usuario='$user' and nombre='$nombre' and fecha='$fecha' and lugar='$lugar' and descripcion='$descripcion';";
+$numero=$_POST["numero"];
+$sql_query="Delete from Usuario_Agenda where numero=$numero;";
 $consulta= pg_query($sql_query);
 break;
 
@@ -352,7 +357,19 @@ $consulta = pg_query($sql_query);}
 header('Location: http://localhost/Desarrollo-II/index.php');
 break;
 
+case "agregarEstudio":
+$d1=$_POST["user"];
+$d2=$_POST["estudioNuevo"];
+$sql_query="Insert into Estudio_Usuario values('$d1', '$d2', 'true');";
+$consulta= pg_query($sql_query);
+break;
 
+case "eliminarEstudio":
+$d1=$_POST["user"];
+$d2=$_POST["estudio"];
+$sql_query="Update Estudio_Usuario set estado='false' where usuario_id='$d1' and estudio='$d2';";
+$consulta= pg_query($sql_query);
+break;
 
 
 case "eliminaPerfil":
