@@ -167,7 +167,7 @@ function buscarContactoNombre($nombreU, $universidadU, $log){
 
 <?php
 function buscarContactoEliminar($nombreU, $log){	
-		$sql_query = "Select nombre, login from Usuario where nombre LIKE '%$nombreU%' and login IN (select usuario_dos from contacto where usuario_uno='$log');";
+		$sql_query = "Select nombre, login from Usuario where nombre LIKE '%$nombreU%' and login IN (select usuario_dos from contacto where usuario_uno='$log') or login IN (select usuario_uno from contacto where usuario_dos='$log');";/*Puede ser usuario uno*/
 		$consulta= pg_query($sql_query);
 		while($fila=pg_fetch_row($consulta))
 			{

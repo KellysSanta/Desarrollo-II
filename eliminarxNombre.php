@@ -22,7 +22,7 @@
   <link rel="shortcut icon" href="img/rs.png">
   <?php 
   include "conexion.php";
-  $usuario = $_POST["user"];
+ $usuario = $_POST["user"];
  $nombre = $_POST["contactoAEliminar"];
  ?>	
 </head>
