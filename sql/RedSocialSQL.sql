@@ -92,7 +92,7 @@ CREATE TABLE Mensaje (
 	estado boolean NOT NULL,
 	visto boolean NOT NULL,
 
-	CONSTRAINT mensaje_pk PRIMARY KEY (usuario_uno, usuario_dos, fecha),
+	CONSTRAINT mensaje_pk PRIMARY KEY (usuario_uno, usuario_dos, fecha, mensaje_enviado),
 	CONSTRAINT usuario_uno_fk FOREIGN KEY (usuario_uno)
 	REFERENCES Usuario (login),
 	CONSTRAINT usuario_dos_fk FOREIGN KEY (usuario_dos)
@@ -143,7 +143,7 @@ CREATE TABLE Notificacion_Evento (
 	estado boolean NOT NULL,
 	visto boolean NOT NULL,
 
-	CONSTRAINT noti_evento_pk PRIMARY KEY (id_evento, usuario, fecha),
+	CONSTRAINT noti_evento_pk PRIMARY KEY (id_evento, usuario, fecha, mensaje_enviado),
 	CONSTRAINT evento_fk FOREIGN KEY (id_evento)
 	REFERENCES Evento (id_evento),
 	CONSTRAINT usuario_fk FOREIGN KEY (usuario)
@@ -207,7 +207,7 @@ CREATE TABLE Notificacion_Grupo (
 	posponer boolean NOT NULL,
 	estado boolean NOT NULL,
 	visto boolean NOT NULL,
-	CONSTRAINT noti_grupo_pk PRIMARY KEY (grupo, usuario, fecha),
+	CONSTRAINT noti_grupo_pk PRIMARY KEY (grupo, usuario, fecha, mensaje_enviado),
 	CONSTRAINT grupo_fk FOREIGN KEY (grupo)
 	REFERENCES Grupo (nombre),
 	CONSTRAINT usuario_fk FOREIGN KEY (usuario)
