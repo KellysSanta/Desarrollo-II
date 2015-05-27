@@ -159,6 +159,7 @@ if (pg_num_rows($arregloresultante) == 1){
 					<div class="sesion_formulario">
 						<input type="hidden" name="tabla" value="datospersonales">
 						<?php echo"<input type='hidden' name='user' value='$user'>";?>
+						<?php echo"<input type='hidden' name='pass' value='$password'>";?>
 						<button type="submit"  class="guardar_personal boton">Guardar</button>
 						<button type="submit"  class="cancelar_personal boton">Cancelar</button>
 					</div>
@@ -225,7 +226,8 @@ if (pg_num_rows($arregloresultante) == 1){
 
 
 				<div class="sesion_formulario">
-				<?phP echo"<input type='hidden' name='user' value='$user'>";?>	
+				<?phP echo"<input type='hidden' name='user' value='$user'>";?>
+				<?phP echo"<input type='hidden' name='password' value='$password'>";?>	
 						<input type='hidden' name='tabla' value='buscaUsuario'> 
 						<button type="submit" class="boton">Buscar</button>
 					
@@ -237,7 +239,7 @@ if (pg_num_rows($arregloresultante) == 1){
 			<div class="cuadros"><h3>Solicitudes de amistad.</h3>
 				<ul class="lista">
 					<li class="solicitud">
-						<a class="principal" href="#">Ver solicitudes</a>
+						<?php echo "<a class='principal'  href='solicitudes.php?user=$user&password=$password'>Ver solicitudes</a>"?>
 					</li>
 				</ul>
 			</div>					
@@ -248,8 +250,9 @@ if (pg_num_rows($arregloresultante) == 1){
 					<input class="input" id="contactoAEliminar" type="text" name="contactoAEliminar" maxlength="60">
 				</div>
 				<div class="sesion_formulario">
-					<input type="hidden" name="tabla" value="eliminaContacto">
+					
 					<?php echo"<input type='hidden' name='user' value='$user'>";?>
+					<?php echo"<input type='hidden' name='pass' value='$password'>";?>
 					<button type="submit" class="boton">Eliminar</button>
 				</div>
 			</form>
@@ -271,7 +274,7 @@ if (pg_num_rows($arregloresultante) == 1){
 						 	<label class="label2">Nombre:</label>
 							<input class="input" id="nombreActividad" type="text" name="nombreActividad" maxlength="100">
 						</div>
-						<h5>Fecha: Los datos de la fecha deben ser numericos</h5>
+						
 						<div class="sesion_formulario">
 							<label class="label2">fecha:</label>
 							<input class="input" id="fechaActividad1" type="text" name="fechaActividad1"   OnFocus="this.blur()" >
@@ -284,8 +287,11 @@ if (pg_num_rows($arregloresultante) == 1){
 							<label class="label2">Descripción:</label>
 							<input class="input" id="descricionActividad" type="text" name="descripcionActividad" maxlength="100">
 						</div>
-						<div class="sesion_formulario"><input type="hidden" name="tabla" value="agregarActividad">
+						<div class="sesion_formulario">
+						<input type="hidden" name="tabla" value="agregarActividad">
 							<?php echo"<input type='hidden' name='user' value='$user'>";?>
+							<?php echo"<input type='hidden' name='pass' value='$password'>";?>
+							
 							<button type="submit" class="boton">Agregar</button>
 							<button type="submit" class="boton" id="cancelar_agregar">Cancelar</button>
 						</div>

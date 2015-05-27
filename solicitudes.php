@@ -22,7 +22,11 @@
   <!-- Fav and touch icons -->
   <link rel="shortcut icon" href="img/rs.png">
   
-	
+  <?php 
+   include "conexion.php";
+   $usuario = $_REQUEST["user"];
+   $password=$_REQUEST["password"];
+   ?>	
 </head>
 
 <body>
@@ -56,16 +60,7 @@
 
 			<div class="cuadros">
 
-					<div class="sesion_formulario">
-							<label class="label2">Usuario</label>
-					</div>		
-					<div class="sesion_formulario">
-							<label class="label2">Universidad</label>
-					</div>	
-					<div class="sesion_formulario">
-							<button type="submit"  class="agregar_amigo boton">Agregar</button>
-							<button type="submit"  class="cancelar_amigo boton">Eliminar</button>
-					</div>
+					<?php consultarSolicitud($usuario);?>
 			</div>
 		</div>
 			

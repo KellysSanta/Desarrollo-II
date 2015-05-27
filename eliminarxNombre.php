@@ -22,8 +22,9 @@
   <link rel="shortcut icon" href="img/rs.png">
   <?php 
   include "conexion.php";
- $usuario = $_POST["user"];
- $nombre = $_POST["contactoAEliminar"];
+ $usuario = $_REQUEST["user"];
+ $pass = $_REQUEST["pass"];
+ $nombre = $_REQUEST["contactoAEliminar"];
  ?>	
 </head>
 
@@ -49,7 +50,7 @@
 						</div>
 						<div class="nombre">
 								<h1>
-									<small>Busqueda de Usuarios</small>			
+									<small>Eliminar Usuarios</small>			
 								</h1>
 
 						</div>

@@ -218,7 +218,7 @@ CREATE TABLE Notificacion_Grupo (
 
 ---las siguientes inserciones a excepcion del administrador son prouebas. Se conservaran mientras se terminan de implemantar el resto de funcionalidades.
 --agregando ususario administrador ala base de datos
-insert into usuario values('Root1', 'camilog777@hotmail.es','Root1','Camilo Andres', 'Gonzalez','Rodriguez','Masculino','1','1151953353','CC','1', true);
+insert into usuario values('Root1', 'camilog777@hotmail.es','Root1','CAMILO', 'Gonzalez','Rodriguez','Masculino','1','1151953353','CC','1', true);
 insert into administrador values('Root1');
 
 --adicionando  universidades prueba
@@ -238,10 +238,10 @@ REFERENCES Carrera (carrera_id);
 
 
 --adicionando usuarios prueba
-insert into usuario values('jhon', 'jhon@hotmail.es','jhon','John freidy', 'Lourido','Astudillo','Masculino','1','1151953353','CC','1', true);	
-insert into usuario values('kellys', 'jhon@hotmail.es','kellys','kellys', 'Santa','Castañeda','Femenino','1','1151953353','CC','1', true);
-insert into usuario values('yaya', 'kellys@hotmail.es','kellys','kellys', 'Santa','Castañeda','Femenino','1','1151953353','CC','1', true);
-insert into usuario values('casanova', 'casanova@hotmail.es','casanova','stefa', 'casanova','Castañeda','Femenino','3','1151953353','CC','1', true);
+insert into usuario values('jhon', 'jhon@hotmail.es','jhon','JOHN FREIDY', 'Lourido','Astudillo','Masculino','1','1151953353','CC','1', true);	
+insert into usuario values('kellys', 'jhon@hotmail.es','kellys','KELLYS', 'Santa','Castañeda','Femenino','1','1151953353','CC','1', true);
+insert into usuario values('yaya', 'kellys@hotmail.es','kellys','KELLYS', 'Santa','Castañeda','Femenino','1','1151953353','CC','1', true);
+insert into usuario values('casanova', 'casanova@hotmail.es','casanova','STEFA', 'casanova','Castañeda','Femenino','3','1151953353','CC','1', true);
 
 --adicionando eventos
 insert into Evento values ('1','concierto babasonicos','rock, indie, electronica', '17-03-20015', 'cali', true, 'jhon');

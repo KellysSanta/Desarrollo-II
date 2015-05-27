@@ -1,9 +1,9 @@
 <?php //Creamos las variables de conexion
 $server = "localhost";
-$db_name = "redsocialid";
+$db_name = "Redsocialin";
 $log = "postgres";
-$pass = "jhon07";
-$port = "5432";
+$pass = "Admin";
+$port = "5433";
 $cadena_con= "host=$server port=$port dbname=$db_name user=$log password=$pass";
 
 //Conectamos con la cadena de conexion
@@ -83,8 +83,8 @@ function consultaActividad($user, $fecha){
 								<input class='input'  type='text' name='fechaAct' value = '$fila[3]' OnFocus='this.blur()'>
 							</div>
 							<div class='sesion_formulario'>
-								<label class='label'>Lugar:</label>
-								<input class='input' type='text' name='lugarcAct' value = '$fila[4]' maxlength='100'>
+								<label class='label2'>Lugar:</label>
+								<input class='input' type='text' name='lugarAct' value = '$fila[4]' maxlength='100'>
 							</div>
 							<div class='sesion_formulario'>
 								<label class='label2'>Descripción:</label>
@@ -97,7 +97,7 @@ function consultaActividad($user, $fecha){
 								<button type='submit' class='boton'>Eliminar</button>
 								<script>function EditaActividad(){x=document.getElementById('tablae');
 										x.value = 'editarActividad';}</script>
-								<button type='submit'  class='boton' onclick='EditaActividad'>Editar</button>
+								<button type='submit'  class='boton' onclick='EditaActividad()'>Editar</button>
 								
 							</div>
 						</form>	
@@ -120,10 +120,10 @@ function consultaActividad($user, $fecha){
 <?php
 function verificaBusquedaNombre($nombreU, $universidad){
 	if($universidadU == "No conozco la universidad"){
-		$sql_query = "Select nombre, login from Usuario where nombre LIKE '%$nombreU%';";
+		$sql_query = "Select nombre, login from Usuario where nombre LIKE upper('%$nombreU%') and login not in (Select usuario_uno from contacto where usuario_uno=login) and login not in (Select usuario_dos from contacto where usuario_dos=login) and estado=true;";
 		$result= pg_query($sql_query);
 	}else{
-		$sql_query = "select nombre, login from usuario inner join (Select universidad_id from  universidad where nombre ='$universidadU') as A on usuario.universidad = A.id where nombre LIKE upper('%$nombreU%');";
+		$sql_query = "select nombre, login from usuario inner join (Select universidad_id from  universidad where nombre ='$universidadU') as A on usuario.universidad = A.id where nombre LIKE upper('%$nombreU%')  and login not in (Select usuario_uno from contacto where usuario_uno=login) and login not in (Select usuario_dos from contacto where usuario_dos=login) and estado=true;";
 		$result= pg_query($sql_query);
 	}
 	return $result;
@@ -132,7 +132,7 @@ function verificaBusquedaNombre($nombreU, $universidad){
 <?php
 function buscarContactoNombre($nombreU, $universidadU, $log){	
 	if($universidadU ==0){
-		$sql_query = "Select nombre, login from Usuario where nombre LIKE '%$nombreU%';";
+		$sql_query = "Select nombre, login from Usuario where nombre LIKE upper('%$nombreU%');";
 		$consulta= pg_query($sql_query);
 		while($fila=pg_fetch_row($consulta))
 			{
@@ -167,7 +167,7 @@ function buscarContactoNombre($nombreU, $universidadU, $log){
 
 <?php
 function buscarContactoEliminar($nombreU, $log){	
-		$sql_query = "Select nombre, login from Usuario where nombre LIKE '%$nombreU%' and login IN (select usuario_dos from contacto where usuario_uno='$log') or login IN (select usuario_uno from contacto where usuario_dos='$log');";/*Puede ser usuario uno*/
+		$sql_query = "Select nombre, login from Usuario where nombre LIKE upper('%$nombreU%') and login IN (select usuario_dos from contacto where usuario_uno='$log') or login IN (select usuario_uno from contacto where usuario_dos='$log');";/*Puede ser usuario uno*/
 		$consulta= pg_query($sql_query);
 		while($fila=pg_fetch_row($consulta))
 			{
@@ -208,16 +208,55 @@ function consultarContactos($nombreC, $nombreU){
 }?>
 
 <?php
+function consultarSolicitud($nombreU){
+
+		$sql_query = "Select U.nombre, U.login from Usuario U inner join (Select usuario_uno, solicitud from contacto where usuario_dos='$nombreU') AS C on C.usuario_uno = U.login and C.solicitud = false ;";
+		
+		$consulta=pg_query($sql_query);
+
+		if (pg_num_rows($consulta) >= 1){
+			while($fila=pg_fetch_row($consulta)){
+					echo"<div class='cuadros'>
+						<form name='gestionSolicitud' action='actualizatabla.php' method='post'>
+							<div class='sesion_formulario'>
+								<label class='label2'>Nombre:</label>
+								<input class='input'  type='text' name ='nombreSol' value='$fila[0]' maxlength='100'>
+							</div>
+							<div class='sesion_formulario'>
+								<label class='label2'>Usuario:</label>
+								<input class='input'  type='text' name='loginSol' value = '$fila[1]' OnFocus='this.blur()'>
+							</div>
+							<div class='sesion_formulario'>
+								<input type='hidden' id='tablae' name='tabla' value='aceptarSolicitud'>
+								<input type='hidden' name='user' value='$nombreU'>
+								<button type='submit' class='boton'>Aceptar</button>
+								<script>function Eliminar(){x=document.getElementById('tablae');
+										x.value = 'eliminarSolicitud';}</script>
+								<button type='submit'  class='boton' onclick='Eliminar()'>Eliminar</button>
+							</div>
+						</form>	
+				</div>";
+			}
+		}else{
+			echo"<div class='sesion_formulario'>
+						<h3>No hay resultados</h3>
+				</div>";
+		}
+}?>
+
+<?php
 function listarContactos($nombreU){
 
-		$sql_query = "select U.nombre, Uni.nombre  from Universidad Uni inner join (select nombre, universidad from usuario inner join 
-						((select usuario_dos from contacto inner join (select login from usuario) as A on A.login = contacto.usuario_dos where contacto.usuario_uno='$nombreU')
+		$sql_query = "select  U.nombre, Uni.nombre, U.login  from Universidad Uni inner join (select nombre, universidad, login from usuario inner join 
+						((select usuario_dos from contacto inner join (select login from usuario) as A on A.login = contacto.usuario_dos where contacto.usuario_uno='$nombreU' and solicitud=true)
 						union
-						(select usuario_uno from contacto inner join (select login from usuario) as A on A.login = contacto.usuario_uno where contacto.usuario_dos='$nombreU')) as R on usuario.login = R.usuario_dos) As U on U.universidad = Uni.universidad_id;";
+						(select usuario_uno from contacto inner join (select login from usuario) as A on A.login = contacto.usuario_uno where contacto.usuario_dos='$nombreU' and solicitud=true)) as R on usuario.login = R.usuario_dos) As U on U.universidad = Uni.universidad_id;";
 		
 		$consulta=pg_query($sql_query);
 		while($fila=pg_fetch_row($consulta)){
-				echo"<div class='sesion_formulario'>
+				echo"
+					<form name='formularioeliminar' action= 'actualizatabla.php' method = 'post'>
+					<div class='sesion_formulario'>
 								<label class='label2'>Usuario</label>
 								<input  type='text' OnFocus='this.blur()' name='usuario2' value='".$fila[0]."'>
 						</div>		
@@ -226,8 +265,13 @@ function listarContactos($nombreU){
 								<input  type='text' OnFocus='this.blur()' name='usuario2' value='".$fila[1]."'>
 						</div>	
 						<div class='sesion_formulario'>
+						<input type = 'hidden' name= 'login' value = $nombreU>
+						<input type = 'hidden' name= 'contacto' value = $fila[2]>
+						<input type = 'hidden' name= 'tabla' value ='eliminarContacto'>
 								<button type='submit'  class='boton'>Eliminar</button>
-						</div>";
+						</div>
+					</form>";
+					
 		}
 }?>
 
