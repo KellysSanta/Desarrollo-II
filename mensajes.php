@@ -64,10 +64,10 @@ include "conexion.php";?>
 				<ul class="menu_principal">
 					<li>
 						<h4>Mensajes</h4>
-						<?php cambiarVisto($usuario);?>		
+							
 					</li>
 					<li class="derecha active">
-						<a class="principal"  href="#">Enviados</a>
+						<?php echo"<a class='principal'  href='mensajesEnviados.php?user=$usuario&password=$password''>Enviados</a>"?>
 					</li>
 					<li class="derecha active">
 						<a class="principal" id="ver_consultar" href="#">Recibidos</a>
@@ -158,23 +158,9 @@ include "conexion.php";?>
 					<?php notificacionEventos($usuario);?>
 			</div>
 			
-			<div class="cuadros">
-				<h3>Ultima Notificación
-				</h3>
-				<br>
-				<div class="sesion_formulario">
-					<label class="label2">Evento</label>
-				</div>
-				<div class="sesion_formulario">
-					<label class="label2">Notificación</label>
-				</div>
-		   </div>
 
+			<br>
 
-
-
-		   
-		
 				<nav>
 					<ul class="menu_principal">
 						<li>
@@ -210,17 +196,6 @@ include "conexion.php";?>
 						<?php notificacionGrupos($usuario);?>
 				</div>
 			
-				<div class="cuadros">
-					<h3>Ultima Notificación
-					</h3>
-					<br>
-					<div class="sesion_formulario">
-						<label class="label2">Grupo</label>
-					</div>
-					<div class="sesion_formulario">
-						<label class="label2">Notificación</label>
-					</div>
-				</div>
 		</div>
 
 	<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>

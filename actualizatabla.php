@@ -150,8 +150,6 @@ $sql_query="Delete from Usuario_Agenda where num_actividad=$numero;";
 $consulta= pg_query($sql_query);
 break;
 
-/***********************************************************************Mensajes****************************************************************************/ 
-
 case "nuevomensaje":
 $d1=$_POST["destino"];
 $destinos = explode(";",$d1);
@@ -164,45 +162,31 @@ foreach ($destinos as $destinatario) {
 unset($destinatario);
 break;
 
+case "eliminaMenEnviado":
+$d1=$_POST["user"];
+$d2=$_POST["usuario2"];
+$d3=$_POST["fecha"];
+$d4=$_POST["mensaje"];
+$sql_query="UPDATE Mensaje SET estado=false where usuario_uno='$d1' and usuario_dos='$d2' and fecha='$d3' and mensaje_enviado='$d4';";
+$consulta = pg_query($sql_query);
+break;
+
 case "ocultarMensaje":
 $user=$_POST["user"];
 $usuario=$_POST["usuario1"];
 $fecha=$_POST["fecha"];
 $mensaje=$_POST["mensaje"];
 $sql_query="UPDATE Mensaje set oculto=true, posponer=false where usuario_uno='$usuario' and usuario_dos='$user' and fecha='$fecha' and mensaje_enviado='$mensaje' and visto=true;";
-//$sql_query="UPDATE Mensaje set oculto=true, posponer=false where usuario_uno='$usuario1' and usuario_dos='$user' and fecha='$fecha' and mensaje_enviado='$mensaje' and oculto=$oculto and posponer=$posponer and visto=$visto;";
 $consulta=pg_query($sql_query);
 break;
-
-/*
-case "eliminaMenEnviado":
-$d1=$_POST["user"];
-$d2=$_POST["usuario2"];
-$d3=$_POST["fecha"];
-$d4=$_POST["mensaje"];
-$sql_query="UPDATE Mensaje SET estado='false' where usuario_uno='$d1' and usuario_dos='$d2' and fecha='$d3' and mensaje='$d4';";
-$consulta = pg_query($sql_query);
-break;
-
 
 
 case "posponerMensaje":
 $user=$_POST["user"];
 $usuario1=$_POST["usuario1"];
 $mensaje=$_POST["mensaje"];
-$oculto=$_POST["oculto"];
-$posponer=$_POST["posponer"];
-$sql_query="UPDATE Mensaje set oculto='false', posponer='true' where usuario_uno='$usuario1' and usuario_dos='$user' and mensaje_enviado='$mensaje' and oculto='$oculto' and posponer='$posponer';"
-$consulta=pg_query($sql_query);
-break;
-
-case "eliminarMensaje":
-$user=$_POST["user"];
-$usuario1=$_POST["usuario1"];
-$mensaje=$_POST["mensaje"];
-$oculto=$_POST["oculto"];
-$posponer=$_POST["posponer"];
-$sql_query="UPDATE Mensaje set estado='false' where usuario_uno='$usuario1' and usuario_dos='$user' and mensaje_enviado='$mensaje' and oculto='$oculto' and posponer='$posponer';"
+$fecha=$_POST["fecha"];
+$sql_query="UPDATE Mensaje set oculto=false, posponer=true, visto=false where usuario_uno='$usuario1' and usuario_dos='$user' and fecha='$fecha' and mensaje_enviado='$mensaje' and visto=true;";
 $consulta=pg_query($sql_query);
 break;
 
@@ -210,21 +194,132 @@ case "dejarOcultarMensaje":
 $user=$_POST["user"];
 $usuario1=$_POST["usuario1"];
 $mensaje=$_POST["mensaje"];
-$oculto=$_POST["oculto"];
-$posponer=$_POST["posponer"];
-$sql_query="UPDATE Mensaje set oculto='false' where usuario_uno='$usuario1' and usuario_dos='$user' and mensaje_enviado='$mensaje' and oculto='$oculto' and posponer='$posponer';"
+$fecha=$_POST["fecha"];
+$sql_query="UPDATE Mensaje set oculto=false where usuario_uno='$usuario1' and usuario_dos='$user' and fecha='$fecha' and mensaje_enviado='$mensaje' and visto=true;";
 $consulta=pg_query($sql_query);
 break;
+
 
 case "dejarPosponerMensaje":
 $user=$_POST["user"];
 $usuario1=$_POST["usuario1"];
 $mensaje=$_POST["mensaje"];
-$oculto=$_POST["oculto"];
-$posponer=$_POST["posponer"];
-$sql_query="UPDATE Mensaje set posponer='false' where usuario_uno='$usuario1' and usuario_dos='$user' and mensaje_enviado='$mensaje' and oculto='$oculto' and posponer='$posponer';"
+$fecha=$_POST["fecha"];
+$sql_query="UPDATE Mensaje set posponer=false, visto=true where usuario_uno='$usuario1' and fecha='$fecha' and usuario_dos='$user' and mensaje_enviado='$mensaje'";
 $consulta=pg_query($sql_query);
 break;
-*/
+
+case "eliminarMensaje":
+$user=$_POST["user"];
+$usuario1=$_POST["usuario1"];
+$mensaje=$_POST["mensaje"];
+$fecha=$_POST["fecha"];
+$sql_query="UPDATE Mensaje set estado='false' where usuario_uno='$usuario1' and usuario_dos='$user' and fecha='$fecha' and mensaje_enviado='$mensaje';";
+$consulta=pg_query($sql_query);
+break;
+
+/***********************************************************************Eventos****************************************************************************/ 
+
+
+case "ocultarNotEvento":
+$user=$_POST["user"];
+$idEvent=$_POST["idEvento"];
+$mensaje=$_POST["notificacionE"];
+$fecha=$_POST["fecha"];
+$sql_query="UPDATE Notificacion_Evento set oculto='true', posponer='false' where id_evento='$idEvent' and usuario='$user' and fecha='$fecha' and mensaje_enviado='$mensaje';";
+$consulta=pg_query($sql_query);
+break;
+
+case "posponerNotEvento":
+$user=$_POST["user"];
+$idEvent=$_POST["idEvento"];
+$mensaje=$_POST["notificacionE"];
+$fecha=$_POST["fecha"];
+$sql_query="UPDATE Notificacion_Evento set oculto='false', posponer='true', visto='false' where id_evento='$idEvent' and usuario='$user' and fecha='$fecha' and mensaje_enviado='$mensaje';";
+$consulta=pg_query($sql_query);
+break;
+
+case "dejarOcultarNotEvento":
+$user=$_POST["user"];
+$idEvent=$_POST["idEvento"];
+$mensaje=$_POST["notificacionE"];
+$fecha=$_POST["fecha"];
+$sql_query="UPDATE Notificacion_Evento set oculto='false' where id_evento='$idEvent' and usuario='$user' and fecha='$fecha' and mensaje_enviado='$mensaje';";
+$consulta=pg_query($sql_query);
+break;
+
+case "dejarPosponerNotEvento":
+$user=$_POST["user"];
+$idEvent=$_POST["idEvento"];
+$mensaje=$_POST["notificacionE"];
+
+$sql_query="UPDATE Notificacion_Evento set posponer='false', visto='true' where id_evento='$idEvent' and usuario='$user' and fecha='$fecha' and mensaje_enviado='$mensaje';";
+$consulta=pg_query($sql_query);
+break;
+
+case "eliminarNotEvento":
+$user=$_POST["user"];
+$idEvent=$_POST["idEvento"];
+$mensaje=$_POST["notificacionE"];
+$fecha=$_POST["fecha"];
+$sql_query="UPDATE Notificacion_Evento set estado='false' where id_evento='$idEvent' and usuario='$user' and fecha='$fecha' and mensaje_enviado='$mensaje';";
+$consulta=pg_query($sql_query);
+break;
+
+/***********************************************************************Grupos****************************************************************************/ 
+case "creaGrupo":
+$user=$_POST["user"];
+$nombre=$_POST["nombreGrupo"];
+$descripcion=$_POST["descGrupo"];
+$invitados = $_POST["invitados"];
+$sql_query="Insert into Grupo values ('$nombre', '$descripcion', '$user');";
+$consulta= pg_query($sql_query);
+agregarInvitadosGrupo($invitados, $user, $nombre);
+break;
+
+case "ocultarNotGrupo":
+$user=$_POST["user"];
+$nombreG=$_POST["nombreGrupo"];
+$mensaje=$_POST["notificacionG"];
+$fecha=$_POST["fecha"];
+$sql_query="UPDATE Notificacion_Grupo set oculto='true', posponer='false' where grupo='$nombreG' and usuario='$user' and fecha='$fecha' and mensaje_enviado='$mensaje' and visto='true';";
+$consulta=pg_query($sql_query);
+break;
+
+case "posponerNotGrupo":
+$user=$_POST["user"];
+$nombreG=$_POST["nombreGrupo"];
+$mensaje=$_POST["notificacionG"];
+$fecha=$_POST["fecha"];
+$sql_query="UPDATE Notificacion_Grupo set oculto=false, posponer=true, visto=false where grupo='$nombreG' and usuario='$user' and fecha='$fecha' and mensaje_enviado='$mensaje' and visto='true';";
+$consulta=pg_query($sql_query);
+break;
+
+case "dejarOcultarNotGrupo":
+$user=$_POST["user"];
+$nombreG=$_POST["nombreGrupo"];
+$mensaje=$_POST["notificacionG"];
+$fecha=$_POST["fecha"];
+$sql_query="UPDATE Notificacion_Grupo set oculto='false' where grupo='$nombreG' and usuario='$user' and fecha='$fecha' and mensaje_enviado='$mensaje';";
+$consulta=pg_query($sql_query);
+break;
+
+case "dejarPosponerNotGrupo":
+$user=$_POST["user"];
+$nombreG=$_POST["nombreGrupo"];
+$mensaje=$_POST["notificacionG"];
+$fecha=$_POST["fecha"];
+$sql_query="UPDATE Notificacion_Grupo set posponer=false, visto=true where grupo='$nombreG' and usuario='$user' and fecha='$fecha' and mensaje_enviado='$mensaje';";
+$consulta=pg_query($sql_query);
+break;
+
+case "eliminarNotGrupo":
+$user=$_POST["user"];
+$nombreG=$_POST["nombreGrupo"];
+$mensaje=$_POST["notificacionG"];
+$fecha=$_POST["fecha"];
+$sql_query="UPDATE Notificacion_Grupo set estado=false, visto=true where grupo='$nombreG' and usuario='$user' and fecha='$fecha' and mensaje_enviado='$mensaje';";
+$consulta=pg_query($sql_query);
+break;
 
 }?>

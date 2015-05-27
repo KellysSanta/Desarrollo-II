@@ -1,7 +1,8 @@
 <!DOCTYPE html>
-  <?php $usuario = $_POST["usuario"];
-  $fecha = $_POST["fechaActividad"];
-  include "conexion.php";?>
+<?php 
+$usuario = $_REQUEST["user"];
+$password =  $_REQUEST["password"];
+include "conexion.php";?>
 <html lang="en">
 <head>
   <meta charset="utf-8">
@@ -14,7 +15,7 @@
 	<!--link rel="stylesheet/less" href="less/responsive.less" type="text/css" /-->
 	<!--script src="js/less-1.3.3.min.js"></script-->
 	<!--append ‘#!watch’ to the browser URL, then refresh the page. -->
-	<link href="css/contactosstyle.css" rel="stylesheet">
+	<link href="css/mensajesstyle.css" rel="stylesheet">
 
   <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
   <!--[if lt IE 9]>
@@ -57,7 +58,9 @@ enviados</small>
 						</div>
 					</div>
 
+					<div class="cuadros" id="mensajes_enviados">
 						<?php mensajesEnviados($usuario);?>
+					</div>
 			</div>
 				
 		</div>

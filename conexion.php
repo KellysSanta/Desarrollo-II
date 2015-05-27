@@ -287,36 +287,37 @@ $consulta = pg_query($sql_query);
 
 			$sql_query1 = "SELECT nombre from Evento where id_evento = '".$fila[0]."';";
 			$consulta1 = pg_query($sql_query1);
-			$fila2=pg_fetch_row($consulta);
+			/*$fila2=pg_fetch_row($consulta1);*/
+			while($fila2=pg_fetch_row($consulta1)){
 				echo"
 
 						<form name='gestionNotEventos' action='actualizatabla.php' method='post'>
 								<div class='sesion_formulario'>
-										<label class='label2'>Nombre</label>
+										<label class='label2'>Evento</label>
 										<input type='hidden' name='idEvento' value='".$fila[0]."'>
 										<input  type='text' OnFocus='this.blur()' name='nombreEvento' value='".$fila2[0]."'>
 								</div>		
 								<div class='sesion_formulario'>
 										<label class='label2'>Notificacion</label>
-										<textarea type='text' OnFocus='this.blur()' name='mensaje' value='".$fila[3]."'>".$fila[3]."</textarea>
+										<textarea type='text' OnFocus='this.blur()' name='notificacionE' value='".$fila[3]."'>".$fila[3]."</textarea>
 								</div>	
 								
 								<div class='sesion_formulario'>
 										<input type='hidden' id='tablae' name='tabla' value='ocultarNotEvento'> 
 										<input type='hidden' name='user' value='$usuario'>
-										<input type='hidden' name='oculto' value=".$fila[4].">
-										<input type='hidden' name='posponer' value=".$fila[5].">
+										<input type='hidden' name='fecha' value='".$fila[2]."'>
 										<button type='submit'  class='boton'>Ocultar</button>
 										<script>function posponerEvento(){x=document.getElementById('tablae');
 													x.value = 'posponerNotEvento';}</script>
-										<button type='submit'  class='boton' onclick='posponerEvento'>Posponer</button>
+										<button type='submit'  class='boton' onclick='posponerEvento()'>Posponer</button>
 										<script>function eliminarEvento(){x=document.getElementById('tablae');
 													x.value = 'eliminarNotEvento';}</script>
-										<button type='submit'  class='boton' onclick='eliminarEvento'>Eliminar</button>
+										<button type='submit'  class='boton' onclick='eliminarEvento()'>Eliminar</button>
 								</div>
 
 						</form>
 						<h3>--------------------------------------------------------------------------</h3>";
+					}
 				}
 			
 }
@@ -325,7 +326,7 @@ $consulta = pg_query($sql_query);
 <?php 
 function notificacionEventosOcultos($usuario){
 
-$sql_query = "SELECT * from Notificacion_Evento where usuario='$usuario' and oculto='true' and posponer='false' and estado='true'; ";
+$sql_query = "SELECT * from Notificacion_Evento where usuario='$usuario' and oculto='true' and estado='true'; ";
 $consulta = pg_query($sql_query);
 
 
@@ -333,7 +334,8 @@ $consulta = pg_query($sql_query);
 
 			$sql_query1 = "SELECT nombre from Evento where id_evento = '".$fila[0]."';";
 			$consulta1 = pg_query($sql_query1);
-			$fila2=pg_fetch_row($consulta);
+			/*$fila2=pg_fetch_row($consulta1);*/
+			while($fila2=pg_fetch_row($consulta1)){
 				echo"
 
 						<form name='gestionNotEventosO' action='actualizatabla.php' method='post'>
@@ -344,22 +346,22 @@ $consulta = pg_query($sql_query);
 								</div>		
 								<div class='sesion_formulario'>
 										<label class='label2'>Notificacion</label>
-										<textarea type='text' OnFocus='this.blur()' name='mensaje' value='".$fila[3]."'>".$fila[3]."</textarea>
+										<textarea type='text' OnFocus='this.blur()' name='notificacionE' value='".$fila[3]."'>".$fila[3]."</textarea>
 								</div>	
 								
 								<div class='sesion_formulario'>
 										<input type='hidden' id='tablaO' name='tabla' value='dejarOcultarNotEvento'> 						
 										<input type='hidden' name='user' value='$usuario'>
-										<input type='hidden' name='oculto' value=".$fila[4].">
-										<input type='hidden' name='posponer' value=".$fila[5].">
+										<input type='hidden' name='fecha' value='".$fila[2]."'>
 										<button type='submit'  class='boton'>Dejar de Ocultar</button>
 										<script>function eliminarEventoO(){x=document.getElementById('tablaO');
 													x.value = 'eliminarNotEvento';}</script>
-										<button type='submit'  class='boton' onclick='eliminarEventoO'>Eliminar</button>
+										<button type='submit'  class='boton' onclick='eliminarEventoO()'>Eliminar</button>
 								</div>
 
 						</form>
 						<h3>--------------------------------------------------------------------------</h3>";
+					}
 				}
 			
 }
@@ -369,7 +371,7 @@ $consulta = pg_query($sql_query);
 <?php 
 function notificacionEventosPospuestos($usuario){
 
-$sql_query = "SELECT * from Notificacion_Evento where usuario='$usuario' and oculto='false' and posponer='true' and estado='true'; ";
+$sql_query = "SELECT * from Notificacion_Evento where usuario='$usuario' and posponer='true' and estado='true'; ";
 $consulta = pg_query($sql_query);
 
 
@@ -377,7 +379,8 @@ $consulta = pg_query($sql_query);
 
 			$sql_query1 = "SELECT nombre from Evento where id_evento = '".$fila[0]."';";
 			$consulta1 = pg_query($sql_query1);
-			$fila2=pg_fetch_row($consulta);
+			/*$fila2=pg_fetch_row($consulta1);*/
+			while($fila2=pg_fetch_row($consulta1)){
 				echo"
 
 						<form name='gestionNotEventosp' action='actualizatabla.php' method='post'>
@@ -388,22 +391,22 @@ $consulta = pg_query($sql_query);
 								</div>		
 								<div class='sesion_formulario'>
 										<label class='label2'>Notificacion</label>
-										<textarea type='text' OnFocus='this.blur()' name='mensaje' value='".$fila[3]."'>".$fila[3]."</textarea>
+										<textarea type='text' OnFocus='this.blur()' name='notificacionE' value='".$fila[3]."'>".$fila[3]."</textarea>
 								</div>	
 								
 								<div class='sesion_formulario'>
 										<input type='hidden' id='tablaP' name='tabla' value='dejarPosponerNotEvento'>
 										<input type='hidden' name='user' value='$usuario'>
-										<input type='hidden' name='oculto' value=".$fila[4].">
-										<input type='hidden' name='posponer' value=".$fila[5].">
+										<input type='hidden' name='fecha' value='".$fila[2]."'>
 										<button type='submit'  class='boton'>Dejar de Posponer</button>
 										<script>function eliminarEventoP(){x=document.getElementById('tablaP');
 													x.value = 'eliminarNotEvento';}</script>
-										<button type='submit'  class='boton' onclick='eliminarEventoP'>Eliminar</button>
+										<button type='submit'  class='boton' onclick='eliminarEventoP()'>Eliminar</button>
 								</div>
 
 						</form>
 						<h3>--------------------------------------------------------------------------</h3>";
+					}
 				}
 			
 }
@@ -439,21 +442,20 @@ $consulta = pg_query($sql_query);
 								</div>		
 								<div class='sesion_formulario'>
 										<label class='label2'>Notificacion</label>
-										<textarea type='text' OnFocus='this.blur()' name='mensaje' value='".$fila[3]."'>".$fila[3]."</textarea>
+										<textarea type='text' OnFocus='this.blur()' name='notificacionG' value='".$fila[3]."'>".$fila[3]."</textarea>
 								</div>	
 								
 								<div class='sesion_formulario'>
 										<input type='hidden' id='tablaGa' name='tabla' value='ocultarNotGrupo'> 
 										<input type='hidden' name='user' value='$usuario'>
-										<input type='hidden' name='oculto' value=".$fila[4].">
-										<input type='hidden' name='posponer' value=".$fila[5].">
+										<input type='hidden' name='fecha' value='".$fila[2]."'>
 										<button type='submit'  class='boton'>Ocultar</button>
 										<script>function posponerGrupo(){x=document.getElementById('tablaGa');
 													x.value = 'posponerNotGrupo';}</script>
-										<button type='submit'  class='boton' onclick='posponerGrupo'>Posponer</button>
+										<button type='submit'  class='boton' onclick='posponerGrupo()'>Posponer</button>
 										<script>function eliminarGrupo(){x=document.getElementById('tablaGa');
 													x.value = 'eliminarNotGrupo';}</script>
-										<button type='submit'  class='boton' onclick='eliminarGrupo'>Eliminar</button>
+										<button type='submit'  class='boton' onclick='eliminarGrupo()'>Eliminar</button>
 								</div>
 
 						</form>
@@ -480,18 +482,17 @@ $consulta = pg_query($sql_query);
 								</div>		
 								<div class='sesion_formulario'>
 										<label class='label2'>Notificacion</label>
-										<textarea type='text' OnFocus='this.blur()' name='mensaje' value='".$fila[3]."'>".$fila[3]."</textarea>
+										<textarea type='text' OnFocus='this.blur()' name='notificacionG' value='".$fila[3]."'>".$fila[3]."</textarea>
 								</div>	
 								
 								<div class='sesion_formulario'>
 										<input type='hidden' id='tablaGb' name='tabla' value='dejarOcultarNotGrupo'> 						
 										<input type='hidden' name='user' value='$usuario'>
-										<input type='hidden' name='oculto' value=".$fila[4].">
-										<input type='hidden' name='posponer' value=".$fila[5].">
+										<input type='hidden' name='fecha' value='".$fila[2]."'>
 										<button type='submit'  class='boton'>Dejar de Ocultar</button>
 										<script>function eliminarGrupoO(){x=document.getElementById('tablaGb');
 													x.value = 'eliminarNotGrupo';}</script>
-										<button type='submit'  class='boton' onclick='eliminarGrupoO'>Eliminar</button>
+										<button type='submit'  class='boton' onclick='eliminarGrupoO()'>Eliminar</button>
 								</div>
 
 						</form>
@@ -518,18 +519,17 @@ $consulta = pg_query($sql_query);
 								</div>		
 								<div class='sesion_formulario'>
 										<label class='label2'>Notificacion</label>
-										<textarea type='text' OnFocus='this.blur()' name='mensaje' value='".$fila[3]."'>".$fila[3]."</textarea>
+										<textarea type='text' OnFocus='this.blur()' name='notificacionG' value='".$fila[3]."'>".$fila[3]."</textarea>
 								</div>	
 								
 								<div class='sesion_formulario'>
 										<input type='hidden' id='tablaGc' name='tabla' value='dejarPosponerNotGrupo'>
 										<input type='hidden' name='user' value='$usuario'>
-										<input type='hidden' name='oculto' value=".$fila[4].">
-										<input type='hidden' name='posponer' value=".$fila[5].">
+										<input type='hidden' name='fecha' value='".$fila[2]."'>
 										<button type='submit'  class='boton'>Dejar de Posponer</button>
 										<script>function eliminarGrupoP(){x=document.getElementById('tablaGc');
 													x.value = 'eliminarNotGrupo';}</script>
-										<button type='submit'  class='boton' onclick='eliminarGrupoP'>Eliminar</button>
+										<button type='submit'  class='boton' onclick='eliminarGrupoP()'>Eliminar</button>
 								</div>
 
 						</form>
@@ -582,11 +582,11 @@ function queryLastGroupCreate($user){
 
 <?php 
 function cambiarVisto($usuario){
-$sql_query = "Update mensaje set visto='true' where usuario_dos='$usuario';";
+$sql_query = "Update mensaje set visto='true' where usuario_dos='$usuario' and posponer='false';";
 $consulta = pg_query($sql_query);
-$sql_query1 = "Update Notificacion_Evento set visto='true' where usuario_dos='$usuario';";
+$sql_query1 = "Update Notificacion_Evento set visto='true' where usuario='$usuario' and posponer='false';";
 $consulta1 = pg_query($sql_query1);
-$sql_query2 = "Update Notificacion_Grupo set visto='true' where usuario_dos='$usuario';";
+$sql_query2 = "Update Notificacion_Grupo set visto='true' where usuario='$usuario' and posponer='false';";
 $consulta2 = pg_query($sql_query2);
 }
 ?>
@@ -598,7 +598,7 @@ $sql_query = "SELECT count(*) from mensaje where usuario_dos='$usuario' and vist
 $consulta = pg_query($sql_query);
 $cuenta=pg_fetch_row($consulta);
 $cantidad=$cuenta[0];
-$sql_query1 = "SELECT count(*) from Notificacion_Evento where usuario='$usuario' and visto='false' and estado='true';";
+$sql_query2 = "SELECT count(*) from Notificacion_Evento where usuario='$usuario' and visto='false' and estado='true';";
 $consulta2 = pg_query($sql_query2);
 $cuenta2=pg_fetch_row($consulta2);
 $cantidad2=$cuenta2[0];
@@ -615,28 +615,29 @@ return $cantidad + $cantidad2 + $cantidad3;
 
 <?php //Muestra mensajes enviados 
 function mensajesEnviados($usuario){
-$sql_query = "SELECT usuario_dos, fecha, mensaje_enviado FROM Mensaje where usuario_uno='$usuario';";
+$sql_query = "SELECT * FROM Mensaje where usuario_uno='$usuario' and estado='true';";
 $consulta = pg_query($sql_query);
 		while($fila=pg_fetch_row($consulta)){
 				echo"<form name='gestionMEnviados' action='actualizatabla.php' method='post'>
 						<div class='sesion_formulario'>
 								<label class='label2'>Usuario</label>
-								<input  type='text' OnFocus='this.blur()' name='usuario2' value='".$fila[0]."'>
+								<input  type='text' OnFocus='this.blur()' name='usuario2' value='".$fila[1]."'>
 						</div>		
 						<div class='sesion_formulario'>
 								<label class='label2'>Fecha</label>
-								<input  type='text' OnFocus='this.blur()' name='fecha' value='".$fila[1]."'>
+								<input  type='text' OnFocus='this.blur()' name='fecha' value='".$fila[2]."'>
 						</div>	
 						<div class='sesion_formulario'>
 								<label class='label2'>Mensaje</label>
-								<textarea  type='text' OnFocus='this.blur()' name='mensaje' value='".$fila[2]."'></textarea>
+								<textarea  type='text' OnFocus='this.blur()' name='mensaje' value='".$fila[3]."'>".$fila[3]."</textarea>
 						</div>
 						<div class='sesion_formulario'>
-								input type='hidden' name='tabla' value='eliminaMenEnviado'>
+								<input type='hidden' name='tabla' value='eliminaMenEnviado'>
 								<input type='hidden' name='user' value='$usuario'>
 								<button type='submit'  class='boton'>Eliminar</button>
 						</div>
-					</form>";
+					</form>
+					<h3>--------------------------------------------------------------------------</h3>";
 				}
 			
 }
@@ -694,14 +695,14 @@ $consulta = pg_query($sql_query);
 						<div class='sesion_formulario'>
 								<input type='hidden' id='tablaMb' name='tabla' value='dejarPosponerMensaje'>
 								<input type='hidden' name='user' value='$usuario'>
-								<input type='hidden' name='oculto' value=".$fila[4].">
-								<input type='hidden' name='posponer' value=".$fila[5].">
+								<input type='hidden' name='fecha' value='".$fila[2]."'>
 								<button type='submit'  class='boton'>Dejar de Posponer</button>
 								<script>function eliminarMensajeP(){x=document.getElementById('tablaMb');
 											x.value = 'eliminarMensaje';}</script>
 								<button type='submit'  class='boton' onclick='eliminarMensajeP()'>Eliminar</button>
 						</div>
-					</form>";
+					</form>
+					<h3>-------------------------------------------------------------------</h3>";
 				}
 			
 }
@@ -726,20 +727,18 @@ $consulta = pg_query($sql_query);
 						<div class='sesion_formulario'>
 								<input type='hidden' id='tablaMc' name='tabla' value='dejarOcultarMensaje'> 						
 								<input type='hidden' name='user' value='$usuario'>
-								<input type='hidden' name='oculto' value=".$fila[4].">
-								<input type='hidden' name='posponer' value=".$fila[5].">
+								<input type='hidden' name='fecha' value='".$fila[2]."'>
 								<button type='submit'  class='boton'>Dejar de Ocultar</button>
 								<script>function eliminarMensajeO(){x=document.getElementById('tablaMc');
 											x.value = 'eliminarMensaje';}</script>
 								<button type='submit'  class='boton' onclick='eliminarMensajeO()'>Eliminar</button>
 						</div>
-					</form>";
+					</form>
+					<h3>-------------------------------------------------------------------</h3>";
 				}
 			
 }
 ?>
-
-
 
 
 <?php /**********************************************************perfil*************************************************************/ ?>
