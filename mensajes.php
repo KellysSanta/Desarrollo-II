@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<?php $usuario=$_GET["usuario"];
+<?php 
+$usuario = $_REQUEST["user"];
+$password =  $_REQUEST["password"];
 include "conexion.php";?>
 <html lang="en">
 <head>
@@ -22,9 +24,7 @@ include "conexion.php";?>
   <![endif]-->
 
   <!-- Fav and touch icons -->
-  <link rel="shortcut icon" href="img/rs.png">
-  
-	
+  <link rel="shortcut icon" href="img/rs.png"> 
 </head>
 
 <body>

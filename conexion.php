@@ -1,9 +1,9 @@
 <?php //Creamos las variables de conexion
 $server = "localhost";
-$db_name = "Redsocialin";
+$db_name = "Redsocialid";
 $log = "postgres";
-$pass = "Admin";
-$port = "5433";
+$pass = "91012206912ksg";
+$port = "5432";
 $cadena_con= "host=$server port=$port dbname=$db_name user=$log password=$pass";
 
 //Conectamos con la cadena de conexion
@@ -95,9 +95,9 @@ function consultaActividad($user, $fecha){
 								<input type='hidden' name='user' value='$user'>
 								<input type='hidden' name='numero' value='$fila[0]'>
 								<button type='submit' class='boton'>Eliminar</button>
-								<script>function EditaActividad(){x=document.getElementById('tablae');
+								<script>function editaActividad(){x=document.getElementById('tablae');
 										x.value = 'editarActividad';}</script>
-								<button type='submit'  class='boton' onclick='EditaActividad()'>Editar</button>
+								<button type='submit'  class='boton' onclick='editaActividad()'>Editar</button>
 								
 							</div>
 						</form>	
@@ -580,6 +580,18 @@ function queryLastGroupCreate($user){
 
 <?php /**********************************************************Mensajes***********************************************************/ ?>
 
+<?php 
+function cambiarVisto($usuario){
+$sql_query = "Update mensaje set visto='true' where usuario_dos='$usuario';";
+$consulta = pg_query($sql_query);
+$sql_query1 = "Update Notificacion_Evento set visto='true' where usuario_dos='$usuario';";
+$consulta1 = pg_query($sql_query1);
+$sql_query2 = "Update Notificacion_Grupo set visto='true' where usuario_dos='$usuario';";
+$consulta2 = pg_query($sql_query2);
+}
+?>
+
+
 <?php //Muestra cantidad msj usuario 
 function cantidadMensajes($usuario){
 $sql_query = "SELECT count(*) from mensaje where usuario_dos='$usuario' and visto='false' and estado='true';";
@@ -594,20 +606,12 @@ $sql_query3 = "SELECT count(*) from Notificacion_Grupo where usuario='$usuario' 
 $consulta3 = pg_query($sql_query3);
 $cuenta3=pg_fetch_row($consulta3);
 $cantidad3=$cuenta3[0];
+cambiarVisto($usuario);
 return $cantidad + $cantidad2 + $cantidad3;
 }
 ?>
 
-<?php 
-function cambiarVisto($usuario){
-$sql_query = "Update mensaje set visto='true' where usuario_dos='$usuario';";
-$consulta = pg_query($sql_query);
-$sql_query1 = "Update Notificacion_Evento set visto='true' where usuario_dos='$usuario';";
-$consulta1 = pg_query($sql_query1);
-$sql_query2 = "Update Notificacion_Grupo set visto='true' where usuario_dos='$usuario';";
-$consulta2 = pg_query($sql_query2);
-}
-?>
+
 
 <?php //Muestra mensajes enviados 
 function mensajesEnviados($usuario){
@@ -656,17 +660,17 @@ $consulta = pg_query($sql_query);
 						<div class='sesion_formulario'>
 								<input type='hidden' id='tablaMa' name='tabla' value='ocultarMensaje'> 
 								<input type='hidden' name='user' value='$usuario'>
-								<input type='hidden' name='oculto' value=".$fila[4].">
-								<input type='hidden' name='posponer' value=".$fila[5].">
+								<input type='hidden' name='fecha' value='".$fila[2]."'>
 								<button type='submit'  class='boton'>Ocultar</button>
 								<script>function posponMensaje(){x=document.getElementById('tablaMa');
 											x.value = 'posponerMensaje';}</script>
-								<button type='submit'  class='boton' onclick='posponMensaje'>Posponer</button>
+								<button type='submit'  class='boton' onclick='posponMensaje()'>Posponer</button>
 								<script>function eliminaMensaje(){x=document.getElementById('tablaMa');
 											x.value = 'eliminarMensaje';}</script>
-								<button type='submit'  class='boton' onclick='eliminaMensaje'>Eliminar</button>
+								<button type='submit'  class='boton' onclick='eliminaMensaje()'>Eliminar</button>
 						</div>
-					</form>";
+					</form>
+					<h3>-------------------------------------------------------------------</h3>";
 				}
 			
 }
@@ -695,7 +699,7 @@ $consulta = pg_query($sql_query);
 								<button type='submit'  class='boton'>Dejar de Posponer</button>
 								<script>function eliminarMensajeP(){x=document.getElementById('tablaMb');
 											x.value = 'eliminarMensaje';}</script>
-								<button type='submit'  class='boton' onclick='eliminarMensajeP'>Eliminar</button>
+								<button type='submit'  class='boton' onclick='eliminarMensajeP()'>Eliminar</button>
 						</div>
 					</form>";
 				}
@@ -727,7 +731,7 @@ $consulta = pg_query($sql_query);
 								<button type='submit'  class='boton'>Dejar de Ocultar</button>
 								<script>function eliminarMensajeO(){x=document.getElementById('tablaMc');
 											x.value = 'eliminarMensaje';}</script>
-								<button type='submit'  class='boton' onclick='eliminarMensajeO'>Eliminar</button>
+								<button type='submit'  class='boton' onclick='eliminarMensajeO()'>Eliminar</button>
 						</div>
 					</form>";
 				}

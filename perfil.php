@@ -59,7 +59,7 @@ if (pg_num_rows($arregloresultante) == 1){
 	<nav>
 		<ul class="menu_principal">
 			<li class="active"><a class="principal seleccionado" href="perfil.php">Perfil</a></li>
-			<?php echo "<li class='active'><a class='principal' href='mensajes.php?usuario=$user'>Mensajes/Notificaciones</a></li>";?>
+			<?php echo "<li class='active'><a class='principal' href='mensajes.php?user=$user&password=$password'>Mensajes/Notificaciones</a></li>";?>
 			<li class="active"><a class="principal" href="eventos.php">Eventos</a></li>
 			<?php echo "<li class='active'><a class='principal' href='grupos.php?user=$user'>Grupos</a></li>" ?>
 			<li class="derecha active"><a class="principal" href="logout.php">Salir</a></li>

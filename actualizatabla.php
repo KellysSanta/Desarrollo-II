@@ -135,12 +135,12 @@ $fecha=$_POST["fechaActividad"];
 consultaActividad($user, $fecha);
 break;
 
-case "'editarActividad":
+case "editarActividad":
 $d1=$_POST["numero"];
 $d3=$_POST["nombreAct"];
 $d4=$_POST["lugarAct"];
 $d5=$_POST["descAct"];
-$sql_query = "update Usuario_Agenda set nombre = '$d3', lugar='$d4', descripcion='$d5' where num_actividad = $d1;" ;
+$sql_query = "Update Usuario_Agenda set nombre = '$d3', lugar='$d4', descripcion='$d5' where num_actividad = $d1;" ;
 $consulta= pg_query($sql_query);
 break;
 
@@ -150,5 +150,81 @@ $sql_query="Delete from Usuario_Agenda where num_actividad=$numero;";
 $consulta= pg_query($sql_query);
 break;
 
+/***********************************************************************Mensajes****************************************************************************/ 
+
+case "nuevomensaje":
+$d1=$_POST["destino"];
+$destinos = explode(";",$d1);
+$d2=$_POST["mensaje"];
+$d3=$_POST["origen"];
+foreach ($destinos as $destinatario) {
+	$sql_query = "insert into mensaje values ('$d3', '$destinatario', current_date,'$d2',false,false,true,false);";
+	$consulta = pg_query($sql_query);
+}
+unset($destinatario);
+break;
+
+case "ocultarMensaje":
+$user=$_POST["user"];
+$usuario=$_POST["usuario1"];
+$fecha=$_POST["fecha"];
+$mensaje=$_POST["mensaje"];
+$sql_query="UPDATE Mensaje set oculto=true, posponer=false where usuario_uno='$usuario' and usuario_dos='$user' and fecha='$fecha' and mensaje_enviado='$mensaje' and visto=true;";
+//$sql_query="UPDATE Mensaje set oculto=true, posponer=false where usuario_uno='$usuario1' and usuario_dos='$user' and fecha='$fecha' and mensaje_enviado='$mensaje' and oculto=$oculto and posponer=$posponer and visto=$visto;";
+$consulta=pg_query($sql_query);
+break;
+
+/*
+case "eliminaMenEnviado":
+$d1=$_POST["user"];
+$d2=$_POST["usuario2"];
+$d3=$_POST["fecha"];
+$d4=$_POST["mensaje"];
+$sql_query="UPDATE Mensaje SET estado='false' where usuario_uno='$d1' and usuario_dos='$d2' and fecha='$d3' and mensaje='$d4';";
+$consulta = pg_query($sql_query);
+break;
+
+
+
+case "posponerMensaje":
+$user=$_POST["user"];
+$usuario1=$_POST["usuario1"];
+$mensaje=$_POST["mensaje"];
+$oculto=$_POST["oculto"];
+$posponer=$_POST["posponer"];
+$sql_query="UPDATE Mensaje set oculto='false', posponer='true' where usuario_uno='$usuario1' and usuario_dos='$user' and mensaje_enviado='$mensaje' and oculto='$oculto' and posponer='$posponer';"
+$consulta=pg_query($sql_query);
+break;
+
+case "eliminarMensaje":
+$user=$_POST["user"];
+$usuario1=$_POST["usuario1"];
+$mensaje=$_POST["mensaje"];
+$oculto=$_POST["oculto"];
+$posponer=$_POST["posponer"];
+$sql_query="UPDATE Mensaje set estado='false' where usuario_uno='$usuario1' and usuario_dos='$user' and mensaje_enviado='$mensaje' and oculto='$oculto' and posponer='$posponer';"
+$consulta=pg_query($sql_query);
+break;
+
+case "dejarOcultarMensaje":
+$user=$_POST["user"];
+$usuario1=$_POST["usuario1"];
+$mensaje=$_POST["mensaje"];
+$oculto=$_POST["oculto"];
+$posponer=$_POST["posponer"];
+$sql_query="UPDATE Mensaje set oculto='false' where usuario_uno='$usuario1' and usuario_dos='$user' and mensaje_enviado='$mensaje' and oculto='$oculto' and posponer='$posponer';"
+$consulta=pg_query($sql_query);
+break;
+
+case "dejarPosponerMensaje":
+$user=$_POST["user"];
+$usuario1=$_POST["usuario1"];
+$mensaje=$_POST["mensaje"];
+$oculto=$_POST["oculto"];
+$posponer=$_POST["posponer"];
+$sql_query="UPDATE Mensaje set posponer='false' where usuario_uno='$usuario1' and usuario_dos='$user' and mensaje_enviado='$mensaje' and oculto='$oculto' and posponer='$posponer';"
+$consulta=pg_query($sql_query);
+break;
+*/
 
 }?>
